@@ -8,6 +8,14 @@ ThisBuild / organizationName := "benknoble"
 lazy val root = (project in file("."))
   .settings(
     name := "loner",
+    libraryDependencies += scalaTest % Test
+  )
+  .aggregate(ebnf)
+  .dependsOn(ebnf)
+
+lazy val ebnf = (project in file("ebnf"))
+  .settings(
+    name := "ebnf",
     libraryDependencies += scalaTest % Test,
     libraryDependencies += parserCombinators
   )
