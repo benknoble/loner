@@ -1,4 +1,4 @@
-package example
+package org.benknoble
 
 object Hello extends Greeting with App {
   println(greeting)

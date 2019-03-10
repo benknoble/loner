@@ -1,4 +1,4 @@
-package example
+package org.benknoble
 
 import org.scalatest._
 
