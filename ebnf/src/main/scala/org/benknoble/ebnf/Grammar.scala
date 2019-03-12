@@ -11,18 +11,17 @@ abstract class Expr {
 
 abstract class Word extends Expr
 
-case class Terminal(s: String) extends Word {
+case class Terminal(val s: String) extends Word {
   override def toString() = s
-
 }
 
-case class Nonterminal(name: Symbol) extends Word {
+case class Nonterminal(val name: Symbol) extends Word {
   override def toString() = "<" + name.name + ">"
 
   def ::=(rule: Expr) = new Production(this, rule)
 }
 
-case class Sequence(left: Expr, right: Expr) extends Expr {
+case class Sequence(val left: Expr, val right: Expr) extends Expr {
   override def toString() = {
     def paren(alt: Alternation) = "(" + alt + ")"
     Util.join(
@@ -34,15 +33,15 @@ case class Sequence(left: Expr, right: Expr) extends Expr {
   }
 }
 
-case class Alternation(left: Expr, right: Expr) extends Expr {
+case class Alternation(val left: Expr, val right: Expr) extends Expr {
   override def toString() = left.toString() + "|" + right.toString()
 }
 
-case class Repetition(expr: Expr) extends Expr {
+case class Repetition(val expr: Expr) extends Expr {
   override def toString() = "{" + expr + "}"
 }
 
-case class Option(expr: Expr) extends Expr {
+case class Option(val expr: Expr) extends Expr {
   override def toString() = "[" + expr + "]"
 }
 
@@ -55,15 +54,15 @@ object ExprImplicts {
   implicit def symbolToNonterminal(s: Symbol) = Nonterminal(s)
 }
 
-
 // <nt> ::= rule
-case class Production(nt: Nonterminal, rule: Expr) {
+class Production(val nt: Nonterminal, val rule: Expr) {
   override def toString() = nt.toString() + " ::= " + rule.toString()
 }
 
-case class Grammar(rules: List[Production]) {
+class Grammar(val rules: Seq[Production]) {
   override def toString() = Util.join("\n", rules)
-  def nonterminals = rules.map(_.nt).toSet
+
+  def nonterminals: Set[Nonterminal] = rules.map(_.nt).toSet
 }
 
 // object Main extends App {

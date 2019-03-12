@@ -6,7 +6,7 @@ class GrammarSpec extends FlatSpec with Matchers {
 
   import ExprImplicts._
 
-  val emptyGrammar = Grammar(List())
+  val emptyGrammar = new Grammar(List())
   val abc: Nonterminal = 'abc
   val `a*`: Expr = Terminal("a").*
   val `a?`: Expr = "a".?
