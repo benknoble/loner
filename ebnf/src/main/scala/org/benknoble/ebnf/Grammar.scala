@@ -60,7 +60,13 @@ class Production(val nt: Nonterminal, val rule: Expr) {
 }
 
 class Grammar(val rules: Seq[Production]) {
-  override def toString() = Util.join("\n", rules)
+  override def toString() = {
+    val joined = Util.join(" ;\n", rules)
+    if (joined.isEmpty)
+      joined
+    else
+      joined + " ;"
+  }
 
   def nonterminals: Set[Nonterminal] = rules.map(_.nt).toSet
 }

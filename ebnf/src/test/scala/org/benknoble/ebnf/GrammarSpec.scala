@@ -78,13 +78,13 @@ class GrammarSpec extends FlatSpec with Matchers {
     `P1(a|c)b`.toString() shouldEqual "<A> ::= 1(a|c)b"
   }
 
-  "A Grammar" should "be newline-separated Productions" in {
-    G.toString() shouldEqual """<A> ::= a
-<A> ::= ε
-<A> ::= {a}
-<A> ::= 1{a}b
-<A> ::= 1[a]b
-<A> ::= 1(a|c)b"""
+  "A Grammar" should "be ;-delimited, newline-separated Productions" in {
+    G.toString() shouldEqual """<A> ::= a ;
+<A> ::= ε ;
+<A> ::= {a} ;
+<A> ::= 1{a}b ;
+<A> ::= 1[a]b ;
+<A> ::= 1(a|c)b ;"""
   }
 
   "A Grammar's nonterminals" should "be the set of nonterminals" in {
