@@ -1,12 +1,14 @@
 package org.benknoble.ebnf
 
+import scala.language.implicitConversions
+
 import ExprImplicts._
 
 abstract class Expr {
   def ~ (right: Expr): Expr = Sequence(this, right)
   def || (right: Expr): Expr = Alternation(this, right)
-  def * = Repetition(this)
-  def ? = Option(this)
+  def *(): Expr = Repetition(this)
+  def ?(): Expr = Option(this)
 }
 
 abstract class Word extends Expr
@@ -18,19 +20,17 @@ case class Terminal(val s: String) extends Word {
 case class Nonterminal(val name: Symbol) extends Word {
   override def toString() = "<" + name.name + ">"
 
-  def ::=(rule: Expr) = new Production(this, rule)
+  def ::=(rule: Expr): Production = new Production(this, rule)
 }
 
 case class Sequence(val left: Expr, val right: Expr) extends Expr {
-  override def toString() = {
-    def paren(alt: Alternation) = "(" + alt + ")"
+  override def toString() =
     Util.join(
       "",
       Seq(left, right).map {
-        case a: Alternation => paren(a)
+        case a: Alternation => "(" + a + ")"
         case other => other.toString()
       })
-  }
 }
 
 case class Alternation(val left: Expr, val right: Expr) extends Expr {
