@@ -55,9 +55,9 @@ class EbnfParser extends RegexParsers {
       case symbol ~ _ ~ rule ~ _ => new Production(symbol, rule)
     }
 
-  def root: Parser[Grammar] = phrase(
-    rep(rule) ^^ { new Grammar(_) }
-  )
+  def grammar: Parser[Grammar] = rep(rule) ^^ { new Grammar(_) }
+
+  def root: Parser[Grammar] = phrase(grammar)
 
   // Should eventually be a custom error type ?
   // Or do I just return the results? # = parse(root, grammar)
