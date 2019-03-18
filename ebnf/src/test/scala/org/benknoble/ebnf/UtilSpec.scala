@@ -1,5 +1,4 @@
-
-package org.benknoble.ebnf
+package org.benknoble.loner.ebnf
 
 import org.scalatest._
 

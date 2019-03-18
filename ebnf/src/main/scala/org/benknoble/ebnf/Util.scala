@@ -1,4 +1,4 @@
-package org.benknoble.ebnf
+package org.benknoble.loner.ebnf
 
 object Util {
   def join[A](sep: String, list: Seq[A]): String = list match {

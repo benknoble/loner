@@ -1,4 +1,4 @@
-package org.benknoble
+package org.benknoble.loner
 
 object Hello extends Greeting with App {
   println(greeting)

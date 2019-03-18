@@ -1,4 +1,4 @@
-package org.benknoble.ebnf
+package org.benknoble.loner.ebnf
 
 import scala.language.implicitConversions
 

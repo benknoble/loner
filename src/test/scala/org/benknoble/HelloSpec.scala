@@ -1,4 +1,4 @@
-package org.benknoble
+package org.benknoble.loner
 
 import org.scalatest._
 
