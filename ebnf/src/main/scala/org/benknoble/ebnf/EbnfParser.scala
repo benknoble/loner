@@ -42,11 +42,13 @@ class EbnfParser extends RegexParsers {
     go(es.tail, es.head)
   }
 
+  private def sequencify(exprs: Seq[Expr]): Expr = reduceTree(exprs, Sequence(_,_))
+
   def sequence: Parser[Expr] =
-    alternation.+ ^^ { branches => reduceTree(branches, Sequence(_,_)) }
+    alternation.+ ^^ sequencify
 
   def exp: Parser[Expr] =
-    sequence.+ ^^ { atoms => reduceTree(atoms, Sequence(_,_)) }
+    sequence.+ ^^ sequencify
 
   def goesTo: Parser[Any] = """::="""
 
