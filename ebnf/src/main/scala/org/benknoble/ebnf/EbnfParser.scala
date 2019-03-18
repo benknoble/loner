@@ -77,6 +77,9 @@ object Main extends App {
 <C> ::= {<B>}$ ;
 <D> ::= abd ;
 <E> ::= (a|b)c ;
+<F> ::= a
+| b | c
+| d ;
 """
   // val parser = new EbnfParser()
   // val rule = parser.root
