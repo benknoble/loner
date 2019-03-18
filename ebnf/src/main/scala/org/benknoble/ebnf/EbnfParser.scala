@@ -61,7 +61,7 @@ class EbnfParser extends RegexParsers {
 
   // Should eventually be a custom error type ?
   // Or do I just return the results? # = parse(root, grammar)
-  def apply(grammar: String): Either[String, Grammar] = parse(root, grammar) match {
+  def parse(grammar: String): Either[String, Grammar] = parse(root, grammar) match {
     case Success(result, _) => Right(result)
     case Failure(msg, _) => Left(msg)
     case Error(msg, _) => Left(msg)
@@ -79,5 +79,5 @@ object Main extends App {
   // val parser = new EbnfParser()
   // val rule = parser.root
   // println(parser.parse(rule, grammar))
-  println(new EbnfParser()(grammar).fold(s => s, g => g.toString()))
+  println(new EbnfParser().parse(grammar).fold(s => s, g => g.toString()))
 }
