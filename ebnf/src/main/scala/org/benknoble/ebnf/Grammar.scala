@@ -7,16 +7,8 @@ import ExprImplicts._
 abstract class Expr {
   def ~ (right: Expr): Expr = Sequence(this, right)
   def || (right: Expr): Expr = Alternation(this, right)
-  def *(): Expr = this match {
-    case r: Repetition => this // (r*)* = r*
-    case Option(e) => Repetition(e) // (o?)* = o*
-    case _ => Repetition(this)
-  }
-  def ?(): Expr = this match {
-    case r: Repetition => this // (r*)? = r*
-    case o: Option => this // (o?)? = o?
-    case _ => Option(this)
-  }
+  def *(): Expr = Repetition(this)
+  def ?(): Expr = Option(this)
 }
 
 abstract class Word extends Expr
