@@ -1,4 +1,5 @@
 import Dependencies._
+import sbtassembly.AssemblyPlugin.defaultShellScript
 
 ThisBuild / scalaVersion     := "2.12.8"
 ThisBuild / version          := "0.1.0"
@@ -8,6 +9,8 @@ ThisBuild / organizationName := "benknoble"
 lazy val root = (project in file("."))
   .settings(
     name := "loner",
+    assemblyOption in assembly := (assemblyOption in assembly).value.copy(prependShellScript = Some(defaultShellScript)),
+    assemblyJarName in assembly := s"${name.value}-${version.value}",
     libraryDependencies += scalaTest % Test
   )
   .aggregate(ebnf)
@@ -16,6 +19,8 @@ lazy val root = (project in file("."))
 lazy val ebnf = (project in file("ebnf"))
   .settings(
     name := "ebnf",
+    assemblyOption in assembly := (assemblyOption in assembly).value.copy(prependShellScript = Some(defaultShellScript)),
+    assemblyJarName in assembly := s"${name.value}-${version.value}",
     libraryDependencies += scalaTest % Test,
     libraryDependencies += parserCombinators
   )
