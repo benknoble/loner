@@ -25,12 +25,10 @@ case class Nonterminal(val name: Symbol) extends Word {
 
 case class Sequence(val left: Expr, val right: Expr) extends Expr {
   override def toString() =
-    Util.join(
-      "",
-      Seq(left, right).map {
-        case a: Alternation => "(" + a + ")"
-        case other => other.toString()
-      })
+    Seq(left, right).map {
+      case a: Alternation => "(" + a + ")"
+      case other => other.toString()
+    }.mkString
 }
 
 case class Alternation(val left: Expr, val right: Expr) extends Expr {
@@ -60,10 +58,11 @@ class Production(val nt: Nonterminal, val rule: Expr) {
 }
 
 class Grammar(val rules: Seq[Production]) {
-  override def toString() = Util.join(" ;\n", rules) match {
-    case "" => "" // empty
-    case s: String => s + " ;"
-  }
+  override def toString() =
+    rules.mkString(" ;\n") match {
+      case "" => "" // empty
+      case s: String => s + " ;"
+    }
 
   def nonterminals: Set[Nonterminal] = rules.map(_.nt).toSet
 }
