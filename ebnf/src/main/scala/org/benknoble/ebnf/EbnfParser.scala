@@ -6,10 +6,7 @@ class EbnfParser extends RegexParsers {
 
   def epsilon: Parser[Expr] = "ε" ^^ { _ => ε }
 
-  def terminal: Parser[Expr] = """[^<>\[\]{}()ε|;\s]+""".r ^^ { quoted =>
-    val str = quoted.stripPrefix("\"").stripSuffix("\"")
-    Terminal(str)
-  }
+  def terminal: Parser[Expr] = """[^<>\[\]{}()ε|;\s]+""".r ^^ { Terminal(_) }
 
   def nonterminal: Parser[Nonterminal] = """<[^>]+>""".r ^^ { bracketed =>
     val name = bracketed.stripPrefix("<").stripSuffix(">")
