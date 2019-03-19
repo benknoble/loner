@@ -70,7 +70,25 @@ class Grammar(val rules: Seq[Production]) {
       case s: String => s + " ;"
     }
 
-  def nonterminals: Set[Nonterminal] = rules.map(_.nt).toSet
+  def nonterminals: Set[Nonterminal] = lhsNonterminals union rhsNonterminals
+
+  private def lhsNonterminals: Set[Nonterminal] = rules.map(_.nt).toSet
+  private def rhsNonterminals: Set[Nonterminal] = {
+    def nonterminals(e: Expr): Set[Nonterminal] = e match {
+      // backticks match against object ε
+      case `ε` => Set()
+      case Terminal(_) => Set()
+      case n @ Nonterminal(_) => Set(n)
+      case Sequence(left, right) => nonterminals(left) union nonterminals(right)
+      case Alternation(left, right) => nonterminals(left) union nonterminals(right)
+      case Repetition(e) => nonterminals(e)
+      case Option(e) => nonterminals(e)
+    }
+
+    rules
+      .map(_.rule)
+      .foldLeft(Set[Nonterminal]())((acc, rule) => acc union nonterminals(rule))
+  }
 }
 
 // object Main extends App {

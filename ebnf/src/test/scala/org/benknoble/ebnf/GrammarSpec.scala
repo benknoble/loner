@@ -89,5 +89,7 @@ class GrammarSpec extends FlatSpec with Matchers {
 
   "A Grammar's nonterminals" should "be the set of nonterminals" in {
     G.nonterminals shouldEqual Set[Nonterminal]('A)
+    new Grammar(G.rules ++ Seq[Production]('A ::= 'B))
+      .nonterminals shouldEqual Set[Nonterminal]('A, 'B)
   }
 }
