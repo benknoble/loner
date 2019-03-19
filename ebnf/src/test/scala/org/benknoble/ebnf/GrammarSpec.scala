@@ -31,55 +31,55 @@ class GrammarSpec extends FlatSpec with Matchers {
     `P1(a|c)b`))
 
   "The empty Grammar object" should "have an empty string representation" in {
-    emptyGrammar.toString() shouldEqual ""
+    emptyGrammar.format shouldEqual ""
   }
 
   "A Terminal of a string" should "be represented by that string" in {
-    Terminal("a").toString() shouldEqual "a"
-    Terminal("ab").toString() shouldEqual "ab"
+    Terminal("a").format shouldEqual "a"
+    Terminal("ab").format shouldEqual "ab"
   }
 
   "A Nonterminal of a string" should "be represented by the string" in {
-    abc.toString() shouldEqual "<abc>"
+    abc.format shouldEqual "<abc>"
   }
 
   "A Sequence" should "be the concatentation of its elements" in {
-    (`a*` ~ ε).toString() shouldEqual "{a}ε"
-    `1(a)*b`.toString() shouldEqual "1{a}b"
-    `1(a)?b`.toString() shouldEqual "1[a]b"
-    `1(a|c)b`.toString() shouldEqual "1(a|c)b"
+    (`a*` ~ ε).format shouldEqual "{a}ε"
+    `1(a)*b`.format shouldEqual "1{a}b"
+    `1(a)?b`.format shouldEqual "1[a]b"
+    `1(a|c)b`.format shouldEqual "1(a|c)b"
   }
 
   "An Alternation" should "consist of |-separated elements" in {
-    (`a*` || ε).toString() shouldEqual "{a}|ε"
-    `(1|(a)*|b)`.toString() shouldEqual "1|{a}|b"
-    `(1|(a)?|b)`.toString() shouldEqual "1|[a]|b"
-    `(1|(a|c)|b)`.toString() shouldEqual "1|a|c|b"
+    (`a*` || ε).format shouldEqual "{a}|ε"
+    `(1|(a)*|b)`.format shouldEqual "1|{a}|b"
+    `(1|(a)?|b)`.format shouldEqual "1|[a]|b"
+    `(1|(a|c)|b)`.format shouldEqual "1|a|c|b"
   }
 
   "A Repetition" should "be surrounded by {}" in {
-    `a*`.toString shouldEqual "{a}"
+    `a*`.format shouldEqual "{a}"
   }
 
   "An Option" should "be surrounded by []" in {
-    `a?`.toString() shouldEqual "[a]"
+    `a?`.format shouldEqual "[a]"
   }
 
   "Epsilon" should "be ε" in {
-    ε.toString() shouldEqual "ε"
+    ε.format shouldEqual "ε"
   }
 
   "A Production" should "be <Nonterminal> ::= rule(s)" in {
-    Pa.toString shouldEqual "<A> ::= a"
-    Pempty.toString() shouldEqual "<A> ::= ε"
-    `Pa*`.toString() shouldEqual "<A> ::= {a}"
-    `P1(a)*b`.toString() shouldEqual "<A> ::= 1{a}b"
-    `P1(a)?b`.toString() shouldEqual "<A> ::= 1[a]b"
-    `P1(a|c)b`.toString() shouldEqual "<A> ::= 1(a|c)b"
+    Pa.format shouldEqual "<A> ::= a"
+    Pempty.format shouldEqual "<A> ::= ε"
+    `Pa*`.format shouldEqual "<A> ::= {a}"
+    `P1(a)*b`.format shouldEqual "<A> ::= 1{a}b"
+    `P1(a)?b`.format shouldEqual "<A> ::= 1[a]b"
+    `P1(a|c)b`.format shouldEqual "<A> ::= 1(a|c)b"
   }
 
   "A Grammar" should "be ;-delimited, newline-separated Productions" in {
-    G.toString() shouldEqual """<A> ::= a ;
+    G.format shouldEqual """<A> ::= a ;
 <A> ::= ε ;
 <A> ::= {a} ;
 <A> ::= 1{a}b ;

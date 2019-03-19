@@ -84,5 +84,5 @@ object Main extends App {
   // val parser = new EbnfParser()
   // val rule = parser.root
   // println(parser.parse(rule, grammar))
-  println(new EbnfParser().parse(grammar).fold(s => s, g => g.toString()))
+  println(new EbnfParser().parse(grammar).fold(s => s, g => g.format))
 }

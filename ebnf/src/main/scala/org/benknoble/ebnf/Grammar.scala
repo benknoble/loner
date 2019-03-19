@@ -9,42 +9,44 @@ abstract class Expr {
   def || (right: Expr): Expr = Alternation(this, right)
   def *(): Expr = Repetition(this)
   def ?(): Expr = Option(this)
+
+  def format: String
 }
 
 abstract class Word extends Expr
 
 case class Terminal(val s: String) extends Word {
-  override def toString() = s
+  def format = s
 }
 
 case class Nonterminal(val name: Symbol) extends Word {
-  override def toString() = "<" + name.name + ">"
+  def format = "<" + name.name + ">"
 
   def ::=(rule: Expr): Production = new Production(this, rule)
 }
 
 case class Sequence(val left: Expr, val right: Expr) extends Expr {
-  override def toString() =
+  def format =
     Seq(left, right).map {
-      case a: Alternation => "(" + a + ")"
-      case other => other.toString()
+      case a: Alternation => "(" + a.format + ")"
+      case other => other.format
     }.mkString
 }
 
 case class Alternation(val left: Expr, val right: Expr) extends Expr {
-  override def toString() = left.toString() + "|" + right.toString()
+  def format = left.format + "|" + right.format
 }
 
 case class Repetition(val expr: Expr) extends Expr {
-  override def toString() = "{" + expr + "}"
+  def format = "{" + expr.format + "}"
 }
 
 case class Option(val expr: Expr) extends Expr {
-  override def toString() = "[" + expr + "]"
+  def format = "[" + expr.format + "]"
 }
 
 case object ε extends Expr {
-  override def toString() = "ε"
+  def format = "ε"
 }
 
 object ExprImplicts {
@@ -54,12 +56,16 @@ object ExprImplicts {
 
 // <nt> ::= rule
 class Production(val nt: Nonterminal, val rule: Expr) {
-  override def toString() = nt.toString() + " ::= " + rule.toString()
+  override def toString() = s"Production($nt, $rule)"
+
+  def format = nt.format + " ::= " + rule.format
 }
 
 class Grammar(val rules: Seq[Production]) {
-  override def toString() =
-    rules.mkString(" ;\n") match {
+  override def toString() = s"Grammar($rules)"
+
+  def format =
+    rules.map(_.format).mkString(" ;\n") match {
       case "" => "" // empty
       case s: String => s + " ;"
     }
