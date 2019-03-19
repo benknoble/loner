@@ -31,24 +31,11 @@ class EbnfParser extends RegexParsers {
       | group,
       "|" ^^^ { (left: Expr, right: Expr) => Alternation(left, right) } )
 
-  // this has to process the list almost backwords in order to get the proper
-  // left-deepness
-  private def reduceTree(es: Seq[Expr], f: (Expr, Expr) => Expr): Expr = {
-    @annotation.tailrec
-    def go(es: Seq[Expr], acc: Expr): Expr = es match {
-      case h :: t => go(t, f(acc, h))
-      case Nil => acc
-    }
-    go(es.tail, es.head)
-  }
-
-  private def sequencify(exprs: Seq[Expr]): Expr = reduceTree(exprs, Sequence(_,_))
-
   def sequence: Parser[Expr] =
-    alternation.+ ^^ sequencify
+    alternation.+ ^^ Expr.sequencify
 
   def exp: Parser[Expr] =
-    sequence.+ ^^ sequencify
+    sequence.+ ^^ Expr.sequencify
 
   def goesTo: Parser[Any] = """::="""
 

@@ -13,6 +13,14 @@ abstract class Expr {
   def format: String
 }
 
+object Expr {
+  def reduceTree(es: Seq[Expr], f: (Expr, Expr) => Expr): Expr =
+    es.tail.foldLeft(es.head)(f)
+
+  def sequencify(exprs: Seq[Expr]): Expr = reduceTree(exprs, Sequence(_,_))
+  def branchify(exprs: Seq[Expr]): Expr = reduceTree(exprs, Alternation(_,_))
+}
+
 abstract class Word extends Expr
 
 case class Terminal(val s: String) extends Word {
