@@ -78,7 +78,7 @@ class Grammar(_rules: Seq[Production]) {
       case s: String => s + " ;"
     }
 
-  def rules: Seq[Production] =
+  lazy val rules: Seq[Production] =
     _rules
       .groupBy(_.nt)
       .map { case (nt: Nonterminal, ps: Seq[Production]) =>
