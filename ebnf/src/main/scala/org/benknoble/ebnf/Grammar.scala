@@ -69,7 +69,7 @@ class Production(val nt: Nonterminal, val rule: Expr) {
   def format = nt.format + " ::= " + rule.format
 }
 
-class Grammar(val rules: Seq[Production]) {
+class Grammar(_rules: Seq[Production]) {
   override def toString() = s"Grammar($rules)"
 
   def format =
@@ -77,6 +77,14 @@ class Grammar(val rules: Seq[Production]) {
       case "" => "" // empty
       case s: String => s + " ;"
     }
+
+  def rules: Seq[Production] =
+    _rules
+      .groupBy(_.nt)
+      .map { case (nt: Nonterminal, ps: Seq[Production]) =>
+        val rules_for_nt = ps.map(_.rule)
+        nt ::= Expr.branchify(rules_for_nt)
+      }.toList
 
   def nonterminals: Set[Nonterminal] = lhsNonterminals union rhsNonterminals
 
