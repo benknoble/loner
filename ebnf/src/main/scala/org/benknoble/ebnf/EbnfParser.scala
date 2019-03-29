@@ -19,20 +19,19 @@ object EbnfParser extends RegexParsers {
 
   def group: Parser[Expr] = "(" ~> exp <~ ")"
 
-  def alternation: Parser[Expr] =
-    chainl1(epsilon
+  def sequence: Parser[Expr] =
+    (epsilon
       | nonterminal
       | terminal
       | opt
       | repetition
-      | group,
-      "|" ^^^ { (left: Expr, right: Expr) => Alternation(left, right) } )
+      | group).+ ^^ Expr.sequencify
 
-  def sequence: Parser[Expr] =
-    alternation.+ ^^ Expr.sequencify
+  def alternation: Parser[Expr] =
+    rep1sep(sequence, "|") ^^ Expr.branchify
 
   def exp: Parser[Expr] =
-    sequence.+ ^^ Expr.sequencify
+    alternation.+ ^^ Expr.sequencify
 
   def goesTo: Parser[Any] = """::="""
 
