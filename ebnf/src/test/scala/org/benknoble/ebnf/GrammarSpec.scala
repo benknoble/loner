@@ -79,12 +79,7 @@ class GrammarSpec extends FlatSpec with Matchers {
   }
 
   "A Grammar" should "be ;-delimited, newline-separated Productions" in {
-    G.format shouldEqual """<A> ::= a ;
-<A> ::= ε ;
-<A> ::= {a} ;
-<A> ::= 1{a}b ;
-<A> ::= 1[a]b ;
-<A> ::= 1(a|c)b ;"""
+    G.format shouldEqual """<A> ::= a|ε|{a}|1{a}b|1[a]b|1(a|c)b ;"""
   }
 
   "A Grammar's nonterminals" should "be the set of nonterminals" in {
