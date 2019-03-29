@@ -65,12 +65,21 @@ object ExprImplicts {
 // <nt> ::= rule
 class Production(val nt: Nonterminal, val rule: Expr) {
   override def toString() = s"Production($nt, $rule)"
+  override def equals(that: Any) = that match {
+    case that: Production => nt == that.nt && rule == that.rule
+    case _ => false
+  }
 
   def format = nt.format + " ::= " + rule.format
 }
 
 class Grammar(_rules: Seq[Production]) {
   override def toString() = s"Grammar($rules)"
+  override def equals(that: Any) = that match {
+    // order matters
+    case that: Grammar => rules == that.rules
+    case _ => false
+  }
 
   def format =
     rules.map(_.format).mkString(" ;\n") match {
