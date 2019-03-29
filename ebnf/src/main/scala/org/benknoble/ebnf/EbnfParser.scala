@@ -2,7 +2,7 @@ package org.benknoble.loner.ebnf
 
 import scala.util.parsing.combinator._
 
-class EbnfParser extends RegexParsers {
+object EbnfParser extends RegexParsers {
 
   def epsilon: Parser[Expr] = "ε" ^^ { _ => ε }
 
@@ -45,12 +45,9 @@ class EbnfParser extends RegexParsers {
 
   def root: Parser[Grammar] = phrase(grammar)
 
-  // Should eventually be a custom error type ?
-  // Or do I just return the results? # = parse(root, grammar)
-  def parse(grammar: String): Either[String, Grammar] = parse(root, grammar) match {
-    case Success(result, _) => Right(result)
-    case Failure(msg, _) => Left(msg)
-    case Error(msg, _) => Left(msg)
+  def apply(input: String): Either[String, Grammar] = parse(root, input) match {
+    case Success(g, _) => Right(g)
+    case NoSuccess(msg, _) => Left(msg)
   }
 
 }
@@ -65,8 +62,5 @@ object Main extends App {
 | b | c
 | d ;
 """
-  // val parser = new EbnfParser()
-  // val rule = parser.root
-  // println(parser.parse(rule, grammar))
-  println(new EbnfParser().parse(grammar).fold(s => s, g => g.format))
+  println(EbnfParser(grammar).map(_.format))
 }
