@@ -116,6 +116,10 @@ class Grammar(_rules: Seq[Production]) {
   }
 }
 
+object Grammar {
+  def apply(productions: Production*): Grammar = new Grammar(productions)
+}
+
 // object Main extends App {
 //   val e: Expr = ("a" ~ "b").*
 //   val f: Expr = "a".?
