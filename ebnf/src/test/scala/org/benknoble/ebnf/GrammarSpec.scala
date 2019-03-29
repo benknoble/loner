@@ -6,7 +6,7 @@ class GrammarSpec extends FlatSpec with Matchers {
 
   import ExprImplicts._
 
-  val emptyGrammar = new Grammar(List())
+  val emptyGrammar = Grammar()
   val abc: Nonterminal = 'abc
   val `a*`: Expr = Terminal("a").*
   val `a?`: Expr = "a".?
@@ -22,13 +22,13 @@ class GrammarSpec extends FlatSpec with Matchers {
   val `P1(a)*b` = 'A ::= `1(a)*b`
   val `P1(a)?b` = 'A ::= `1(a)?b`
   val `P1(a|c)b` = 'A ::= `1(a|c)b`
-  val G = new Grammar(Seq(
+  val G = Grammar(
     Pa,
     Pempty,
     `Pa*`,
     `P1(a)*b`,
     `P1(a)?b`,
-    `P1(a|c)b`))
+    `P1(a|c)b`)
 
   "The empty Grammar object" should "have an empty string representation" in {
     emptyGrammar.format shouldEqual ""
