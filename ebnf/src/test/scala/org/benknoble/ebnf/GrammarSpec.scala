@@ -28,7 +28,8 @@ class GrammarSpec extends FlatSpec with Matchers {
     `Pa*`,
     `P1(a)*b`,
     `P1(a)?b`,
-    `P1(a|c)b`)
+    `P1(a|c)b`,
+    'C ::= "c")
 
   "The empty Grammar object" should "have an empty string representation" in {
     emptyGrammar.format shouldEqual ""
@@ -79,12 +80,13 @@ class GrammarSpec extends FlatSpec with Matchers {
   }
 
   "A Grammar" should "be ;-delimited, newline-separated Productions" in {
-    G.format shouldEqual """<A> ::= a|ε|{a}|1{a}b|1[a]b|1(a|c)b ;"""
+    G.format shouldEqual """<A> ::= a|ε|{a}|1{a}b|1[a]b|1(a|c)b ;
+<C> ::= c ;"""
   }
 
   "A Grammar's nonterminals" should "be the set of nonterminals" in {
-    G.nonterminals shouldEqual Set[Nonterminal]('A)
+    G.nonterminals shouldEqual Set[Nonterminal]('A, 'C)
     new Grammar(G.rules ++ Seq[Production]('A ::= 'B))
-      .nonterminals shouldEqual Set[Nonterminal]('A, 'B)
+      .nonterminals shouldEqual Set[Nonterminal]('A, 'B, 'C)
   }
 }
