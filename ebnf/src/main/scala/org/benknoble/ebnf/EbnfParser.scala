@@ -51,15 +51,15 @@ object EbnfParser extends RegexParsers {
 
 }
 
-object Main extends App {
-  val grammar = """<A> ::= [a|ε]c ;
-<B> ::= <A>b ;
-<C> ::= {<B>}$ ;
-<D> ::= abd ;
-<E> ::= (a|b)c ;
-<F> ::= a
-| b | c
-| d ;
-"""
-  println(EbnfParser(grammar).map(_.format))
-}
+// object Main extends App {
+//   val grammar = """<A> ::= [a|ε]c ;
+// <B> ::= <A>b ;
+// <C> ::= {<B>}$ ;
+// <D> ::= abd ;
+// <E> ::= (a|b)c ;
+// <F> ::= a
+// | b | c
+// | d ;
+// """
+//   println(EbnfParser(grammar).map(_.format))
+// }
