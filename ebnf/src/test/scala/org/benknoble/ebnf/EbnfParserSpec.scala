@@ -92,4 +92,16 @@ class EbnfParserSpec extends FlatSpec with Matchers with EitherValues {
       Grammar('A ::= "a" || "b" ~ "c".?)
   }
 
+  it should "ignore comments" in {
+    EbnfParser("""
+      # this is a comment
+      <A> ::= a     # a values
+              | b   # b values
+              | c   # c values
+              ;
+      """
+      ).right.value shouldEqual
+    Grammar('A ::= "a" || "b" || "c")
+  }
+
 }

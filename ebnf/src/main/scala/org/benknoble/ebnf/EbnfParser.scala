@@ -4,6 +4,10 @@ import scala.util.parsing.combinator._
 
 object EbnfParser extends RegexParsers {
 
+  protected val commentPrefix = "#"
+  override protected val whiteSpace =
+    s"""(\\s|${commentPrefix}.*)+""".r
+
   def epsilon: Parser[Expr] = "ε" ^^ { _ => ε }
 
   def terminal: Parser[Expr] = """[^<>\[\]{}()ε|;\s]+""".r ^^ { Terminal(_) }
