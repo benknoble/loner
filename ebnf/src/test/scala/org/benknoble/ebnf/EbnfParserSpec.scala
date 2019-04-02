@@ -88,7 +88,8 @@ class EbnfParserSpec extends FlatSpec with Matchers with EitherValues {
       <A>
         ::= a
         | b	[c    ]
-        ;""").right.value shouldEqual
+        ;"""
+        ).right.value shouldEqual
       Grammar('A ::= "a" || "b" ~ "c".?)
   }
 
