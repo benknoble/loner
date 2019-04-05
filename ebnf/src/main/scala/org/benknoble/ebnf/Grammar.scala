@@ -57,7 +57,7 @@ case object ε extends Expr {
   def format = "ε"
 }
 
-object ExprImplicts {
+object ExprImplicits {
   implicit def charToTerminal(s: String) = Terminal(s)
   implicit def symbolToNonterminal(s: Symbol) = Nonterminal(s)
 }
