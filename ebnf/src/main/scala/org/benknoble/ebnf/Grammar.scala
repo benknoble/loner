@@ -99,7 +99,7 @@ case class Terminal(val s: String) extends Word {
 
 /** A nonterminal symbol of the grammar
   *
-  * Nonterminals look like <Name>:
+  * Nonterminals look like `<Name>`:
   * {{{
   * scala> import org.benknoble.loner.ebnf._
   * import org.benknoble.loner.ebnf._
@@ -262,7 +262,7 @@ object ExprImplicits {
 
 /** A production from a nonterminal to a rule
   *
-  * A production is represented as <Nonterminal> ::= expr:
+  * A production is represented as `<Nonterminal> ::= expr`:
   * {{{
   * scala> val e = new Production(Nonterminal('A),Terminal("abc")).format
   * e: String = <A> ::= abc
