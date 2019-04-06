@@ -1,7 +1,7 @@
-package org.benknoble.loner.ebnf
+package org.benknoble.ebnf
 
 import org.scalatest._
-import ExprImplicts._
+import ExprImplicits._
 
 class EbnfParserSpec extends FlatSpec with Matchers with EitherValues {
 

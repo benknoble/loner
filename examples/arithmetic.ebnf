@@ -1,0 +1,6 @@
+# expression
+<E> ::= <T>|<E><Op><T> ;
+# term
+<T> ::= <E>|num ;
+# operator
+<Op> ::= +|× ;

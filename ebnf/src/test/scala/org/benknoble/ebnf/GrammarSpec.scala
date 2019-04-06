@@ -1,10 +1,10 @@
-package org.benknoble.loner.ebnf
+package org.benknoble.ebnf
 
 import org.scalatest._
 
 class GrammarSpec extends FlatSpec with Matchers {
 
-  import ExprImplicts._
+  import ExprImplicits._
 
   val emptyGrammar = Grammar()
   val abc: Nonterminal = 'abc
