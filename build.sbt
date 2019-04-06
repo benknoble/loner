@@ -7,10 +7,6 @@ ThisBuild / organization     := "org.benknoble"
 ThisBuild / organizationName := "benknoble"
 
 enablePlugins(SiteScaladocPlugin)
-enablePlugins(GhpagesPlugin)
-
-git.remoteRepo := "git@github.com:benknoble/lloner.git"
-ghpagesNoJekyll := true
 
 lazy val loner = (project in file("."))
   .settings(
@@ -47,6 +43,11 @@ lazy val scaladocSiteSettings =
   }
 
 lazy val scaladocSite = (project in file("site"))
-  .settings(scaladocSiteSettings)
+  .settings(
+    scaladocSiteSettings,
+    git.remoteRepo := "git@github.com:benknoble/loner.git",
+    ghpagesNoJekyll := true
+  )
+  .enablePlugins(GhpagesPlugin)
 
 // See https://www.scala-sbt.org/1.x/docs/Using-Sonatype.html for instructions on how to publish to Sonatype.
