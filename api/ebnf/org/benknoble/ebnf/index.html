@@ -1,0 +1,681 @@
+<!DOCTYPE html >
+<html>
+        <head>
+          <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+          <title></title>
+          <meta name="description" content="" />
+          <meta name="keywords" content="" />
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      <link href="../../../lib/index.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../../../lib/jquery.js"></script>
+      <script type="text/javascript" src="../../../lib/jquery.panzoom.min.js"></script>
+      <script type="text/javascript" src="../../../lib/jquery.mousewheel.min.js"></script>
+      <script type="text/javascript" src="../../../lib/index.js"></script>
+      <script type="text/javascript" src="../../../index.js"></script>
+      <script type="text/javascript" src="../../../lib/scheduler.js"></script>
+      <script type="text/javascript" src="../../../lib/template.js"></script>
+      <script type="text/javascript" src="../../../lib/tools.tooltip.js"></script>
+      
+      <script type="text/javascript">
+        /* this variable can be used by the JS to determine the path to the root document */
+        var toRoot = '../../../';
+      </script>
+    
+        </head>
+        <body>
+      <div id="search">
+        <span id="doc-title"><span id="doc-version"></span></span>
+        <span class="close-results"><span class="left">&lt;</span> Back</span>
+        <div id="textfilter">
+          <span class="input">
+            <input autocapitalize="none" placeholder="Search" id="index-input" type="text" accesskey="/" />
+            <i class="clear material-icons"></i>
+            <i id="search-icon" class="material-icons"></i>
+          </span>
+        </div>
+    </div>
+      <div id="search-results">
+        <div id="search-progress">
+          <div id="progress-fill"></div>
+        </div>
+        <div id="results-content">
+          <div id="entity-results"></div>
+          <div id="member-results"></div>
+        </div>
+      </div>
+      <div id="content-scroll-container" style="-webkit-overflow-scrolling: touch;">
+        <div id="content-container" style="-webkit-overflow-scrolling: touch;">
+          <div id="subpackage-spacer">
+            <div id="packages">
+              <h1>Packages</h1>
+              <ul>
+                <li name="_root_.root" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="_root_"></a><a id="root:_root_"></a>
+      <span class="permalink">
+      <a href="index.html#_root_" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a title="" href="../../../index.html"><span class="name">root</span></a>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../../../index.html" class="extype" name="_root_">root</a></dd></dl></div>
+    </li><li name="_root_.org" visbl="pub" class="indented1 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="org"></a><a id="org:org"></a>
+      <span class="permalink">
+      <a href="index.html#org" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a title="" href="../../index.html"><span class="name">org</span></a>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../../../index.html" class="extype" name="_root_">root</a></dd></dl></div>
+    </li><li name="org.benknoble" visbl="pub" class="indented2 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="benknoble"></a><a id="benknoble:benknoble"></a>
+      <span class="permalink">
+      <a href="../org/index.html#benknoble" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a title="" href="../index.html"><span class="name">benknoble</span></a>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../../index.html" class="extype" name="org">org</a></dd></dl></div>
+    </li><li name="org.benknoble.ebnf" visbl="pub" class="indented3 current" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ebnf"></a><a id="ebnf:ebnf"></a>
+      <span class="permalink">
+      <a href="../../org/benknoble/index.html#ebnf" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ebnf</span>
+      </span>
+      
+      <p class="shortcomment cmt">Provides classes for dealing with context-free grammars in EBNF form.</p><div class="fullcomment"><div class="comment cmt"><p>Provides classes for dealing with context-free grammars in EBNF form.</p><p>Provides a <a href="Grammar.html" class="extype" name="org.benknoble.ebnf.Grammar">org.benknoble.ebnf.Grammar</a> model, complete with scala
+DSL for creating complex grammars in code, and an
+<a href="EbnfParser$.html" class="extype" name="org.benknoble.ebnf.EbnfParser">org.benknoble.ebnf.EbnfParser</a> to generate Grammars from a String.</p><h4>Overview</h4><p>The main class is <a href="Grammar.html" class="extype" name="org.benknoble.ebnf.Grammar">org.benknoble.ebnf.Grammar</a>:</p><pre>scala&gt; <span class="kw">val</span> grammar = Grammar(
+     |   <span class="kw">new</span> Production(
+     |     Nonterminal('A),
+     |     Alternation(Nonterminal('A),
+     |     Sequence(Repetition(Terminal(<span class="lit">"abc"</span>)), <span class="std">Option</span>(Terminal(<span class="lit">"def"</span>))))))
+grammar: org.benknoble.ebnf.Grammar = Grammar(<span class="std">List</span>(Production(Nonterminal('A), Alternation(Nonterminal('A),Sequence(Repetition(Terminal(abc)),<span class="std">Option</span>(Terminal(<span class="kw">def</span>)))))))
+
+scala&gt; <span class="kw">val</span> s = grammar.format
+s: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{abc}[<span class="kw">def</span>] ;</pre><p>If you include <a href="ExprImplicits$.html" class="extype" name="org.benknoble.ebnf.ExprImplicits">org.benknoble.ebnf.ExprImplicits</a> and take advantage
+of <a href="Expr.html" class="extype" name="org.benknoble.ebnf.Expr">org.benknoble.ebnf.Expr</a> syntax, it looks a lot cleaner:</p><pre>scala&gt; <span class="kw">val</span> grammar = Grammar(<span class="lit">'A ::= '</span>A || Terminal(<span class="lit">"abc"</span>).* ~ <span class="lit">"def"</span>.?)
+grammar: org.benknoble.ebnf.Grammar = Grammar(<span class="std">List</span>(Production(Nonterminal('A), Alternation(Nonterminal('A),Sequence(Repetition(Terminal(abc)),<span class="std">Option</span>(Terminal(<span class="kw">def</span>)))))))
+
+scala&gt; <span class="kw">val</span> s = grammar.format
+s: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{abc}[<span class="kw">def</span>] ;</pre><p>Finally, you can take advantage of <a href="EbnfParser$.html" class="extype" name="org.benknoble.ebnf.EbnfParser">org.benknoble.ebnf.EbnfParser</a>:</p><pre>scala&gt; <span class="kw">val</span> grammar = EbnfParser(<span class="lit">"&lt;A&gt; ::= &lt;A&gt;|{abc}[def] ;"</span>)
+grammar: Either[<span class="std">String</span>,org.benknoble.ebnf.Grammar] = Right(Grammar(<span class="std">List</span>(Production(Nonterminal('A), Alternation(Nonterminal('A),Sequence(Repetition(Terminal(abc)),<span class="std">Option</span>(Terminal(<span class="kw">def</span>))))))))
+
+scala&gt; <span class="kw">val</span> msg = grammar.fold(s <span class="kw">=&gt;</span> s, g <span class="kw">=&gt;</span> g.format)
+msg: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{abc}[<span class="kw">def</span>] ;</pre></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../index.html" class="extype" name="org.benknoble">benknoble</a></dd></dl></div>
+    </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="class" href="Alternation.html" title="A choice of expressions in the tree"></a>
+                        <a href="Alternation.html" title="A choice of expressions in the tree">Alternation</a>
+                      </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="object" href="EbnfParser$.html" title="Parser for EBNF specifications"></a>
+                        <a href="EbnfParser$.html" title="Parser for EBNF specifications">EbnfParser</a>
+                      </li><li class="current-entities indented3">
+                        <a class="object" href="Expr$.html" title="Provides helper methods for expressions"></a>
+                        <a class="class" href="Expr.html" title="Base class for expressions"></a>
+                        <a href="Expr.html" title="Base class for expressions">Expr</a>
+                      </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="object" href="ExprImplicits$.html" title="Implicit conversions for Expr"></a>
+                        <a href="ExprImplicits$.html" title="Implicit conversions for Expr">ExprImplicits</a>
+                      </li><li class="current-entities indented3">
+                        <a class="object" href="Grammar$.html" title="Factory for org.benknoble.ebnf.Grammar instances."></a>
+                        <a class="class" href="Grammar.html" title="A (context-free) grammar of productions"></a>
+                        <a href="Grammar.html" title="A (context-free) grammar of productions">Grammar</a>
+                      </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="object" href="Main$.html" title=""></a>
+                        <a href="Main$.html" title="">Main</a>
+                      </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="class" href="Nonterminal.html" title="A nonterminal symbol of the grammar"></a>
+                        <a href="Nonterminal.html" title="A nonterminal symbol of the grammar">Nonterminal</a>
+                      </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="class" href="Option.html" title="An optional expression."></a>
+                        <a href="Option.html" title="An optional expression.">Option</a>
+                      </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="class" href="Production.html" title="A production from a nonterminal to a rule"></a>
+                        <a href="Production.html" title="A production from a nonterminal to a rule">Production</a>
+                      </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="class" href="Repetition.html" title="The Kleene-star closure of an expression"></a>
+                        <a href="Repetition.html" title="The Kleene-star closure of an expression">Repetition</a>
+                      </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="class" href="Sequence.html" title="A sequence of expressions in the tree"></a>
+                        <a href="Sequence.html" title="A sequence of expressions in the tree">Sequence</a>
+                      </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="class" href="Terminal.html" title="A terminal symbol of the grammar"></a>
+                        <a href="Terminal.html" title="A terminal symbol of the grammar">Terminal</a>
+                      </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="class" href="Word.html" title=""></a>
+                        <a href="Word.html" title="">Word</a>
+                      </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="object" href="ε$.html" title="The empty expression (pronounced &quot;epsilon&quot;)"></a>
+                        <a href="ε$.html" title="The empty expression (pronounced &quot;epsilon&quot;)">ε</a>
+                      </li>
+              </ul>
+            </div>
+          </div>
+          <div id="content">
+            <body class="package value">
+      <div id="definition">
+        <div class="big-circle package">p</div>
+        <p id="owner"><a href="../../index.html" class="extype" name="org">org</a>.<a href="../index.html" class="extype" name="org.benknoble">benknoble</a></p>
+        <h1>ebnf<span class="permalink">
+      <a href="../../../org/benknoble/ebnf/index.html" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span></h1>
+        
+      </div>
+
+      <h4 id="signature" class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ebnf</span>
+      </span>
+      </h4>
+
+      
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Provides classes for dealing with context-free grammars in EBNF form.</p><p>Provides a <a href="Grammar.html" class="extype" name="org.benknoble.ebnf.Grammar">org.benknoble.ebnf.Grammar</a> model, complete with scala
+DSL for creating complex grammars in code, and an
+<a href="EbnfParser$.html" class="extype" name="org.benknoble.ebnf.EbnfParser">org.benknoble.ebnf.EbnfParser</a> to generate Grammars from a String.</p><h4>Overview</h4><p>The main class is <a href="Grammar.html" class="extype" name="org.benknoble.ebnf.Grammar">org.benknoble.ebnf.Grammar</a>:</p><pre>scala&gt; <span class="kw">val</span> grammar = Grammar(
+     |   <span class="kw">new</span> Production(
+     |     Nonterminal('A),
+     |     Alternation(Nonterminal('A),
+     |     Sequence(Repetition(Terminal(<span class="lit">"abc"</span>)), <span class="std">Option</span>(Terminal(<span class="lit">"def"</span>))))))
+grammar: org.benknoble.ebnf.Grammar = Grammar(<span class="std">List</span>(Production(Nonterminal('A), Alternation(Nonterminal('A),Sequence(Repetition(Terminal(abc)),<span class="std">Option</span>(Terminal(<span class="kw">def</span>)))))))
+
+scala&gt; <span class="kw">val</span> s = grammar.format
+s: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{abc}[<span class="kw">def</span>] ;</pre><p>If you include <a href="ExprImplicits$.html" class="extype" name="org.benknoble.ebnf.ExprImplicits">org.benknoble.ebnf.ExprImplicits</a> and take advantage
+of <a href="Expr.html" class="extype" name="org.benknoble.ebnf.Expr">org.benknoble.ebnf.Expr</a> syntax, it looks a lot cleaner:</p><pre>scala&gt; <span class="kw">val</span> grammar = Grammar(<span class="lit">'A ::= '</span>A || Terminal(<span class="lit">"abc"</span>).* ~ <span class="lit">"def"</span>.?)
+grammar: org.benknoble.ebnf.Grammar = Grammar(<span class="std">List</span>(Production(Nonterminal('A), Alternation(Nonterminal('A),Sequence(Repetition(Terminal(abc)),<span class="std">Option</span>(Terminal(<span class="kw">def</span>)))))))
+
+scala&gt; <span class="kw">val</span> s = grammar.format
+s: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{abc}[<span class="kw">def</span>] ;</pre><p>Finally, you can take advantage of <a href="EbnfParser$.html" class="extype" name="org.benknoble.ebnf.EbnfParser">org.benknoble.ebnf.EbnfParser</a>:</p><pre>scala&gt; <span class="kw">val</span> grammar = EbnfParser(<span class="lit">"&lt;A&gt; ::= &lt;A&gt;|{abc}[def] ;"</span>)
+grammar: Either[<span class="std">String</span>,org.benknoble.ebnf.Grammar] = Right(Grammar(<span class="std">List</span>(Production(Nonterminal('A), Alternation(Nonterminal('A),Sequence(Repetition(Terminal(abc)),<span class="std">Option</span>(Terminal(<span class="kw">def</span>))))))))
+
+scala&gt; <span class="kw">val</span> msg = grammar.fold(s <span class="kw">=&gt;</span> s, g <span class="kw">=&gt;</span> g.format)
+msg: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{abc}[<span class="kw">def</span>] ;</pre></div><div class="toggleContainer block">
+          <span class="toggle">
+            Linear Supertypes
+          </span>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+        </div></div>
+        
+
+      <div id="mbrsel">
+        <div class="toggle"></div>
+        <div id="memberfilter">
+          <i class="material-icons arrow"></i>
+          <span class="input">
+            <input id="mbrsel-input" placeholder="Filter all members" type="text" accesskey="/" />
+          </span>
+          <i class="clear material-icons"></i>
+        </div>
+        <div id="filterby">
+          <div id="order">
+            <span class="filtertype">Ordering</span>
+            <ol>
+              
+              <li class="alpha in"><span>Alphabetic</span></li>
+              <li class="inherit out"><span>By Inheritance</span></li>
+            </ol>
+          </div>
+          <div class="ancestors">
+                  <span class="filtertype">Inherited<br />
+                  </span>
+                  <ol id="linearization">
+                    <li class="in" name="org.benknoble.ebnf"><span>ebnf</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  </ol>
+                </div><div class="ancestors">
+              <span class="filtertype"></span>
+              <ol>
+                <li class="hideall out"><span>Hide All</span></li>
+                <li class="showall in"><span>Show All</span></li>
+              </ol>
+            </div>
+          <div id="visbl">
+              <span class="filtertype">Visibility</span>
+              <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+            </div>
+        </div>
+      </div>
+
+      <div id="template">
+        <div id="allMembers">
+        
+
+        <div id="types" class="types members">
+              <h3>Type Members</h3>
+              <ol><li name="org.benknoble.ebnf.Alternation" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="AlternationextendsExprwithProductwithSerializable"></a><a id="Alternation:Alternation"></a>
+      <span class="permalink">
+      <a href="../../../org/benknoble/ebnf/index.html#AlternationextendsExprwithProductwithSerializable" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a title="A choice of expressions in the tree" href="Alternation.html"><span class="name">Alternation</span></a><span class="params">(<span name="left">left: <a href="Expr.html" class="extype" name="org.benknoble.ebnf.Expr">Expr</a></span>, <span name="right">right: <a href="Expr.html" class="extype" name="org.benknoble.ebnf.Expr">Expr</a></span>)</span><span class="result"> extends <a href="Expr.html" class="extype" name="org.benknoble.ebnf.Expr">Expr</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">A choice of expressions in the tree</p><div class="fullcomment"><div class="comment cmt"><p>A choice of expressions in the tree</p><p>Alternations are just their elements separated by '|':</p><pre>scala&gt; <span class="kw">import</span> org.benknoble.ebnf._
+<span class="kw">import</span> org.benknoble.ebnf._
+
+scala&gt; <span class="kw">val</span> a = Alternation(Nonterminal('A), Terminal(<span class="lit">"a"</span>)).format
+a: <span class="std">String</span> = &lt;A&gt;|a</pre></div><dl class="paramcmts block"><dt class="param">left</dt><dd class="cmt"><p>the left side of the Alternation</p></dd><dt class="param">right</dt><dd class="cmt"><p>the right side in the Alternation</p></dd></dl></div>
+    </li><li name="org.benknoble.ebnf.Expr" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="ExprextendsAnyRef"></a><a id="Expr:Expr"></a>
+      <span class="permalink">
+      <a href="../../../org/benknoble/ebnf/index.html#ExprextendsAnyRef" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a title="Base class for expressions" href="Expr.html"><span class="name">Expr</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Base class for expressions</p><div class="fullcomment"><div class="comment cmt"><p>Base class for expressions</p><p>An expression is the right hand side of an EBNF rule, made of sequences,
+branches, repetitions, and options of terminal and nonterminal symbols.
+Each of these is represented by a concrete case class.</p><p>Provides methods common to all expressions.
+</p></div></div>
+    </li><li name="org.benknoble.ebnf.Grammar" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="GrammarextendsAnyRef"></a><a id="Grammar:Grammar"></a>
+      <span class="permalink">
+      <a href="../../../org/benknoble/ebnf/index.html#GrammarextendsAnyRef" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a title="A (context-free) grammar of productions" href="Grammar.html"><span class="name">Grammar</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">A (context-free) grammar of productions</p><div class="fullcomment"><div class="comment cmt"><p>A (context-free) grammar of productions</p><p>The preferred construction method is via the companion object's apply
+method, which is variadic.</p><p>A Grammar is represented by ;-delimited, newline-separated Productions:</p><pre>scala&gt; <span class="kw">val</span> g = <span class="kw">new</span> Grammar(<span class="std">Seq</span>(<span class="kw">new</span> Production(Nonterminal('A), Alternation(Terminal(<span class="lit">"abc"</span>), <span class="std">Option</span>(Nonterminal('B)))))).format
+g: <span class="std">String</span> = &lt;A&gt; ::= abc|[&lt;B&gt;] ;</pre></div><dl class="attributes block"> <dt>See also</dt><dd><span class="cmt"><p><a href="Production.html" class="extype" name="org.benknoble.ebnf.Production">org.benknoble.ebnf.Production</a></p></span></dd></dl></div>
+    </li><li name="org.benknoble.ebnf.Nonterminal" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="NonterminalextendsWordwithProductwithSerializable"></a><a id="Nonterminal:Nonterminal"></a>
+      <span class="permalink">
+      <a href="../../../org/benknoble/ebnf/index.html#NonterminalextendsWordwithProductwithSerializable" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a title="A nonterminal symbol of the grammar" href="Nonterminal.html"><span class="name">Nonterminal</span></a><span class="params">(<span name="name">name: <span class="extype" name="scala.Symbol">Symbol</span></span>)</span><span class="result"> extends <a href="Word.html" class="extype" name="org.benknoble.ebnf.Word">Word</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">A nonterminal symbol of the grammar</p><div class="fullcomment"><div class="comment cmt"><p>A nonterminal symbol of the grammar</p><p>Nonterminals look like <code>&lt;Name&gt;</code>:</p><pre>scala&gt; <span class="kw">import</span> org.benknoble.ebnf._
+<span class="kw">import</span> org.benknoble.ebnf._
+
+scala&gt; <span class="kw">val</span> n = Nonterminal('A).format
+n: <span class="std">String</span> = &lt;A&gt;</pre></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>the name of the Nonterminal</p></dd></dl></div>
+    </li><li name="org.benknoble.ebnf.Option" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="OptionextendsExprwithProductwithSerializable"></a><a id="Option:Option"></a>
+      <span class="permalink">
+      <a href="../../../org/benknoble/ebnf/index.html#OptionextendsExprwithProductwithSerializable" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a title="An optional expression." href="Option.html"><span class="name">Option</span></a><span class="params">(<span name="expr">expr: <a href="Expr.html" class="extype" name="org.benknoble.ebnf.Expr">Expr</a></span>)</span><span class="result"> extends <a href="Expr.html" class="extype" name="org.benknoble.ebnf.Expr">Expr</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">An optional expression.</p><div class="fullcomment"><div class="comment cmt"><p>An optional expression.</p><p>Equivalent to <code>Alternation(expr, ε)</code>. Surrounded by square brackets:</p><pre>scala&gt; <span class="kw">var</span> o = <span class="std">Option</span>(Sequence(Nonterminal('A), Terminal(<span class="lit">"abc"</span>))).format
+o: <span class="std">String</span> = [&lt;A&gt;abc]
+
+scala&gt; o = Sequence(Nonterminal('A), Terminal(<span class="lit">"abc"</span>)).?.format
+o: <span class="std">String</span> = [&lt;A&gt;abc]</pre></div><dl class="paramcmts block"><dt class="param">expr</dt><dd class="cmt"><p>the optional expression</p></dd></dl><dl class="attributes block"> <dt>See also</dt><dd><span class="cmt"><p><a href="Alternation.html" class="extype" name="org.benknoble.ebnf.Alternation">org.benknoble.ebnf.Alternation</a></p></span><span class="cmt"><p><a href="ε$.html" class="extype" name="org.benknoble.ebnf.ε">org.benknoble.ebnf.ε</a></p></span></dd></dl></div>
+    </li><li name="org.benknoble.ebnf.Production" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ProductionextendsAnyRef"></a><a id="Production:Production"></a>
+      <span class="permalink">
+      <a href="../../../org/benknoble/ebnf/index.html#ProductionextendsAnyRef" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a title="A production from a nonterminal to a rule" href="Production.html"><span class="name">Production</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">A production from a nonterminal to a rule</p><div class="fullcomment"><div class="comment cmt"><p>A production from a nonterminal to a rule</p><p>A production is represented as <code>&lt;Nonterminal&gt; ::= expr</code>:</p><pre>scala&gt; <span class="kw">val</span> e = <span class="kw">new</span> Production(Nonterminal('A),Terminal(<span class="lit">"abc"</span>)).format
+e: <span class="std">String</span> = &lt;A&gt; ::= abc</pre><p>Contains a naïve comparison for equality based on the nonterminal and
+expression (structural equality: <code>'A ::= &quot;a&quot;||&quot;b&quot;</code> does NOT equal
+<code>'A ::= &quot;b&quot;||&quot;a&quot;</code>)
+</p></div><dl class="attributes block"> <dt>See also</dt><dd><span class="cmt"><p><a href="Nonterminal.html" class="extype" name="org.benknoble.ebnf.Nonterminal">org.benknoble.ebnf.Nonterminal</a>'s ::= syntax</p></span><span class="cmt"><p><a href="Expr.html" class="extype" name="org.benknoble.ebnf.Expr">org.benknoble.ebnf.Expr</a></p></span></dd></dl></div>
+    </li><li name="org.benknoble.ebnf.Repetition" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="RepetitionextendsExprwithProductwithSerializable"></a><a id="Repetition:Repetition"></a>
+      <span class="permalink">
+      <a href="../../../org/benknoble/ebnf/index.html#RepetitionextendsExprwithProductwithSerializable" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a title="The Kleene-star closure of an expression" href="Repetition.html"><span class="name">Repetition</span></a><span class="params">(<span name="expr">expr: <a href="Expr.html" class="extype" name="org.benknoble.ebnf.Expr">Expr</a></span>)</span><span class="result"> extends <a href="Expr.html" class="extype" name="org.benknoble.ebnf.Expr">Expr</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">The Kleene-star closure of an expression</p><div class="fullcomment"><div class="comment cmt"><p>The Kleene-star closure of an expression</p><p>Repetitions are an expression surrounded by curly braces:</p><pre>scala&gt; <span class="kw">val</span> r = Repetition(Sequence(Nonterminal('A), Terminal(<span class="lit">"abc"</span>))).format
+r: <span class="std">String</span> = {&lt;A&gt;abc}
+
+scala&gt; <span class="kw">val</span> r2 = Sequence(Nonterminal('A), Terminal(<span class="lit">"abc"</span>)).*.format
+r2: <span class="std">String</span> = {&lt;A&gt;abc}</pre></div><dl class="paramcmts block"><dt class="param">expr</dt><dd class="cmt"><p>the expression to repeat</p></dd></dl></div>
+    </li><li name="org.benknoble.ebnf.Sequence" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="SequenceextendsExprwithProductwithSerializable"></a><a id="Sequence:Sequence"></a>
+      <span class="permalink">
+      <a href="../../../org/benknoble/ebnf/index.html#SequenceextendsExprwithProductwithSerializable" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a title="A sequence of expressions in the tree" href="Sequence.html"><span class="name">Sequence</span></a><span class="params">(<span name="left">left: <a href="Expr.html" class="extype" name="org.benknoble.ebnf.Expr">Expr</a></span>, <span name="right">right: <a href="Expr.html" class="extype" name="org.benknoble.ebnf.Expr">Expr</a></span>)</span><span class="result"> extends <a href="Expr.html" class="extype" name="org.benknoble.ebnf.Expr">Expr</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">A sequence of expressions in the tree</p><div class="fullcomment"><div class="comment cmt"><p>A sequence of expressions in the tree</p><p>Sequences are just their elements concatenated. They take special care to
+group <a href="Alternation.html" class="extype" name="org.benknoble.ebnf.Alternation">org.benknoble.ebnf.Alternation</a>s in parens:</p><pre>scala&gt; <span class="kw">import</span> org.benknoble.ebnf._
+<span class="kw">import</span> org.benknoble.ebnf._
+
+scala&gt; <span class="kw">val</span> s = Sequence(Nonterminal('A), Terminal(<span class="lit">"a"</span>)).format
+s: <span class="std">String</span> = &lt;A&gt;a
+
+scala&gt; <span class="kw">val</span> sa = Sequence(Nonterminal('A), Alternation(Terminal(<span class="lit">"a"</span>), Terminal(<span class="lit">"b"</span>))).format
+sa: <span class="std">String</span> = &lt;A&gt;(a|b)</pre></div><dl class="paramcmts block"><dt class="param">left</dt><dd class="cmt"><p>the left side of the sequence</p></dd><dt class="param">right</dt><dd class="cmt"><p>the right side in the sequence</p></dd></dl></div>
+    </li><li name="org.benknoble.ebnf.Terminal" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="TerminalextendsWordwithProductwithSerializable"></a><a id="Terminal:Terminal"></a>
+      <span class="permalink">
+      <a href="../../../org/benknoble/ebnf/index.html#TerminalextendsWordwithProductwithSerializable" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a title="A terminal symbol of the grammar" href="Terminal.html"><span class="name">Terminal</span></a><span class="params">(<span name="s">s: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <a href="Word.html" class="extype" name="org.benknoble.ebnf.Word">Word</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">A terminal symbol of the grammar</p><div class="fullcomment"><div class="comment cmt"><p>A terminal symbol of the grammar</p><p>Terminals look like themselves:</p><pre>scala&gt; <span class="kw">import</span> org.benknoble.ebnf._
+<span class="kw">import</span> org.benknoble.ebnf._
+
+scala&gt; <span class="kw">val</span> t = Terminal(<span class="lit">"abc"</span>).format
+t: <span class="std">String</span> = abc</pre></div><dl class="paramcmts block"><dt class="param">s</dt><dd class="cmt"><p>the String representing the terminal symbol</p></dd></dl></div>
+    </li><li name="org.benknoble.ebnf.Word" visbl="pub" class="indented0 " data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="WordextendsExpr"></a><a id="Word:Word"></a>
+      <span class="permalink">
+      <a href="../../../org/benknoble/ebnf/index.html#WordextendsExpr" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a title="" href="Word.html"><span class="name">Word</span></a><span class="result"> extends <a href="Expr.html" class="extype" name="org.benknoble.ebnf.Expr">Expr</a></span>
+      </span>
+      
+      
+    </li></ol>
+            </div>
+
+        
+
+        <div class="values members">
+              <h3>Value Members</h3>
+              <ol>
+                <li name="org.benknoble.ebnf.EbnfParser" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="EbnfParser"></a><a id="EbnfParser:EbnfParser"></a>
+      <span class="permalink">
+      <a href="../../../org/benknoble/ebnf/index.html#EbnfParser" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a title="Parser for EBNF specifications" href="EbnfParser$.html"><span class="name">EbnfParser</span></a><span class="result"> extends <span class="extype" name="scala.util.parsing.combinator.RegexParsers">RegexParsers</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Parser for EBNF specifications</p><div class="fullcomment"><div class="comment cmt"><p>Parser for EBNF specifications</p><p>Intended usage is via the <code>apply</code> method to Strings, or via standard
+parser combinator mechanisms. <code>apply</code> returns either the error message or
+the <a href="Grammar.html" class="extype" name="org.benknoble.ebnf.Grammar">org.benknoble.ebnf.Grammar</a> in an Either.</p><p>From <a href="http://matt.might.net/articles/grammars-bnf-ebnf/" target="_blank">Matt Might's specification</a></p><h3>BNF</h3><p>When describing languages, Backus-Naur form (BNF) is a formal notation for
+encoding grammars intended for human consumption.</p><p>Many programming languages, protocols or formats have a BNF description in
+their specification.</p><p>Every rule in Backus-Naur form has the following structure:</p><pre>name ::= expansion</pre><p>The symbol <code>::=</code> means &quot;may expand into&quot; and &quot;may be replaced with.&quot;</p><p>In some texts, a name is also called a non-terminal symbol.</p><p>Every name in Backus-Naur form is surrounded by angle brackets, <code>&lt;</code> <code>&gt;</code>,
+whether it appears on the left- or right-hand side of the rule.</p><p>An expansion is an expression containing terminal symbols and non-terminal
+symbols, joined together by sequencing and choice.</p><p>A terminal symbol is a literal like (&quot;+&quot; or &quot;function&quot;) or a class of
+literals (like integer).</p><p>Simply juxtaposing expressions indicates sequencing.</p><p>A vertical bar <code>|</code> indicates choice.</p><p>For example, in BNF, the classic expression grammar is:</p><pre>&lt;expr&gt; ::= &lt;term&gt; <span class="lit">"+"</span> &lt;expr&gt; |  &lt;term&gt;
+&lt;term&gt; ::= &lt;factor&gt; <span class="lit">"*"</span> &lt;term&gt; |  &lt;factor&gt;
+&lt;factor&gt; ::= <span class="lit">"("</span> &lt;expr&gt; <span class="lit">")"</span> |  &lt;const&gt;
+&lt;const&gt; ::= integer</pre><h3>EBNF</h3><p>Extended Backus-Naur form (EBNF) is a collection of extensions to
+Backus-Naur form.</p><p>More important than the minor syntactic differences between the forms of
+EBNF are the additional operations it allows in expansions.</p><h4>Option</h4><p>In EBNF, square brackets around an expansion, <code>[ expansion ]</code>, indicates
+that this expansion is optional.</p><p>For example, the rule:</p><pre>&lt;term&gt; ::= [ <span class="lit">"-"</span> ] &lt;factor&gt;</pre><p>allows factors to be negated.</p><h4>Repetition</h4><p>In EBNF, curly braces indicate that the expression may be repeated zero or
+more times.</p><p>For example, the rule:</p><pre>&lt;args&gt; ::= &lt;arg&gt; { <span class="lit">","</span> &lt;arg&gt; }</pre><p>defines a conventional comma-separated argument list.</p><h4>Grouping</h4><p>To indicate precedence, EBNF grammars may use parentheses, <code>()</code>, to
+explictly define the order of expansion.</p><p>For example, the rule:</p><pre>&lt;expr&gt; ::= &lt;term&gt; (<span class="lit">"+"</span> | <span class="lit">"-"</span>) &lt;expr&gt;</pre><p>defines an expression form that allows both addition and subtraction.</p><h3>Extensions</h3><p>This version of EBNF admits a &quot;comment-like&quot; extension syntax: a <code>#</code> escapes
+the rest of the line, such that it is not parsed at all. Indeed, it is not
+kept in the grammar object at all, so the result of formatting loses the
+comments (considered a feature: it cleans the output for consumption by
+another tool).</p><p>The following grammar from the tests is thus valid:</p><pre># <span class="kw">this</span> is a comment
+&lt;A&gt; ::= a     # a values
+        | b   # b values
+        | c   # c values
+        ;</pre></div></div>
+    </li><li name="org.benknoble.ebnf.Expr" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Expr"></a><a id="Expr:Expr"></a>
+      <span class="permalink">
+      <a href="../../../org/benknoble/ebnf/index.html#Expr" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a title="Provides helper methods for expressions" href="Expr$.html"><span class="name">Expr</span></a>
+      </span>
+      
+      <p class="shortcomment cmt">Provides helper methods for expressions</p><div class="fullcomment"><div class="comment cmt"><p>Provides helper methods for expressions</p><p>The most notable is <code>reduceTree</code>, which helps convert a Seq of
+<a href="Expr.html" class="extype" name="org.benknoble.ebnf.Expr">org.benknoble.ebnf.Expr</a>s to an <a href="Expr.html" class="extype" name="org.benknoble.ebnf.Expr">org.benknoble.ebnf.Expr</a>
+subtype representing an expression tree.</p><p>Simple names are provided for the most common tree reductions.</p><p>Used primarly by <a href="EbnfParser$.html" class="extype" name="org.benknoble.ebnf.EbnfParser">org.benknoble.ebnf.EbnfParser</a> to map parser
+results into trees.
+</p></div></div>
+    </li><li name="org.benknoble.ebnf.ExprImplicits" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ExprImplicits"></a><a id="ExprImplicits:ExprImplicits"></a>
+      <span class="permalink">
+      <a href="../../../org/benknoble/ebnf/index.html#ExprImplicits" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a title="Implicit conversions for Expr" href="ExprImplicits$.html"><span class="name">ExprImplicits</span></a>
+      </span>
+      
+      <p class="shortcomment cmt">Implicit conversions for Expr</p><div class="fullcomment"><div class="comment cmt"><p>Implicit conversions for Expr</p><p>Creates a DSL-like system, with Strings automatically converted to
+<a href="Terminal.html" class="extype" name="org.benknoble.ebnf.Terminal">org.benknoble.ebnf.Terminal</a>s and Symbols converted to
+<a href="Nonterminal.html" class="extype" name="org.benknoble.ebnf.Nonterminal">org.benknoble.ebnf.Nonterminal</a>:</p><pre>scala&gt; <span class="kw">import</span> org.benknoble.ebnf._
+<span class="kw">import</span> org.benknoble.ebnf._
+
+scala&gt; <span class="kw">import</span> ExprImplicits._
+<span class="kw">import</span> ExprImplicits._
+
+scala&gt; <span class="kw">val</span> p = 'A ::= (<span class="lit">"abc"</span> || 'B.?) ~ 'C.*
+p: org.benknoble.ebnf.Production = Production(Nonterminal('A), Sequence(Alternation(Terminal(abc),<span class="std">Option</span>(Nonterminal('B))),Repetition(Nonterminal('C))))
+
+scala&gt; <span class="kw">val</span> f = p.format
+f: <span class="std">String</span> = &lt;A&gt; ::= (abc|[&lt;B&gt;]){&lt;C&gt;}</pre><p>Do note that <code>val r: Expr = &quot;abc&quot;.*</code> will not work, due to ambiguity:</p><pre>scala&gt; <span class="kw">val</span> r: Expr = <span class="lit">"abc"</span>.*
+&lt;console<span class="kw">&gt;:</span><span class="num">17</span>: error: <span class="kw">type</span> mismatch;
+ found   : <span class="std">String</span>(<span class="lit">"abc"</span>)
+ required: ?{<span class="kw">def</span> *: ?}
+Note that <span class="kw">implicit</span> conversions are not applicable because they are ambiguous:
+ both method augmentString in <span class="kw">object</span> <span class="std">Predef</span> of <span class="kw">type</span> (x: <span class="std">String</span>)scala.collection.immutable.StringOps
+ and method charToTerminal in <span class="kw">object</span> ExprImplicits of <span class="kw">type</span> (s: <span class="std">String</span>)org.benknoble.ebnf.Terminal
+ are possible conversion functions from <span class="std">String</span>(<span class="lit">"abc"</span>) to ?{<span class="kw">def</span> *: ?}
+       <span class="kw">val</span> r: Expr = <span class="lit">"abc"</span>.*
+                     ^
+&lt;console<span class="kw">&gt;:</span><span class="num">17</span>: error: value * is not a member of <span class="std">String</span>
+       <span class="kw">val</span> r: Expr = <span class="lit">"abc"</span>.*
+                           ^</pre></div></div>
+    </li><li name="org.benknoble.ebnf.Grammar" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Grammar"></a><a id="Grammar:Grammar"></a>
+      <span class="permalink">
+      <a href="../../../org/benknoble/ebnf/index.html#Grammar" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a title="Factory for org.benknoble.ebnf.Grammar instances." href="Grammar$.html"><span class="name">Grammar</span></a>
+      </span>
+      
+      <p class="shortcomment cmt">Factory for <a href="Grammar.html" class="extype" name="org.benknoble.ebnf.Grammar">org.benknoble.ebnf.Grammar</a> instances.</p>
+    </li><li name="org.benknoble.ebnf.Main" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Main"></a><a id="Main:Main"></a>
+      <span class="permalink">
+      <a href="../../../org/benknoble/ebnf/index.html#Main" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a title="" href="Main$.html"><span class="name">Main</span></a>
+      </span>
+      
+      
+    </li><li name="org.benknoble.ebnf.ε" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ε"></a><a id="ε:ε"></a>
+      <span class="permalink">
+      <a href="../../../org/benknoble/ebnf/index.html#ε" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a title="The empty expression (pronounced &quot;epsilon&quot;)" href="ε$.html"><span class="name">ε</span></a><span class="result"> extends <a href="Expr.html" class="extype" name="org.benknoble.ebnf.Expr">Expr</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">The empty expression (pronounced &quot;epsilon&quot;)</p>
+    </li>
+              </ol>
+            </div>
+
+        
+
+        
+        </div>
+
+        <div id="inheritedMembers">
+        <div class="parent" name="scala.AnyRef">
+              <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
+            </div><div class="parent" name="scala.Any">
+              <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
+            </div>
+        
+        </div>
+
+        <div id="groupedMembers">
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
+              
+            </div>
+        </div>
+
+      </div>
+
+      <div id="tooltip"></div>
+
+      <div id="footer">  </div>
+    </body>
+          </div>
+        </div>
+      </div>
+    </body>
+      </html>

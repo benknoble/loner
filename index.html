@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="style.css">
+    <title>Loner</title>
+  </head>
+
+  <body>
+
+    <h1 id="loner">Loner</h1>
+    <p>An EBNF parser and LL(1) checker, written in Scala.</p>
+    <p>This project consists of</p>
+    <ul>
+      <li>
+        <code>ebnf</code>: an EBNF parser and formatting filter</li>
+      <li>
+        <strong>COMING SOON</strong> <code>loner</code>: an LL(1) checker that depends on the
+        <code>ebnf</code> library</li>
+    </ul>
+    <p>Each project is split into an API component and a <code>Main.scala</code>
+    CLI component. The CLI driver serves as an example of the API usage, as a
+    proof-of-concept, and as a useful tool for developers (especially those
+    working on language and compiler design).</p>
+    <p>The CLI drivers have the same interface: they read from standard in, or
+    from a file if passed one as a parameter. They output to standard out a
+    formatted grammar, suitable for machine consumption, or an error message if
+    the input is not EBNF-formatted (see below). The exit status reflects the
+    success state (0: success, 1: not ebnf, 2: invalid arguments). Given the
+    <code>-h</code> flags gives a help message. Given the <code>-q</code>
+    suppresses output.</p>
+    <p>Compiled binaries can be found in the Releases of GitHub</p>
+    <p><a href="https://github.com/benknoble/loner/">Find me on GitHub!</a></p>
+
+    <h2 id="documentation">Documentation</h2>
+    <p>API documentation available for<p>
+    <ul>
+      <li><a href="./api/ebnf/org/benknoble/ebnf/">ebnf</a></li>
+      <li><a href="./api/loner/org/benknoble/loner/">loner</a></li>
+    </ul>
+    <p><strong>COMING SOON</strong> Check out the live demo!</p>
+
+    <h2 id="ebnf-file-format">EBNF File Format</h2>
+    <p>See the docs for the EbnfParser. In brief:</p>
+    <p>From <a href="http://matt.might.net/articles/grammars-bnf-ebnf/">Matt Might's specification</a></p>
+    <ul>
+      <li>
+        <p>Rules look like <code>name ::= expansion</code></p>
+      </li>
+      <li>
+        <p>Every name is surrounded by angle brackets, <code>&lt;</code> <code>&gt;</code>.</p>
+      </li>
+      <li>
+        <p>An expansion is an expression containing terminal symbols and non-terminal
+        symbols, joined together by sequencing and choice.</p>
+      </li>
+      <li>
+        <p>A terminal symbol is a literal like ("+" or "function") or a class of
+        literals (like integer).</p>
+      </li>
+      <li>
+        <p>Simply juxtaposing expressions indicates sequencing.</p>
+      </li>
+      <li>
+        <p>A vertical bar <code>|</code> indicates choice.</p>
+      </li>
+    </ul>
+    <p>Example:</p>
+    <pre><code>&lt;expr&gt; ::= &lt;term&gt; "+" &lt;expr&gt; |  &lt;term&gt;
+&lt;term&gt; ::= &lt;factor&gt; "*" &lt;term&gt; |  &lt;factor&gt;
+&lt;factor&gt; ::= "(" &lt;expr&gt; ")" |  &lt;const&gt;
+&lt;const&gt; ::= integer</code></pre>
+    <ul>
+      <li>Square brackets around an expansion, <code>[ expansion ]</code>, indicates that this
+        expansion is optional.</li>
+    </ul>
+    <p>For example, the rule:</p>
+    <pre><code>&lt;term&gt; ::= [ "-" ] &lt;factor&gt; </code></pre>
+    <p>allows factors to be negated.</p>
+    <ul>
+      <li>Curly braces indicate that the expression may be repeated zero or more times.</li>
+    </ul>
+    <p>For example, the rule:</p>
+    <pre><code>&lt;args&gt; ::= &lt;arg&gt; { "," &lt;arg&gt; } </code></pre>
+    <p>defines a conventional comma-separated argument list.</p>
+    <ul>
+      <li>To indicate precedence, use parentheses, <code>()</code>, to explictly define the order
+        of expansion.</li>
+    </ul>
+    <p>For example, the rule:</p>
+    <pre><code>&lt;expr&gt; ::= &lt;term&gt; ("+" | "-") &lt;expr&gt; </code></pre>
+    <p>defines an expression form that allows both addition and subtraction.</p>
+    <p>This version of EBNF admits a "comment-like" extension syntax: a <code>#</code> escapes
+    the rest of the line, such that it is not parsed at all. Indeed, it is not
+    kept in the grammar object at all, so the result of formatting loses the
+    comments (considered a feature: it cleans the output for consumption by
+    another tool).</p>
+    <p>The following grammar from the tests is thus valid:</p>
+    <pre><code># this is a comment
+&lt;A&gt; ::= a     # a values
+        | b   # b values
+        | c   # c values
+        ; </code></pre>
+    <p>All whitespace is ignored.</p>
+
+    <h2 id="developer-guide">Developer Guide</h2>
+    <p>Loner is configured and built using <code>sbt</code>, and conforms to all
+    the standard commands. Because it provides main methods, the project code
+    may be run via <code>run</code>.</p>
+    <p>The two primary projects are <code>loner</code> and
+    <code>ebnf</code>. Switch between them with <code>project</code>; loner
+    depends on ebnf, for ease of development.</p>
+    <p>Documentation is generated via <code>doc</code>. <code>sbt-site</code>
+    and <code>sbt-ghpages</code> provide site-generation tools for the <a href="https://benknoble.github.io/loner/">website</a>.</p>
+    <p>Tests are written using <code>scalatest</code> and are accessible via the
+    standard <code>test</code> commands. All API features require tests&mdash;new
+    features or bug-fixes should ensure test coverage, in the style of the
+    originals.</p>
+    <p>It also uses the <code>assembly</code> plugin (providing an
+    <code>assembly</code> command), which is used to generated FAT executable
+    jars&mdash;these jars have no dependencies other than a working java runtime
+    environment, and are uploaded in the releases section.  They can be executed
+    directly (<code>chmod -u+x &lt;jar&gt; ; ./&lt;jar&gt;</code>) or via java
+    (<code>java -jar &lt;jar&gt;</code>).</p>
+
+    <h3 id="bugs">Bugs</h3>
+    <p>Does not support escaping special characters (yet).</p>
+
+    <h3 id="credits">Credits</h3>
+    <p>This project was built while enrolled in Comp 520 at UNC Chapel Hill,
+    taught by Dr. Jan Prins, in Spring 2019. The topics of this compilers course
+    inspired loner.</p>
+
+  </body>
+</html>
