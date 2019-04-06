@@ -13,13 +13,22 @@ The CLI driver serves as an example of the API usage, as a proof-of-concept,
 and as a useful tool for developers (especially those working on language and
 compiler design).
 
+The CLI drivers have the same interface: they read from standard in, or from a
+file if passed one as a parameter. They output to standard out a formatted
+grammar, suitable for machine consumption, or an error message if the input is
+not EBNF-formatted (see below). The exit status reflects the success state (0:
+success, 1: not ebnf, 2: invalid arguments). Given the `-h` flags gives a help
+message. Given the `-q` suppresses output.
+
 ## Getting Started
 
-Run the two tools on some [examples](./examples)!
+You can find pre-built executables in the Releases section.
+
+Run the tools on some [examples](./examples)!
 
 ## EBNF File Format
 
-See the docs for the Parser. In brief:
+See the docs for the EbnfParser. In brief:
 
 From [Matt Might's specification](http://matt.might.net/articles/grammars-bnf-ebnf/)
 
@@ -105,8 +114,8 @@ Loner is configured and built using `sbt`, and conforms to all the standard
 commands. Because it provides main methods, the project code may be run via
 `run`.
 
-The two primary projects are `root` (the loner project) and `ebnf`. Switch
-between them with `project`; root depends on ebnf, for ease of development.
+The two primary projects are `loner` and `ebnf`. Switch between them with
+`project`; loner depends on ebnf, for ease of development.
 
 Documentation is generated via `doc`. `sbt-site` and `sbt-ghpages` provide
 site-generation tools for the [website][site].
