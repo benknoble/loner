@@ -99,7 +99,7 @@ Generated HTML documentation can be found on the [website][site].
 See primarily [build.sbt](./build.sbt), as well as
 
   - [Dependencies](./project/Dependencies.scala)
-  - [assembly](./project/assembly.sbt)
+  - [plugins](./project/plugins.sbt)
 
 Loner is configured and built using `sbt`, and conforms to all the standard
 commands. Because it provides main methods, the project code may be run via
