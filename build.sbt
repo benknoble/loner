@@ -8,17 +8,13 @@ ThisBuild / organizationName := "benknoble"
 
 enablePlugins(SiteScaladocPlugin)
 
-lazy val root = (project in file("."))
+lazy val loner = (project in file("."))
   .settings(
     name := "loner",
     assemblyOption in assembly := (assemblyOption in assembly).value.copy(prependShellScript = Some(defaultShellScript)),
     assemblyJarName in assembly := s"${name.value}-${version.value}",
-    libraryDependencies += scalaTest % Test,
-    siteSubdirName in ScalaUnidoc := "api",
-    addMappingsToSiteDir(
-      mappings in (ScalaUnidoc, packageDoc), siteSubdirName in ScalaUnidoc)
+    libraryDependencies += scalaTest % Test
   )
-  .enablePlugins(ScalaUnidocPlugin)
   .aggregate(ebnf)
   .dependsOn(ebnf)
 
@@ -30,5 +26,23 @@ lazy val ebnf = (project in file("ebnf"))
     libraryDependencies += scalaTest % Test,
     libraryDependencies += parserCombinators
   )
+
+lazy val Loner = config("root")
+lazy val Ebnf = config("ebnf")
+
+lazy val scaladocSiteProjects = List(
+    (loner, Loner),
+    (ebnf, Ebnf))
+
+lazy val scaladocSiteSettings =
+  scaladocSiteProjects.flatMap { case (project, conf) =>
+    SiteScaladocPlugin.scaladocSettings(
+        conf,
+        mappings in (Compile, packageDoc) in project,
+        s"api/${project.id}")
+  }
+
+lazy val scaladocSite = (project in file("site"))
+  .settings(scaladocSiteSettings)
 
 // See https://www.scala-sbt.org/1.x/docs/Using-Sonatype.html for instructions on how to publish to Sonatype.
