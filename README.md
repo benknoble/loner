@@ -23,19 +23,19 @@ See the docs for the Parser. In brief:
 
 From [Matt Might's specification](http://matt.might.net/articles/grammars-bnf-ebnf/)
 
-Rules look like `name ::= expansion`
+ - Rules look like `name ::= expansion`
 
-Every name is surrounded by angle brackets, `<` `>`.
+ - Every name is surrounded by angle brackets, `<` `>`.
 
-An expansion is an expression containing terminal symbols and non-terminal
-symbols, joined together by sequencing and choice.
+ - An expansion is an expression containing terminal symbols and non-terminal
+   symbols, joined together by sequencing and choice.
 
-A terminal symbol is a literal like ("+" or "function") or a class of
-literals (like integer).
+ - A terminal symbol is a literal like ("+" or "function") or a class of
+   literals (like integer).
 
-Simply juxtaposing expressions indicates sequencing.
+ - Simply juxtaposing expressions indicates sequencing.
 
-A vertical bar `|` indicates choice.
+ - A vertical bar `|` indicates choice.
 
 Example:
 ```
@@ -45,8 +45,8 @@ Example:
 <const> ::= integer
 ```
 
-Square brackets around an expansion, `[ expansion ]`, indicates that this
-expansion is optional.
+ - Square brackets around an expansion, `[ expansion ]`, indicates that this
+   expansion is optional.
 
 For example, the rule:
 ```
@@ -54,7 +54,7 @@ For example, the rule:
 ```
 allows factors to be negated.
 
-Curly braces indicate that the expression may be repeated zero or more times.
+ - Curly braces indicate that the expression may be repeated zero or more times.
 
 For example, the rule:
 ```
@@ -62,8 +62,8 @@ For example, the rule:
 ```
 defines a conventional comma-separated argument list.
 
-To indicate precedence, use parentheses, `()`, to explictly define the order of
-expansion.
+ - To indicate precedence, use parentheses, `()`, to explictly define the order
+   of expansion.
 
 For example, the rule:
 ```
