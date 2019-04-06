@@ -15,7 +15,7 @@ compiler design).
 
 ## Getting Started
 
-See the self-documenting [examples](./examples)!
+Run the two tools on some [examples](./examples)!
 
 ## EBNF File Format
 
