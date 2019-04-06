@@ -7,6 +7,10 @@ ThisBuild / organization     := "org.benknoble"
 ThisBuild / organizationName := "benknoble"
 
 enablePlugins(SiteScaladocPlugin)
+enablePlugins(GhpagesPlugin)
+
+git.remoteRepo := "git@github.com:benknoble/lloner.git"
+ghpagesNoJekyll := true
 
 lazy val loner = (project in file("."))
   .settings(
