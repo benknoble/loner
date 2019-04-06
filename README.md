@@ -121,6 +121,10 @@ a working java runtime environment, and are uploaded in the releases section.
 They can be executed directly (`chmod -u+x <jar> ; ./<jar>`) or via java (`java
 -jar <jar>`).
 
+### Bugs
+
+Does not support escaping special characters (yet).
+
 ### Credits
 
 This project was built while enrolled in Comp 520 at UNC Chapel Hill, taught by
