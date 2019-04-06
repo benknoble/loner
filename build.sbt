@@ -7,7 +7,6 @@ ThisBuild / organization     := "org.benknoble"
 ThisBuild / organizationName := "benknoble"
 
 enablePlugins(SiteScaladocPlugin)
-enablePlugins(JekyllPlugin)
 
 lazy val root = (project in file("."))
   .settings(
