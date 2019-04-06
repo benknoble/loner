@@ -1,0 +1,6 @@
+# declarations (at least one) followed by a statemetn
+<Prog> ::= let <Decl> {, <Decl>} in <Stmt>
+        # or an if
+        | <IfStmt> ;
+# an if with an optional else
+<IfStmt> ::= if <Exp> then <Stmt> [else <Stmt>] ;
