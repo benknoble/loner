@@ -26,6 +26,12 @@ You can find pre-built executables in the Releases section.
 
 Run the tools on some [examples](./examples)!
 
+## Documentation
+
+Generated HTML documentation can be found on the [website][site].
+
+**COMING SOON** Check out the live demo!
+
 ## EBNF File Format
 
 See the docs for the EbnfParser. In brief:
@@ -96,12 +102,6 @@ The following grammar from the tests is thus valid:
 ```
 
 All whitespace is ignored.
-
-## Documentation
-
-Generated HTML documentation can be found on the [website][site].
-
-**COMING SOON** Check out the live demo!
 
 ## Developer Guide
 
