@@ -1,4 +1,4 @@
-package org.benknoble.loner.ebnf
+package org.benknoble.ebnf
 
 import scala.util.parsing.combinator._
 
@@ -6,7 +6,7 @@ import scala.util.parsing.combinator._
   *
   * Intended usage is via the `apply` method to Strings, or via standard
   * parser combinator mechanisms. `apply` returns either the error message or
-  * the [[org.benknoble.loner.ebnf.Grammar]] in an Either.
+  * the [[org.benknoble.ebnf.Grammar]] in an Either.
   *
   * From [[http://matt.might.net/articles/grammars-bnf-ebnf/ Matt Might's specification]]
   *
@@ -174,7 +174,7 @@ object EbnfParser extends RegexParsers {
     *
     * Considers the entire input as a grammar, failing otherwise
     *
-    * @see [[org.benknoble.loner.ebnf.EbnfParser.phrase]]
+    * @see [[org.benknoble.ebnf.EbnfParser.phrase]]
     */
   def root: Parser[Grammar] = phrase(grammar)
 

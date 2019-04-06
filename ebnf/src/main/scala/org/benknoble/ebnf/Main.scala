@@ -1,4 +1,4 @@
-package org.benknoble.loner.ebnf
+package org.benknoble.ebnf
 
 import scala.io.Source
 

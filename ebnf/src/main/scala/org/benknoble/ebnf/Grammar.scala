@@ -1,4 +1,4 @@
-package org.benknoble.loner.ebnf
+package org.benknoble.ebnf
 
 import scala.language.implicitConversions
 
@@ -13,22 +13,22 @@ import ExprImplicits._
   * Provides methods common to all expressions.
   */
 abstract class Expr {
-  /** Returns a [[org.benknoble.loner.ebnf.Sequence]]
+  /** Returns a [[org.benknoble.ebnf.Sequence]]
    *
    *  @param right the next item in the sequence
    */
   def ~ (right: Expr): Expr = Sequence(this, right)
 
-  /** Returns an [[org.benknoble.loner.ebnf.Alternation]]
+  /** Returns an [[org.benknoble.ebnf.Alternation]]
     *
     * @param right the right side of the branch
     */
   def || (right: Expr): Expr = Alternation(this, right)
 
-  /** Returns a [[org.benknoble.loner.ebnf.Repetition]] of this */
+  /** Returns a [[org.benknoble.ebnf.Repetition]] of this */
   def *(): Expr = Repetition(this)
 
-  /** Returns a [[org.benknoble.loner.ebnf.Option]] of this */
+  /** Returns a [[org.benknoble.ebnf.Option]] of this */
   def ?(): Expr = Option(this)
 
   /** Returns a formatted version of this
@@ -43,12 +43,12 @@ abstract class Expr {
 /** Provides helper methods for expressions
   *
   * The most notable is `reduceTree`, which helps convert a Seq of
-  * [[org.benknoble.loner.ebnf.Expr]]s to an [[org.benknoble.loner.ebnf.Expr]]
+  * [[org.benknoble.ebnf.Expr]]s to an [[org.benknoble.ebnf.Expr]]
   * subtype representing an expression tree.
   *
   * Simple names are provided for the most common tree reductions.
   *
-  * Used primarly by [[org.benknoble.loner.ebnf.EbnfParser]] to map parser
+  * Used primarly by [[org.benknoble.ebnf.EbnfParser]] to map parser
   * results into trees.
   */
 object Expr {
@@ -61,18 +61,18 @@ object Expr {
     *
     * @param es sequence of expressions
     * @param f function to fold expressions together
-    * @return a single [[org.benknoble.loner.ebnf.Expr]] tree
+    * @return a single [[org.benknoble.ebnf.Expr]] tree
     */
   def reduceTree(es: Seq[Expr], f: (Expr, Expr) => Expr): Expr =
     es.tail.foldLeft(es.head)(f)
 
   /** Convert a series of of expressions into a tree of
-    * [[org.benknoble.loner.ebnf.Sequence]]s
+    * [[org.benknoble.ebnf.Sequence]]s
     */
   def sequencify(exprs: Seq[Expr]): Expr = reduceTree(exprs, Sequence(_,_))
 
   /** Convert a series of of expressions into a tree of
-    * [[org.benknoble.loner.ebnf.Alternation]]s
+    * [[org.benknoble.ebnf.Alternation]]s
     */
   def branchify(exprs: Seq[Expr]): Expr = reduceTree(exprs, Alternation(_,_))
 }
@@ -83,8 +83,8 @@ abstract class Word extends Expr
   *
   * Terminals look like themselves:
   * {{{
-  * scala> import org.benknoble.loner.ebnf._
-  * import org.benknoble.loner.ebnf._
+  * scala> import org.benknoble.ebnf._
+  * import org.benknoble.ebnf._
   *
   * scala> val t = Terminal("abc").format
   * t: String = abc
@@ -101,8 +101,8 @@ case class Terminal(val s: String) extends Word {
   *
   * Nonterminals look like `<Name>`:
   * {{{
-  * scala> import org.benknoble.loner.ebnf._
-  * import org.benknoble.loner.ebnf._
+  * scala> import org.benknoble.ebnf._
+  * import org.benknoble.ebnf._
   *
   * scala> val n = Nonterminal('A).format
   * n: String = <A>
@@ -114,17 +114,17 @@ case class Terminal(val s: String) extends Word {
 case class Nonterminal(val name: Symbol) extends Word {
   def format = "<" + name.name + ">"
 
-  /** Syntactic sugar to create [[org.benknoble.loner.ebnf.Production]]s:
+  /** Syntactic sugar to create [[org.benknoble.ebnf.Production]]s:
     * {{{
-    * scala> import org.benknoble.loner.ebnf._
-    * import org.benknoble.loner.ebnf._
+    * scala> import org.benknoble.ebnf._
+    * import org.benknoble.ebnf._
     *
     * scala> val p = Nonterminal('A) ::= Terminal("a")
-    * p: org.benknoble.loner.ebnf.Production = Production(Nonterminal('A), Terminal(a))
+    * p: org.benknoble.ebnf.Production = Production(Nonterminal('A), Terminal(a))
     * }}}
     *
     * @param rule the right hand side of a production
-    * @return an [[org.benknoble.loner.ebnf.Production]] of this ::= rule
+    * @return an [[org.benknoble.ebnf.Production]] of this ::= rule
     */
   def ::=(rule: Expr): Production = new Production(this, rule)
 }
@@ -132,10 +132,10 @@ case class Nonterminal(val name: Symbol) extends Word {
 /** A sequence of expressions in the tree
   *
   * Sequences are just their elements concatenated. They take special care to
-  * group [[org.benknoble.loner.ebnf.Alternation]]s in parens:
+  * group [[org.benknoble.ebnf.Alternation]]s in parens:
   * {{{
-  * scala> import org.benknoble.loner.ebnf._
-  * import org.benknoble.loner.ebnf._
+  * scala> import org.benknoble.ebnf._
+  * import org.benknoble.ebnf._
   *
   * scala> val s = Sequence(Nonterminal('A), Terminal("a")).format
   * s: String = <A>a
@@ -160,8 +160,8 @@ case class Sequence(val left: Expr, val right: Expr) extends Expr {
   *
   * Alternations are just their elements separated by '|':
   * {{{
-  * scala> import org.benknoble.loner.ebnf._
-  * import org.benknoble.loner.ebnf._
+  * scala> import org.benknoble.ebnf._
+  * import org.benknoble.ebnf._
   *
   * scala> val a = Alternation(Nonterminal('A), Terminal("a")).format
   * a: String = <A>|a
@@ -204,8 +204,8 @@ case class Repetition(val expr: Expr) extends Expr {
   * o: String = [<A>abc]
   * }}}
   *
-  * @see [[org.benknoble.loner.ebnf.Alternation]]
-  * @see [[org.benknoble.loner.ebnf.ε]]
+  * @see [[org.benknoble.ebnf.Alternation]]
+  * @see [[org.benknoble.ebnf.ε]]
   *
   * @constructor create a new Option of expr
   * @param expr the optional expression
@@ -222,17 +222,17 @@ case object ε extends Expr {
 /** Implicit conversions for Expr
   *
   * Creates a DSL-like system, with Strings automatically converted to
-  * [[org.benknoble.loner.ebnf.Terminal]]s and Symbols converted to
-  * [[org.benknoble.loner.ebnf.Nonterminal]]:
+  * [[org.benknoble.ebnf.Terminal]]s and Symbols converted to
+  * [[org.benknoble.ebnf.Nonterminal]]:
   * {{{
-  * scala> import org.benknoble.loner.ebnf._
-  * import org.benknoble.loner.ebnf._
+  * scala> import org.benknoble.ebnf._
+  * import org.benknoble.ebnf._
   *
   * scala> import ExprImplicits._
   * import ExprImplicits._
   *
   * scala> val p = 'A ::= ("abc" || 'B.?) ~ 'C.*
-  * p: org.benknoble.loner.ebnf.Production = Production(Nonterminal('A), Sequence(Alternation(Terminal(abc),Option(Nonterminal('B))),Repetition(Nonterminal('C))))
+  * p: org.benknoble.ebnf.Production = Production(Nonterminal('A), Sequence(Alternation(Terminal(abc),Option(Nonterminal('B))),Repetition(Nonterminal('C))))
 
   * scala> val f = p.format
   * f: String = <A> ::= (abc|[<B>]){<C>}
@@ -246,7 +246,7 @@ case object ε extends Expr {
   *  required: ?{def *: ?}
   * Note that implicit conversions are not applicable because they are ambiguous:
   *  both method augmentString in object Predef of type (x: String)scala.collection.immutable.StringOps
-  *  and method charToTerminal in object ExprImplicits of type (s: String)org.benknoble.loner.ebnf.Terminal
+  *  and method charToTerminal in object ExprImplicits of type (s: String)org.benknoble.ebnf.Terminal
   *  are possible conversion functions from String("abc") to ?{def *: ?}
   *        val r: Expr = "abc".*
   *                      ^
@@ -272,8 +272,8 @@ object ExprImplicits {
   * expression (structural equality: `'A ::= "a"||"b"` does NOT equal
   * `'A ::= "b"||"a"`)
   *
-  * @see [[org.benknoble.loner.ebnf.Nonterminal]]'s ::= syntax
-  * @see [[org.benknoble.loner.ebnf.Expr]]
+  * @see [[org.benknoble.ebnf.Nonterminal]]'s ::= syntax
+  * @see [[org.benknoble.ebnf.Expr]]
   *
   * @constructor create a new Production
   * @param nt the Nonterminal
@@ -301,7 +301,7 @@ class Production(val nt: Nonterminal, val rule: Expr) {
   * g: String = <A> ::= abc|[<B>] ;
   * }}}
   *
-  * @see [[org.benknoble.loner.ebnf.Production]]
+  * @see [[org.benknoble.ebnf.Production]]
   * @constructor create a new Grammar
   * @param _rules the sequence of Productions
   */
@@ -363,7 +363,7 @@ class Grammar(_rules: Seq[Production]) {
   }
 }
 
-/** Factory for [[org.benknoble.loner.ebnf.Grammar]] instances. */
+/** Factory for [[org.benknoble.ebnf.Grammar]] instances. */
 object Grammar {
   /** Creates a Grammar with the given productions
     *
