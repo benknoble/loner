@@ -17,6 +17,77 @@ compiler design).
 
 See the self-documenting [examples](./examples)!
 
+## EBNF File Format
+
+See the docs for the Parser. In brief:
+
+From [Matt Might's specification](http://matt.might.net/articles/grammars-bnf-ebnf/)
+
+Rules look like `name ::= expansion`
+
+Every name is surrounded by angle brackets, `<` `>`.
+
+An expansion is an expression containing terminal symbols and non-terminal
+symbols, joined together by sequencing and choice.
+
+A terminal symbol is a literal like ("+" or "function") or a class of
+literals (like integer).
+
+Simply juxtaposing expressions indicates sequencing.
+
+A vertical bar `|` indicates choice.
+
+Example:
+```
+<expr> ::= <term> "+" <expr> |  <term>
+<term> ::= <factor> "*" <term> |  <factor>
+<factor> ::= "(" <expr> ")" |  <const>
+<const> ::= integer
+```
+
+Square brackets around an expansion, `[ expansion ]`, indicates that this
+expansion is optional.
+
+For example, the rule:
+```
+<term> ::= [ "-" ] <factor>
+```
+allows factors to be negated.
+
+Curly braces indicate that the expression may be repeated zero or more times.
+
+For example, the rule:
+```
+<args> ::= <arg> { "," <arg> }
+```
+defines a conventional comma-separated argument list.
+
+To indicate precedence, use parentheses, `()`, to explictly define the order of
+expansion.
+
+For example, the rule:
+```
+<expr> ::= <term> ("+" | "-") <expr>
+```
+defines an expression form that allows both addition and subtraction.
+
+This version of EBNF admits a "comment-like" extension syntax: a `#` escapes
+the rest of the line, such that it is not parsed at all. Indeed, it is not
+kept in the grammar object at all, so the result of formatting loses the
+comments (considered a feature: it cleans the output for consumption by
+another tool).
+
+The following grammar from the tests is thus valid:
+```
+# this is a comment
+<A> ::= a     # a values
+        | b   # b values
+        | c   # c values
+        ;
+```
+
+All whitespace is ignored.
+
 ## Documentation
 
 Generated HTML documentation can be found on the [website][site].
