@@ -14,9 +14,9 @@ import ExprImplicits._
   */
 abstract class Expr {
   /** Returns a [[org.benknoble.ebnf.Sequence]]
-   *
-   *  @param right the next item in the sequence
-   */
+    *
+    * @param right the next item in the sequence
+    */
   def ~ (right: Expr): Expr = Sequence(this, right)
 
   /** Returns an [[org.benknoble.ebnf.Alternation]]
