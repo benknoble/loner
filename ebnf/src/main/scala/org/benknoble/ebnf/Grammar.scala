@@ -215,7 +215,7 @@ case class Option(val expr: Expr) extends Expr {
 }
 
 /** The empty expression (pronounced "epsilon") */
-case object ε extends Expr {
+case object ε extends Word {
   def format = "ε"
 }
 
