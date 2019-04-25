@@ -4,12 +4,14 @@ import org.benknoble.ebnf._
 
 object Loner {
 
+  import ExprImplicits._
+
   def ⊙ = SetFilter[Word](ε)
 
   type NtMap[A] = Map[Nonterminal, A]
-  type Nullable = NtMap[Boolean]
-  type Starter = NtMap[Set[Word]]
-  type Follower = NtMap[Set[Word]]
+  type Nullables = NtMap[Boolean]
+  type Starters = NtMap[Set[Word]]
+  type Followers = NtMap[Set[Word]]
 
   def fix[A,B,C](fi: (A, Map[B, C]) => Map[B, C])(f0: Map[B, C]): (A => Map[B, C]) = a => {
     @annotation.tailrec
@@ -25,26 +27,26 @@ object Loner {
   private def mapGrammar[A](f: Expr => A)(g: Grammar): NtMap[A] =
     g.rules.map { p => p.nt -> f(p.rule) }.toMap
 
-  private def nullable_i(g: Grammar, prev: Nullable): Nullable = {
-    def N(e: Expr): Boolean = e match {
-      case `ε` => true
-      case Terminal(_) => false
-      case n: Nonterminal => prev(n)
-      case Sequence(left, right) => N(left) && N(right)
-      case Alternation(left, right) => N(left) || N(right)
-      case Repetition(_) => true
-      case Option(_) => true
-    }
-
-    mapGrammar(N)(g)
+  private def N(prev: Nullables)(e: Expr): Boolean = e match {
+    case `ε` => true
+    case Terminal(_) => false
+    case n: Nonterminal => prev(n)
+    case Sequence(left, right) => N(prev)(left) && N(prev)(right)
+    case Alternation(left, right) => N(prev)(left) || N(prev)(right)
+    case Repetition(_) => true
+    case Option(_) => true
   }
 
-  def nullable(g: Grammar): Nullable = {
+  private def nullable_i(g: Grammar, prev: Nullables): Nullables = {
+    mapGrammar(N(prev))(g)
+  }
+
+  def nullable(g: Grammar): Nullables = {
     val n0 = g.nonterminals.map(_ -> false).toMap
     fix(nullable_i)(n0)(g)
   }
 
-  private def S(base: Starter)(e: Expr): Set[Word] = e match {
+  private def S(base: Starters)(e: Expr): Set[Word] = e match {
     case `ε` => Set(ε)
     case t: Terminal => Set(t)
     case n: Nonterminal => base(n)
@@ -54,44 +56,113 @@ object Loner {
     case Option(exp) => S(base)(exp) union Set(ε)
   }
 
-  private def starters_i(g: Grammar, prev: Starter): Starter =
+  private def starters_i(g: Grammar, prev: Starters): Starters =
     mapGrammar(S(prev))(g)
 
 
-  def starters(g: Grammar): Starter = {
+  def starters(g: Grammar): Starters = {
     val nullmap = nullable(g)
     val s0 = g.nonterminals.map(n => {
-      val value: Set[Word] = if (nullmap(n)) Set(ε) else Set()
+      val value: Set[Word] = if (nullmap(n)) Set(ε) else Set.empty
       n -> value
     }).toMap
     fix(starters_i)(s0)(g)
   }
 
-  def followers(g: Grammar): Follower = {
+  private def contains(n: Nonterminal)(e: Expr): Boolean = e match {
+    case `n` => true
+    case w: Word => false
+    case Sequence(left, right) => contains(n)(left) || contains(n)(right)
+    case Alternation(left, right) => contains(n)(left) || contains(n)(right)
+    case Repetition(exp) => contains(n)(exp)
+    case Option(exp) => contains(n)(exp)
+  }
+
+  // should this go in Expr?
+  // should any of these utility methods?
+  private def sequify(e: Expr): Seq[Expr] = e match {
+    case w: Word => Seq(w)
+    case Alternation(left, right) => sequify(left) ++ sequify(right)
+    case Sequence(left, right) => sequify(left) ++ sequify(right)
+    case Repetition(exp) => sequify(exp)
+    case Option(exp) => sequify(exp)
+  }
+
+  private def after(n: Nonterminal)(e: Expr): Seq[Expr] = e match {
+    case w: Word => Seq()
+    case Alternation(left, right) => after(n)(left) ++ after(n)(right)
+    case Repetition(exp) => after(n)(exp)
+    case Option(exp) => after(n)(exp)
+    case Sequence(left, right) => {
+      val lef =
+        if (contains(n)(left))
+          after(n)(left) ++ sequify(right)
+        else
+          Seq()
+
+      val rig =
+        if (contains(n)(right))
+          after(n)(right)
+        else
+          Seq()
+
+      lef ++ rig
+    }
+  }
+
+  def followers(g: Grammar): Followers = {
     val nullmap = nullable(g)
     val startmap = starters(g)
     val Sf = S(startmap)(_)
+    val Nf = N(nullmap)(_)
 
-    def F(n: Nonterminal)(e: Expr): Seq[Set[Word]] = e match {
-      // these cases should all be handled by the very specific Seq
-      // implementation
-      // case Sequence(`n`, right) => Seq(Sf(right))
-      // case Sequence(_, Sequence(`n`, right)) => Seq(Sf(right))
-      // case Sequence(Sequence(_, `n`), right) => Seq(Sf(right))
-      case w: Word => Seq(Set())
-      case Sequence(left, right) => F(n)(left) ++ F(n)(right)
-      case Alternation(left, right) => F(n)(left) ++ F(n)(right)
-      case Repetition(exp) => F(n)(exp)
-      case Option(exp) => F(n)(exp)
+    def F0(n: Nonterminal)(e: Expr): Seq[Set[Word]] = e match {
+      case w: Word => Seq(Set.empty)
+      case Alternation(left, right) => F0(n)(left) ++ F0(n)(right)
+      case Repetition(exp) => F0(n)(exp)
+      case Option(exp) => F0(n)(exp)
+      case s: Sequence if (contains(n)(s)) => {
+        val starter_sets = after(n)(s)
+          .map(Sf)
+          .reduceOption(⊙(_)(_))
+          .getOrElse(Set.empty)
+        Seq(starter_sets)
+      }
+      // otherwise: n not in seq, so we don't need to recurse
+      case _: Sequence => Seq()
     }
 
     val f0 = g.nonterminals.map(a => {
-      val a_finder = F(a)(_)
-      val f0_a = g.rules.flatMap(p => a_finder(p.rule)).reduce(_ union _)
+      val a_finder = F0(a)(_)
+      val f0_a = g.rules
+        .flatMap(p => a_finder(p.rule))
+        .reduceOption(_ union _)
+        .getOrElse(Set.empty)
       a -> (f0_a - ε)
     }).toMap
 
-    f0
+    def followers_i(g: Grammar, prev: Followers): Followers = {
+      def F(n: Nonterminal)(p: Production): Seq[Set[Word]] = p.rule match {
+        case w: Word => Seq()
+        case Alternation(left, right) => F(n)(p.nt ::= left) ++ F(n)(p.nt ::= right)
+        case Repetition(exp) => F(n)(p.nt ::= exp)
+        case Option(exp) => F(n)(p.nt ::= exp)
+        case s: Sequence if (
+          contains(n)(s) && after(n)(s).forall(Nf)) => Seq(prev(p.nt))
+        case _: Sequence => Seq()
+      }
+
+      g.nonterminals.map(a => {
+        val a_finder = F(a)(_)
+        val fi_a = g.rules
+          .flatMap(p => a_finder(p))
+          .reduceOption(_ union _)
+          .getOrElse(Set.empty)
+          a -> (fi_a union prev(a))
+      }).toMap
+    }
+
+    fix(followers_i)(f0)(g)
   }
 
   def isLLone(g: Grammar): Boolean = false
