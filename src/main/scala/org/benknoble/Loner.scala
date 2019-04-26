@@ -237,4 +237,6 @@ object Loner {
     g.rules.map(p => predict(p)).forall(b => b)
   }
 
+  def apply(g: Grammar): Boolean = isLLone(g)
+
 }
