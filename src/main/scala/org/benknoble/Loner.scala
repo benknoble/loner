@@ -232,7 +232,6 @@ object Loner {
       case Option(exp) => predict(p.nt ::= exp)
     }
 
-    println(g.rules.map(p => predict(p)))
     g.rules.map(p => predict(p)).forall(b => b)
   }
 
