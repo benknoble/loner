@@ -46,14 +46,14 @@ object Loner {
     fix(nullable_i)(n0)(g)
   }
 
-  private def S(base: Starters)(e: Expr): Set[Word] = e match {
+  private def S(prev: Starters)(e: Expr): Set[Word] = e match {
     case `ε` => Set(ε)
     case t: Terminal => Set(t)
-    case n: Nonterminal => base(n)
-    case Sequence(left, right) => ⊙(S(base)(left))(S(base)(right))
-    case Alternation(left, right) => S(base)(left) union S(base)(right)
-    case Repetition(exp) => S(base)(exp) union Set(ε)
-    case Option(exp) => S(base)(exp) union Set(ε)
+    case n: Nonterminal => prev(n)
+    case Sequence(left, right) => ⊙(S(prev)(left))(S(prev)(right))
+    case Alternation(left, right) => S(prev)(left) union S(prev)(right)
+    case Repetition(exp) => S(prev)(exp) union Set(ε)
+    case Option(exp) => S(prev)(exp) union Set(ε)
   }
 
   private def starters_i(g: Grammar, prev: Starters): Starters =
