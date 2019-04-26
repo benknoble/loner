@@ -361,6 +361,8 @@ class Grammar(_rules: Seq[Production]) {
       .map(_.rule)
       .foldLeft(Set[Nonterminal]())((acc, rule) => acc union nonterminals(rule))
   }
+
+  def isWellFormed: Boolean = rhsNonterminals subsetOf lhsNonterminals
 }
 
 /** Factory for [[org.benknoble.ebnf.Grammar]] instances. */

@@ -190,6 +190,8 @@ object Loner {
     sets.reduceOption(_ intersect _).getOrElse(Set.empty) == Set.empty
 
   def isLLone(g: Grammar): Boolean = {
+    if (!g.isWellFormed)
+      return false
     val nullmap = nullable(g)
     val Nf = N(nullmap)(_)
     val startmap = starters(g)
