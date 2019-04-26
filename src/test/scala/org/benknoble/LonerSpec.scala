@@ -17,7 +17,7 @@ class LonerSpec extends FlatSpec with Matchers {
     'D ::= "d" || ε)
   val example2 = Grammar(
     'S ::= 'A ~ 'B ~ "c",
-    'A ::= 'A ~ "b" || ε,
+    'A ::= "a" ~ 'B || ε,
     'B ::= "b" || ε)
   val example3 = Grammar(
     'S ::= 'A ~ "s",
@@ -89,7 +89,7 @@ class LonerSpec extends FlatSpec with Matchers {
     unpack(Loner.followers(example2)) shouldEqual Map(
       'S -> Set.empty,
       'A -> Set[Word]("b", "c"),
-      'B -> Set[Word]("c"))
+      'B -> Set[Word]("b", "c"))
     unpack(Loner.followers(example3)) shouldEqual Map(
       'S -> Set.empty,
       'A -> Set[Word]("c", "s"),
