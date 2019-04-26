@@ -88,6 +88,22 @@ object Loner {
     case Option(exp) => sequify(exp)
   }
 
+  private def sequify_alternation(e: Expr): Seq[Expr] = e match {
+    case w: Word => Seq(w)
+    case Alternation(left, right) => {
+      def alt(e: Expr) = e match {
+        case a: Alternation => sequify_alternation(a)
+        case _ => Seq(e)
+      }
+      val lef = alt(left)
+      val rig = alt(right)
+      lef ++ rig
+    }
+    case Sequence(left, right) => sequify_alternation(left) ++ sequify_alternation(right)
+    case Repetition(exp) => sequify_alternation(exp)
+    case Option(exp) => sequify_alternation(exp)
+  }
+
   private def after(n: Nonterminal)(e: Expr): Seq[Expr] = e match {
     case w: Word => Seq()
     case Alternation(left, right) => after(n)(left) ++ after(n)(right)
@@ -170,6 +186,54 @@ object Loner {
     fix(followers_i)(f0)(g)
   }
 
-  def isLLone(g: Grammar): Boolean = false
+  private def areDisjoint[A](sets: Set[A]*): Boolean =
+    sets.reduceOption(_ intersect _).getOrElse(Set.empty) == Set.empty
+
+  def isLLone(g: Grammar): Boolean = {
+    val nullmap = nullable(g)
+    val Nf = N(nullmap)(_)
+    val startmap = starters(g)
+    val Sf = S(startmap)(_)
+    val follmap = followers(g)
+
+    def predict(p: Production): Boolean = p.rule match {
+      case Sequence(a: Alternation, right) => {
+        val choices = sequify_alternation(a)
+        val predictions = choices.map(c => ⊙(Sf(c ~ right))(follmap(p.nt)))
+
+        (areDisjoint(predictions :_*)
+          && predict(p.nt ::= a)
+          && predict(p.nt ::= right))
+      }
+      case a: Alternation => {
+        val choices = sequify_alternation(a)
+        val predictions = choices.map(c => ⊙(Sf(c))(follmap(p.nt)))
+
+        (areDisjoint(predictions :_*)
+          && predict(p.nt ::= a.left)
+          && predict(p.nt ::= a.right))
+      }
+      case Sequence(Repetition(exp), right) => {
+        val disjoint = ((!Nf(exp))
+          && areDisjoint(Sf(exp), ⊙(Sf(right))(follmap(p.nt))))
+
+        (disjoint
+          && predict(p.nt ::= exp)
+          && predict(p.nt ::= right))
+      }
+      case Repetition(exp) => {
+        val disjoint = (!Nf(exp)) && areDisjoint(Sf(exp), follmap(p.nt))
+
+        (disjoint
+          && predict(p.nt ::= exp))
+      }
+      case w: Word => true
+      case Sequence(left, right) => predict(p.nt ::= left) && predict(p.nt ::= right)
+      case Option(exp) => predict(p.nt ::= exp)
+    }
+
+    println(g.rules.map(p => predict(p)))
+    g.rules.map(p => predict(p)).forall(b => b)
+  }
 
 }
