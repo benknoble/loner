@@ -91,7 +91,11 @@ object Loner {
   private def after(n: Nonterminal)(e: Expr): Seq[Expr] = e match {
     case w: Word => Seq()
     case Alternation(left, right) => after(n)(left) ++ after(n)(right)
-    case Repetition(exp) => after(n)(exp)
+    case Repetition(exp) => after(n)(exp) ++ (
+      if (contains(n)(exp))
+        Seq(n)
+      else
+        Seq())
     case Option(exp) => after(n)(exp)
     case Sequence(left, right) => {
       val lef =
@@ -143,6 +147,7 @@ object Loner {
 
     def followers_i(g: Grammar, prev: Followers): Followers = {
       def F(n: Nonterminal)(p: Production): Seq[Set[Word]] = p.rule match {
+        case `n` => Seq(prev(p.nt))
         case w: Word => Seq()
         case Alternation(left, right) => F(n)(p.nt ::= left) ++ F(n)(p.nt ::= right)
         case Repetition(exp) => F(n)(p.nt ::= exp)
