@@ -15,7 +15,7 @@
       <li>
         <code>ebnf</code>: an EBNF parser and formatting filter</li>
       <li>
-        <strong>COMING SOON</strong> <code>loner</code>: an LL(1) checker that depends on the
+        <code>loner</code>: an LL(1) checker that depends on the
         <code>ebnf</code> library</li>
     </ul>
     <p>Each project is split into an API component and a <code>Main.scala</code>
@@ -25,10 +25,10 @@
     <p>The CLI drivers have the same interface: they read from standard in, or
     from a file if passed one as a parameter. They output to standard out a
     formatted grammar, suitable for machine consumption, or an error message if
-    the input is not EBNF-formatted (see below). The exit status reflects the
-    success state (0: success, 1: not ebnf, 2: invalid arguments). Given the
-    <code>-h</code> flags gives a help message. Given the <code>-q</code>
-    suppresses output.</p>
+    the input is not EBNF-formatted (see below). Loner additionally errors if
+    the grammar is not LL(1). The exit status reflects the success state (0:
+    success, 1: not ebnf, 2: invalid arguments). Given the <code>-h</code> flags
+    gives a help message. Given the <code>-q</code> suppresses output.</p>
     <p>Compiled binaries can be found in the Releases of GitHub</p>
     <p><a href="https://github.com/benknoble/loner/">Find me on GitHub!</a></p>
 

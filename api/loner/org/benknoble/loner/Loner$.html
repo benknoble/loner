@@ -101,10 +101,10 @@
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../../index.html" class="extype" name="org">org</a></dd></dl></div>
-    </li><li name="org.benknoble.ebnf" visbl="pub" class="indented3 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="ebnf"></a><a id="ebnf:ebnf"></a>
+    </li><li name="org.benknoble.loner" visbl="pub" class="indented3 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="loner"></a><a id="loner:loner"></a>
       <span class="permalink">
-      <a href="../../org/benknoble/index.html#ebnf" title="Permalink">
+      <a href="../../org/benknoble/index.html#loner" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -113,85 +113,30 @@
         <span class="kind">package</span>
       </span>
       <span class="symbol">
-        <a title="Provides classes for dealing with context-free grammars in EBNF form." href="index.html"><span class="name">ebnf</span></a>
+        <a title="" href="index.html"><span class="name">loner</span></a>
       </span>
       
-      <p class="shortcomment cmt">Provides classes for dealing with context-free grammars in EBNF form.</p><div class="fullcomment"><div class="comment cmt"><p>Provides classes for dealing with context-free grammars in EBNF form.</p><p>Provides a <a href="Grammar.html" class="extype" name="org.benknoble.ebnf.Grammar">org.benknoble.ebnf.Grammar</a> model, complete with scala
-DSL for creating complex grammars in code, and an
-<a href="EbnfParser$.html" class="extype" name="org.benknoble.ebnf.EbnfParser">org.benknoble.ebnf.EbnfParser</a> to generate Grammars from a String.</p><h4>Overview</h4><p>The main class is <a href="Grammar.html" class="extype" name="org.benknoble.ebnf.Grammar">org.benknoble.ebnf.Grammar</a>:</p><pre>scala&gt; <span class="kw">val</span> grammar = Grammar(
-     |   <span class="kw">new</span> Production(
-     |     Nonterminal('A),
-     |     Alternation(Nonterminal('A),
-     |     Sequence(Repetition(Terminal(<span class="lit">"abc"</span>)), <span class="std">Option</span>(Terminal(<span class="lit">"def"</span>))))))
-grammar: org.benknoble.ebnf.Grammar = Grammar(<span class="std">List</span>(Production(Nonterminal('A), Alternation(Nonterminal('A),Sequence(Repetition(Terminal(abc)),<span class="std">Option</span>(Terminal(<span class="kw">def</span>)))))))
-
-scala&gt; <span class="kw">val</span> s = grammar.format
-s: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{abc}[<span class="kw">def</span>] ;</pre><p>If you include <a href="ExprImplicits$.html" class="extype" name="org.benknoble.ebnf.ExprImplicits">org.benknoble.ebnf.ExprImplicits</a> and take advantage
-of <a href="Expr.html" class="extype" name="org.benknoble.ebnf.Expr">org.benknoble.ebnf.Expr</a> syntax, it looks a lot cleaner:</p><pre>scala&gt; <span class="kw">val</span> grammar = Grammar(<span class="lit">'A ::= '</span>A || Terminal(<span class="lit">"abc"</span>).* ~ <span class="lit">"def"</span>.?)
-grammar: org.benknoble.ebnf.Grammar = Grammar(<span class="std">List</span>(Production(Nonterminal('A), Alternation(Nonterminal('A),Sequence(Repetition(Terminal(abc)),<span class="std">Option</span>(Terminal(<span class="kw">def</span>)))))))
-
-scala&gt; <span class="kw">val</span> s = grammar.format
-s: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{abc}[<span class="kw">def</span>] ;</pre><p>Finally, you can take advantage of <a href="EbnfParser$.html" class="extype" name="org.benknoble.ebnf.EbnfParser">org.benknoble.ebnf.EbnfParser</a>:</p><pre>scala&gt; <span class="kw">val</span> grammar = EbnfParser(<span class="lit">"&lt;A&gt; ::= &lt;A&gt;|{abc}[def] ;"</span>)
-grammar: Either[<span class="std">String</span>,org.benknoble.ebnf.Grammar] = Right(Grammar(<span class="std">List</span>(Production(Nonterminal('A), Alternation(Nonterminal('A),Sequence(Repetition(Terminal(abc)),<span class="std">Option</span>(Terminal(<span class="kw">def</span>))))))))
-
-scala&gt; <span class="kw">val</span> msg = grammar.fold(s <span class="kw">=&gt;</span> s, g <span class="kw">=&gt;</span> g.format)
-msg: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{abc}[<span class="kw">def</span>] ;</pre></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../index.html" class="extype" name="org.benknoble">benknoble</a></dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../index.html" class="extype" name="org.benknoble">benknoble</a></dd></dl></div>
     </li><li class="current-entities indented3">
                         <span class="separator"></span>
-                        <a class="class" href="Alternation.html" title="A choice of expressions in the tree"></a>
-                        <a href="Alternation.html" title="A choice of expressions in the tree">Alternation</a>
-                      </li><li class="current-entities indented3">
-                        <span class="separator"></span>
-                        <a class="object" href="EbnfParser$.html" title="Parser for EBNF specifications"></a>
-                        <a href="EbnfParser$.html" title="Parser for EBNF specifications">EbnfParser</a>
-                      </li><li class="current-entities indented3">
-                        <a class="object" href="Expr$.html" title="Provides helper methods for expressions"></a>
-                        <a class="class" href="Expr.html" title="Base class for expressions"></a>
-                        <a href="Expr.html" title="Base class for expressions">Expr</a>
-                      </li><li class="current-entities indented3">
-                        <span class="separator"></span>
-                        <a class="object" href="ExprImplicits$.html" title="Implicit conversions for Expr"></a>
-                        <a href="ExprImplicits$.html" title="Implicit conversions for Expr">ExprImplicits</a>
-                      </li><li class="current-entities indented3">
-                        <a class="object" href="Grammar$.html" title="Factory for org.benknoble.ebnf.Grammar instances."></a>
-                        <a class="class" href="Grammar.html" title="A (context-free) grammar of productions"></a>
-                        <a href="Grammar.html" title="A (context-free) grammar of productions">Grammar</a>
+                        <a class="object" href="" title="LL(1) computer"></a>
+                        <a href="" title="LL(1) computer">Loner</a>
                       </li><li class="current-entities indented3">
                         <span class="separator"></span>
                         <a class="object" href="Main$.html" title=""></a>
                         <a href="Main$.html" title="">Main</a>
                       </li><li class="current-entities indented3">
                         <span class="separator"></span>
-                        <a class="class" href="Nonterminal.html" title="A nonterminal symbol of the grammar"></a>
-                        <a href="Nonterminal.html" title="A nonterminal symbol of the grammar">Nonterminal</a>
+                        <a class="trait" href="Monoid.html" title="A moinoid over members of type A"></a>
+                        <a href="Monoid.html" title="A moinoid over members of type A">Monoid</a>
                       </li><li class="current-entities indented3">
                         <span class="separator"></span>
-                        <a class="class" href="Option.html" title="An optional expression."></a>
-                        <a href="Option.html" title="An optional expression.">Option</a>
+                        <a class="class" href="SetFilter.html" title="A set-filtering monoid."></a>
+                        <a href="SetFilter.html" title="A set-filtering monoid.">SetFilter</a>
                       </li><li class="current-entities indented3">
                         <span class="separator"></span>
-                        <a class="class" href="Production.html" title="A production from a nonterminal to a rule"></a>
-                        <a href="Production.html" title="A production from a nonterminal to a rule">Production</a>
-                      </li><li class="current-entities indented3">
-                        <span class="separator"></span>
-                        <a class="class" href="Repetition.html" title="The Kleene-star closure of an expression"></a>
-                        <a href="Repetition.html" title="The Kleene-star closure of an expression">Repetition</a>
-                      </li><li class="current-entities indented3">
-                        <span class="separator"></span>
-                        <a class="class" href="Sequence.html" title="A sequence of expressions in the tree"></a>
-                        <a href="Sequence.html" title="A sequence of expressions in the tree">Sequence</a>
-                      </li><li class="current-entities indented3">
-                        <span class="separator"></span>
-                        <a class="class" href="Terminal.html" title="A terminal symbol of the grammar"></a>
-                        <a href="Terminal.html" title="A terminal symbol of the grammar">Terminal</a>
-                      </li><li class="current-entities indented3">
-                        <span class="separator"></span>
-                        <a class="class" href="Word.html" title=""></a>
-                        <a href="Word.html" title="">Word</a>
-                      </li><li class="current-entities indented3">
-                        <span class="separator"></span>
-                        <a class="object" href="" title="The empty expression (pronounced &quot;epsilon&quot;)"></a>
-                        <a href="" title="The empty expression (pronounced &quot;epsilon&quot;)">ε</a>
+                        <a class="trait" href="Subgroup.html" title="A subgroup over members of type A"></a>
+                        <a href="Subgroup.html" title="A subgroup over members of type A">Subgroup</a>
                       </li>
               </ul>
             </div>
@@ -200,9 +145,9 @@ msg: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{abc}[<span class
             <body class="object value">
       <div id="definition">
         <div class="big-circle object">o</div>
-        <p id="owner"><a href="../../index.html" class="extype" name="org">org</a>.<a href="../index.html" class="extype" name="org.benknoble">benknoble</a>.<a href="index.html" class="extype" name="org.benknoble.ebnf">ebnf</a></p>
-        <h1>ε<span class="permalink">
-      <a href="../../../org/benknoble/ebnf/ε$.html" title="Permalink">
+        <p id="owner"><a href="../../index.html" class="extype" name="org">org</a>.<a href="../index.html" class="extype" name="org.benknoble">benknoble</a>.<a href="index.html" class="extype" name="org.benknoble.loner">loner</a></p>
+        <h1>Loner<span class="permalink">
+      <a href="../../../org/benknoble/loner/Loner$.html" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span></h1>
@@ -215,16 +160,17 @@ msg: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{abc}[<span class
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <span class="name">ε</span><span class="result"> extends <a href="Word.html" class="extype" name="org.benknoble.ebnf.Word">Word</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <span class="name">Loner</span>
       </span>
       </h4>
 
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>The empty expression (pronounced &quot;epsilon&quot;)</p></div><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>LL(1) computer</p><p>Applicable to org.benknoble.ebnf.Grammar instances
+</p></div><div class="toggleContainer block">
           <span class="toggle">
             Linear Supertypes
           </span>
-          <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.Product">Product</span>, <span class="extype" name="scala.Equals">Equals</span>, <a href="Word.html" class="extype" name="org.benknoble.ebnf.Word">Word</a>, <a href="Expr.html" class="extype" name="org.benknoble.ebnf.Expr">Expr</a>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
         
 
@@ -250,7 +196,7 @@ msg: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{abc}[<span class
                   <span class="filtertype">Inherited<br />
                   </span>
                   <ol id="linearization">
-                    <li class="in" name="org.benknoble.ebnf.ε"><span>ε</span></li><li class="in" name="scala.Serializable"><span>Serializable</span></li><li class="in" name="java.io.Serializable"><span>Serializable</span></li><li class="in" name="scala.Product"><span>Product</span></li><li class="in" name="scala.Equals"><span>Equals</span></li><li class="in" name="org.benknoble.ebnf.Word"><span>Word</span></li><li class="in" name="org.benknoble.ebnf.Expr"><span>Expr</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                    <li class="in" name="org.benknoble.loner.Loner"><span>Loner</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                   </ol>
                 </div><div class="ancestors">
               <span class="filtertype"></span>
@@ -270,7 +216,77 @@ msg: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{abc}[<span class
         <div id="allMembers">
         
 
-        
+        <div id="types" class="types members">
+              <h3>Type Members</h3>
+              <ol><li name="org.benknoble.loner.Loner.Followers" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Followers=org.benknoble.loner.Loner.NtMap[Set[org.benknoble.ebnf.Word]]"></a><a id="Followers:Followers"></a>
+      <span class="permalink">
+      <a href="../../../org/benknoble/loner/Loner$.html#Followers=org.benknoble.loner.Loner.NtMap[Set[org.benknoble.ebnf.Word]]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Followers</span><span class="result alias"> = <span class="extype" name="scala.collection.immutable.Map">Map</span>[<span class="extype" name="org.benknoble.ebnf.Nonterminal">Nonterminal</span>, <span class="extype" name="scala.Predef.Set">Set</span>[<span class="extype" name="org.benknoble.ebnf.Word">Word</span>]]</span>
+      </span>
+      
+      <p class="shortcomment cmt">Type of the follower computation</p><div class="fullcomment"><div class="comment cmt"><p>Type of the follower computation</p><p>Map from org.benknoble.ebnf.Nonterminal to Set[Word]
+</p></div></div>
+    </li><li name="org.benknoble.loner.Loner.NtMap" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="NtMap[A]=Map[org.benknoble.ebnf.Nonterminal,A]"></a><a id="NtMap[A]:NtMap[A]"></a>
+      <span class="permalink">
+      <a href="../../../org/benknoble/loner/Loner$.html#NtMap[A]=Map[org.benknoble.ebnf.Nonterminal,A]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">NtMap</span><span class="tparams">[<span name="A">A</span>]</span><span class="result alias"> = <span class="extype" name="scala.collection.immutable.Map">Map</span>[<span class="extype" name="org.benknoble.ebnf.Nonterminal">Nonterminal</span>, <span class="extype" name="org.benknoble.loner.Loner.NtMap.A">A</span>]</span>
+      </span>
+      
+      <p class="shortcomment cmt">Map from org.benknoble.ebnf.Nonterminal to 'A'</p>
+    </li><li name="org.benknoble.loner.Loner.Nullables" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Nullables=org.benknoble.loner.Loner.NtMap[Boolean]"></a><a id="Nullables:Nullables"></a>
+      <span class="permalink">
+      <a href="../../../org/benknoble/loner/Loner$.html#Nullables=org.benknoble.loner.Loner.NtMap[Boolean]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Nullables</span><span class="result alias"> = <span class="extype" name="scala.collection.immutable.Map">Map</span>[<span class="extype" name="org.benknoble.ebnf.Nonterminal">Nonterminal</span>, <span class="extype" name="scala.Boolean">Boolean</span>]</span>
+      </span>
+      
+      <p class="shortcomment cmt">Type of the nullable computation</p><div class="fullcomment"><div class="comment cmt"><p>Type of the nullable computation</p><p>Map from org.benknoble.ebnf.Nonterminal to Boolean
+</p></div></div>
+    </li><li name="org.benknoble.loner.Loner.Starters" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Starters=org.benknoble.loner.Loner.NtMap[Set[org.benknoble.ebnf.Word]]"></a><a id="Starters:Starters"></a>
+      <span class="permalink">
+      <a href="../../../org/benknoble/loner/Loner$.html#Starters=org.benknoble.loner.Loner.NtMap[Set[org.benknoble.ebnf.Word]]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Starters</span><span class="result alias"> = <span class="extype" name="scala.collection.immutable.Map">Map</span>[<span class="extype" name="org.benknoble.ebnf.Nonterminal">Nonterminal</span>, <span class="extype" name="scala.Predef.Set">Set</span>[<span class="extype" name="org.benknoble.ebnf.Word">Word</span>]]</span>
+      </span>
+      
+      <p class="shortcomment cmt">Type of the starter computation</p><div class="fullcomment"><div class="comment cmt"><p>Type of the starter computation</p><p>Map from org.benknoble.ebnf.Nonterminal to Set[Word]
+</p></div></div>
+    </li></ol>
+            </div>
 
         
 
@@ -280,7 +296,7 @@ msg: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{abc}[<span class
                 <li name="scala.AnyRef#!=" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="!=(x$1:Any):Boolean"></a><a id="!=(Any):Boolean"></a>
       <span class="permalink">
-      <a href="../../../org/benknoble/ebnf/ε$.html#!=(x$1:Any):Boolean" title="Permalink">
+      <a href="../../../org/benknoble/loner/Loner$.html#!=(x$1:Any):Boolean" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -296,7 +312,7 @@ msg: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{abc}[<span class
     </li><li name="scala.AnyRef###" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="##():Int"></a>
       <span class="permalink">
-      <a href="../../../org/benknoble/ebnf/ε$.html###():Int" title="Permalink">
+      <a href="../../../org/benknoble/loner/Loner$.html###():Int" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -309,26 +325,10 @@ msg: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{abc}[<span class
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="org.benknoble.ebnf.Expr#*" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="*():org.benknoble.ebnf.Expr"></a><a id="*():Expr"></a>
-      <span class="permalink">
-      <a href="../../../org/benknoble/ebnf/ε$.html#*():org.benknoble.ebnf.Expr" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span title="gt4s: $times" class="name">*</span><span class="params">()</span><span class="result">: <a href="Expr.html" class="extype" name="org.benknoble.ebnf.Expr">Expr</a></span>
-      </span>
-      
-      <p class="shortcomment cmt">Returns a <a href="Repetition.html" class="extype" name="org.benknoble.ebnf.Repetition">org.benknoble.ebnf.Repetition</a> of this</p><div class="fullcomment"><div class="comment cmt"><p>Returns a <a href="Repetition.html" class="extype" name="org.benknoble.ebnf.Repetition">org.benknoble.ebnf.Repetition</a> of this</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Expr.html" class="extype" name="org.benknoble.ebnf.Expr">Expr</a></dd></dl></div>
     </li><li name="scala.AnyRef#==" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="==(x$1:Any):Boolean"></a><a id="==(Any):Boolean"></a>
       <span class="permalink">
-      <a href="../../../org/benknoble/ebnf/ε$.html#==(x$1:Any):Boolean" title="Permalink">
+      <a href="../../../org/benknoble/loner/Loner$.html#==(x$1:Any):Boolean" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -341,10 +341,10 @@ msg: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{abc}[<span class
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="org.benknoble.ebnf.Expr#?" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="?():org.benknoble.ebnf.Expr"></a><a id="?():Expr"></a>
+    </li><li name="org.benknoble.loner.Loner#apply" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="apply(g:org.benknoble.ebnf.Grammar):Boolean"></a><a id="apply(Grammar):Boolean"></a>
       <span class="permalink">
-      <a href="../../../org/benknoble/ebnf/ε$.html#?():org.benknoble.ebnf.Expr" title="Permalink">
+      <a href="../../../org/benknoble/loner/Loner$.html#apply(g:org.benknoble.ebnf.Grammar):Boolean" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -353,14 +353,31 @@ msg: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{abc}[<span class
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span title="gt4s: $qmark" class="name">?</span><span class="params">()</span><span class="result">: <a href="Expr.html" class="extype" name="org.benknoble.ebnf.Expr">Expr</a></span>
+        <span class="name">apply</span><span class="params">(<span name="g">g: <span class="extype" name="org.benknoble.ebnf.Grammar">Grammar</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       
-      <p class="shortcomment cmt">Returns a <a href="Option.html" class="extype" name="org.benknoble.ebnf.Option">org.benknoble.ebnf.Option</a> of this</p><div class="fullcomment"><div class="comment cmt"><p>Returns a <a href="Option.html" class="extype" name="org.benknoble.ebnf.Option">org.benknoble.ebnf.Option</a> of this</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Expr.html" class="extype" name="org.benknoble.ebnf.Expr">Expr</a></dd></dl></div>
+      <p class="shortcomment cmt">equivalent to Loner.isLLone(g)</p>
+    </li><li name="org.benknoble.loner.Loner#areDisjoint" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="areDisjoint[A](sets:Set[A]*):Boolean"></a><a id="areDisjoint[A](Set[A]*):Boolean"></a>
+      <span class="permalink">
+      <a href="../../../org/benknoble/loner/Loner$.html#areDisjoint[A](sets:Set[A]*):Boolean" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">areDisjoint</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="sets">sets: <span class="extype" name="scala.Predef.Set">Set</span>[<span class="extype" name="org.benknoble.loner.Loner.areDisjoint.A">A</span>]*</span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">true iff all sets are mutually disjoint</p><div class="fullcomment"><div class="comment cmt"><p>true iff all sets are mutually disjoint</p><p>Equivalent to ∩(sets) == ∅
+</p></div><dl class="paramcmts block"><dt class="param">sets</dt><dd class="cmt"><p>the sets to test</p></dd></dl></div>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <span class="permalink">
-      <a href="../../../org/benknoble/ebnf/ε$.html#asInstanceOf[T0]:T0" title="Permalink">
+      <a href="../../../org/benknoble/loner/Loner$.html#asInstanceOf[T0]:T0" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -376,7 +393,7 @@ msg: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{abc}[<span class
     </li><li name="scala.AnyRef#clone" visbl="prt" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="clone():Object"></a><a id="clone():AnyRef"></a>
       <span class="permalink">
-      <a href="../../../org/benknoble/ebnf/ε$.html#clone():Object" title="Permalink">
+      <a href="../../../org/benknoble/loner/Loner$.html#clone():Object" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -400,7 +417,7 @@ msg: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{abc}[<span class
     </li><li name="scala.AnyRef#eq" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a><a id="eq(AnyRef):Boolean"></a>
       <span class="permalink">
-      <a href="../../../org/benknoble/ebnf/ε$.html#eq(x$1:AnyRef):Boolean" title="Permalink">
+      <a href="../../../org/benknoble/loner/Loner$.html#eq(x$1:AnyRef):Boolean" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -416,7 +433,7 @@ msg: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{abc}[<span class
     </li><li name="scala.AnyRef#equals" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="equals(x$1:Any):Boolean"></a><a id="equals(Any):Boolean"></a>
       <span class="permalink">
-      <a href="../../../org/benknoble/ebnf/ε$.html#equals(x$1:Any):Boolean" title="Permalink">
+      <a href="../../../org/benknoble/loner/Loner$.html#equals(x$1:Any):Boolean" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -432,7 +449,7 @@ msg: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{abc}[<span class
     </li><li name="scala.AnyRef#finalize" visbl="prt" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="finalize():Unit"></a>
       <span class="permalink">
-      <a href="../../../org/benknoble/ebnf/ε$.html#finalize():Unit" title="Permalink">
+      <a href="../../../org/benknoble/loner/Loner$.html#finalize():Unit" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -451,10 +468,10 @@ msg: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{abc}[<span class
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="org.benknoble.ebnf.ε#format" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="format:String"></a>
+    </li><li name="org.benknoble.loner.Loner#fix" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="fix[A,B](fi:(A,B)=&gt;B)(f0:B):A=&gt;B"></a><a id="fix[A,B]((A,B)⇒B)(B):(A)⇒B"></a>
       <span class="permalink">
-      <a href="../../../org/benknoble/ebnf/ε$.html#format:String" title="Permalink">
+      <a href="../../../org/benknoble/loner/Loner$.html#fix[A,B](fi:(A,B)=&gt;B)(f0:B):A=&gt;B" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -463,15 +480,34 @@ msg: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{abc}[<span class
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">format</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="name">fix</span><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>]</span><span class="params">(<span name="fi">fi: (<span class="extype" name="org.benknoble.loner.Loner.fix.A">A</span>, <span class="extype" name="org.benknoble.loner.Loner.fix.B">B</span>) ⇒ <span class="extype" name="org.benknoble.loner.Loner.fix.B">B</span></span>)</span><span class="params">(<span name="f0">f0: <span class="extype" name="org.benknoble.loner.Loner.fix.B">B</span></span>)</span><span class="result">: (<span class="extype" name="org.benknoble.loner.Loner.fix.A">A</span>) ⇒ <span class="extype" name="org.benknoble.loner.Loner.fix.B">B</span></span>
       </span>
       
-      <p class="shortcomment cmt">Returns a formatted version of this</p><div class="fullcomment"><div class="comment cmt"><p>Returns a formatted version of this</p><p>Sub-classes implement this to determine formatting.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>a print-able version in EBNF format</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="org.benknoble.ebnf.ε">ε</a> → <a href="Expr.html" class="extype" name="org.benknoble.ebnf.Expr">Expr</a></dd></dl></div>
+      <p class="shortcomment cmt">Returns a function which computes the least fixed point, given a starting
+value and a step function
+</p><div class="fullcomment"><div class="comment cmt"><p>Returns a function which computes the least fixed point, given a starting
+value and a step function
+</p></div><dl class="paramcmts block"><dt class="param">fi</dt><dd class="cmt"><p>step function</p></dd><dt class="param">f0</dt><dd class="cmt"><p>start value</p></dd></dl></div>
+    </li><li name="org.benknoble.loner.Loner#followers" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="followers(g:org.benknoble.ebnf.Grammar):org.benknoble.loner.Loner.Followers"></a><a id="followers(Grammar):Followers"></a>
+      <span class="permalink">
+      <a href="../../../org/benknoble/loner/Loner$.html#followers(g:org.benknoble.ebnf.Grammar):org.benknoble.loner.Loner.Followers" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">followers</span><span class="params">(<span name="g">g: <span class="extype" name="org.benknoble.ebnf.Grammar">Grammar</span></span>)</span><span class="result">: <a href="#Followers=org.benknoble.loner.Loner.NtMap[Set[org.benknoble.ebnf.Word]]" class="extmbr" name="org.benknoble.loner.Loner.Followers">Followers</a></span>
+      </span>
+      
+      <p class="shortcomment cmt">Computes follower map of an org.benknoble.ebnf.Grammar</p>
     </li><li name="scala.AnyRef#getClass" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getClass():Class[_]"></a>
       <span class="permalink">
-      <a href="../../../org/benknoble/ebnf/ε$.html#getClass():Class[_]" title="Permalink">
+      <a href="../../../org/benknoble/loner/Loner$.html#getClass():Class[_]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -487,10 +523,29 @@ msg: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{abc}[<span class
                 <span class="name">@native</span><span class="args">()</span>
               
         </dd></dl></div>
+    </li><li name="scala.AnyRef#hashCode" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="hashCode():Int"></a>
+      <span class="permalink">
+      <a href="../../../org/benknoble/loner/Loner$.html#hashCode():Int" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd><dt>Annotations</dt><dd>
+                <span class="name">@native</span><span class="args">()</span>
+              
+        </dd></dl></div>
     </li><li name="scala.Any#isInstanceOf" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="isInstanceOf[T0]:Boolean"></a>
       <span class="permalink">
-      <a href="../../../org/benknoble/ebnf/ε$.html#isInstanceOf[T0]:Boolean" title="Permalink">
+      <a href="../../../org/benknoble/loner/Loner$.html#isInstanceOf[T0]:Boolean" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -503,10 +558,26 @@ msg: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{abc}[<span class
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="org.benknoble.loner.Loner#isLLone" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="isLLone(g:org.benknoble.ebnf.Grammar):Boolean"></a><a id="isLLone(Grammar):Boolean"></a>
+      <span class="permalink">
+      <a href="../../../org/benknoble/loner/Loner$.html#isLLone(g:org.benknoble.ebnf.Grammar):Boolean" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">isLLone</span><span class="params">(<span name="g">g: <span class="extype" name="org.benknoble.ebnf.Grammar">Grammar</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">true iff the org.benknoble.ebnf.Gramamr is in LL(1)</p>
     </li><li name="scala.AnyRef#ne" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a><a id="ne(AnyRef):Boolean"></a>
       <span class="permalink">
-      <a href="../../../org/benknoble/ebnf/ε$.html#ne(x$1:AnyRef):Boolean" title="Permalink">
+      <a href="../../../org/benknoble/loner/Loner$.html#ne(x$1:AnyRef):Boolean" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -522,7 +593,7 @@ msg: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{abc}[<span class
     </li><li name="scala.AnyRef#notify" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="notify():Unit"></a>
       <span class="permalink">
-      <a href="../../../org/benknoble/ebnf/ε$.html#notify():Unit" title="Permalink">
+      <a href="../../../org/benknoble/loner/Loner$.html#notify():Unit" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -541,7 +612,7 @@ msg: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{abc}[<span class
     </li><li name="scala.AnyRef#notifyAll" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="notifyAll():Unit"></a>
       <span class="permalink">
-      <a href="../../../org/benknoble/ebnf/ε$.html#notifyAll():Unit" title="Permalink">
+      <a href="../../../org/benknoble/loner/Loner$.html#notifyAll():Unit" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -557,10 +628,42 @@ msg: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{abc}[<span class
                 <span class="name">@native</span><span class="args">()</span>
               
         </dd></dl></div>
+    </li><li name="org.benknoble.loner.Loner#nullable" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="nullable(g:org.benknoble.ebnf.Grammar):org.benknoble.loner.Loner.Nullables"></a><a id="nullable(Grammar):Nullables"></a>
+      <span class="permalink">
+      <a href="../../../org/benknoble/loner/Loner$.html#nullable(g:org.benknoble.ebnf.Grammar):org.benknoble.loner.Loner.Nullables" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">nullable</span><span class="params">(<span name="g">g: <span class="extype" name="org.benknoble.ebnf.Grammar">Grammar</span></span>)</span><span class="result">: <a href="#Nullables=org.benknoble.loner.Loner.NtMap[Boolean]" class="extmbr" name="org.benknoble.loner.Loner.Nullables">Nullables</a></span>
+      </span>
+      
+      <p class="shortcomment cmt">Computes nullable map of an org.benknoble.ebnf.Grammar</p>
+    </li><li name="org.benknoble.loner.Loner#starters" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="starters(g:org.benknoble.ebnf.Grammar):org.benknoble.loner.Loner.Starters"></a><a id="starters(Grammar):Starters"></a>
+      <span class="permalink">
+      <a href="../../../org/benknoble/loner/Loner$.html#starters(g:org.benknoble.ebnf.Grammar):org.benknoble.loner.Loner.Starters" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">starters</span><span class="params">(<span name="g">g: <span class="extype" name="org.benknoble.ebnf.Grammar">Grammar</span></span>)</span><span class="result">: <a href="#Starters=org.benknoble.loner.Loner.NtMap[Set[org.benknoble.ebnf.Word]]" class="extmbr" name="org.benknoble.loner.Loner.Starters">Starters</a></span>
+      </span>
+      
+      <p class="shortcomment cmt">Computes starter map of an org.benknoble.ebnf.Grammar</p>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a><a id="synchronized[T0](⇒T0):T0"></a>
       <span class="permalink">
-      <a href="../../../org/benknoble/ebnf/ε$.html#synchronized[T0](x$1:=&gt;T0):T0" title="Permalink">
+      <a href="../../../org/benknoble/loner/Loner$.html#synchronized[T0](x$1:=&gt;T0):T0" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -573,10 +676,26 @@ msg: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{abc}[<span class
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#toString" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="toString():String"></a>
+      <span class="permalink">
+      <a href="../../../org/benknoble/loner/Loner$.html#toString():String" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait():Unit"></a>
       <span class="permalink">
-      <a href="../../../org/benknoble/ebnf/ε$.html#wait():Unit" title="Permalink">
+      <a href="../../../org/benknoble/loner/Loner$.html#wait():Unit" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -598,7 +717,7 @@ msg: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{abc}[<span class
     </li><li name="scala.AnyRef#wait" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait(x$1:Long,x$2:Int):Unit"></a><a id="wait(Long,Int):Unit"></a>
       <span class="permalink">
-      <a href="../../../org/benknoble/ebnf/ε$.html#wait(x$1:Long,x$2:Int):Unit" title="Permalink">
+      <a href="../../../org/benknoble/loner/Loner$.html#wait(x$1:Long,x$2:Int):Unit" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -620,7 +739,7 @@ msg: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{abc}[<span class
     </li><li name="scala.AnyRef#wait" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait(x$1:Long):Unit"></a><a id="wait(Long):Unit"></a>
       <span class="permalink">
-      <a href="../../../org/benknoble/ebnf/ε$.html#wait(x$1:Long):Unit" title="Permalink">
+      <a href="../../../org/benknoble/loner/Loner$.html#wait(x$1:Long):Unit" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -641,10 +760,10 @@ msg: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{abc}[<span class
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="org.benknoble.ebnf.Expr#||" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="||(right:org.benknoble.ebnf.Expr):org.benknoble.ebnf.Expr"></a><a id="||(Expr):Expr"></a>
+    </li><li name="org.benknoble.loner.Loner#⊙" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="⊙:org.benknoble.loner.SetFilter[org.benknoble.ebnf.Word]"></a><a id="⊙:SetFilter[Word]"></a>
       <span class="permalink">
-      <a href="../../../org/benknoble/ebnf/ε$.html#||(right:org.benknoble.ebnf.Expr):org.benknoble.ebnf.Expr" title="Permalink">
+      <a href="../../../org/benknoble/loner/Loner$.html#⊙:org.benknoble.loner.SetFilter[org.benknoble.ebnf.Word]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -653,30 +772,13 @@ msg: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{abc}[<span class
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span title="gt4s: $bar$bar" class="name">||</span><span class="params">(<span name="right">right: <a href="Expr.html" class="extype" name="org.benknoble.ebnf.Expr">Expr</a></span>)</span><span class="result">: <a href="Expr.html" class="extype" name="org.benknoble.ebnf.Expr">Expr</a></span>
+        <span title="gt4s: $u2299" class="name">⊙</span><span class="result">: <a href="SetFilter.html" class="extype" name="org.benknoble.loner.SetFilter">SetFilter</a>[<span class="extype" name="org.benknoble.ebnf.Word">Word</span>]</span>
       </span>
       
-      <p class="shortcomment cmt">Returns an <a href="Alternation.html" class="extype" name="org.benknoble.ebnf.Alternation">org.benknoble.ebnf.Alternation</a>
-</p><div class="fullcomment"><div class="comment cmt"><p>Returns an <a href="Alternation.html" class="extype" name="org.benknoble.ebnf.Alternation">org.benknoble.ebnf.Alternation</a>
-</p></div><dl class="paramcmts block"><dt class="param">right</dt><dd class="cmt"><p>the right side of the branch</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Expr.html" class="extype" name="org.benknoble.ebnf.Expr">Expr</a></dd></dl></div>
-    </li><li name="org.benknoble.ebnf.Expr#~" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="~(right:org.benknoble.ebnf.Expr):org.benknoble.ebnf.Expr"></a><a id="~(Expr):Expr"></a>
-      <span class="permalink">
-      <a href="../../../org/benknoble/ebnf/ε$.html#~(right:org.benknoble.ebnf.Expr):org.benknoble.ebnf.Expr" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span title="gt4s: $tilde" class="name">~</span><span class="params">(<span name="right">right: <a href="Expr.html" class="extype" name="org.benknoble.ebnf.Expr">Expr</a></span>)</span><span class="result">: <a href="Expr.html" class="extype" name="org.benknoble.ebnf.Expr">Expr</a></span>
-      </span>
-      
-      <p class="shortcomment cmt">Returns a <a href="Sequence.html" class="extype" name="org.benknoble.ebnf.Sequence">org.benknoble.ebnf.Sequence</a>
-</p><div class="fullcomment"><div class="comment cmt"><p>Returns a <a href="Sequence.html" class="extype" name="org.benknoble.ebnf.Sequence">org.benknoble.ebnf.Sequence</a>
-</p></div><dl class="paramcmts block"><dt class="param">right</dt><dd class="cmt"><p>the next item in the sequence</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Expr.html" class="extype" name="org.benknoble.ebnf.Expr">Expr</a></dd></dl></div>
+      <p class="shortcomment cmt">The monoid operation on Set[Word] defined by
+<a href="SetFilter.html" class="extype" name="org.benknoble.loner.SetFilter">org.benknoble.loner.SetFilter</a></p><div class="fullcomment"><div class="comment cmt"><p>The monoid operation on Set[Word] defined by
+<a href="SetFilter.html" class="extype" name="org.benknoble.loner.SetFilter">org.benknoble.loner.SetFilter</a></p><p>⊙(S)(T) = if (S contains ε) (S - ε) union T else S
+</p></div></div>
     </li>
               </ol>
             </div>
@@ -687,19 +789,7 @@ msg: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{abc}[<span class
         </div>
 
         <div id="inheritedMembers">
-        <div class="parent" name="scala.Serializable">
-              <h3>Inherited from <span class="extype" name="scala.Serializable">Serializable</span></h3>
-            </div><div class="parent" name="java.io.Serializable">
-              <h3>Inherited from <span class="extype" name="java.io.Serializable">Serializable</span></h3>
-            </div><div class="parent" name="scala.Product">
-              <h3>Inherited from <span class="extype" name="scala.Product">Product</span></h3>
-            </div><div class="parent" name="scala.Equals">
-              <h3>Inherited from <span class="extype" name="scala.Equals">Equals</span></h3>
-            </div><div class="parent" name="org.benknoble.ebnf.Word">
-              <h3>Inherited from <a href="Word.html" class="extype" name="org.benknoble.ebnf.Word">Word</a></h3>
-            </div><div class="parent" name="org.benknoble.ebnf.Expr">
-              <h3>Inherited from <a href="Expr.html" class="extype" name="org.benknoble.ebnf.Expr">Expr</a></h3>
-            </div><div class="parent" name="scala.AnyRef">
+        <div class="parent" name="scala.AnyRef">
               <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
             </div><div class="parent" name="scala.Any">
               <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>

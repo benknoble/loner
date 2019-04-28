@@ -119,12 +119,24 @@
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../index.html" class="extype" name="org.benknoble">benknoble</a></dd></dl></div>
     </li><li class="current-entities indented3">
                         <span class="separator"></span>
-                        <a class="trait" href="Greeting.html" title=""></a>
-                        <a href="Greeting.html" title="">Greeting</a>
+                        <a class="object" href="Loner$.html" title="LL(1) computer"></a>
+                        <a href="Loner$.html" title="LL(1) computer">Loner</a>
                       </li><li class="current-entities indented3">
                         <span class="separator"></span>
-                        <a class="object" href="Hello$.html" title=""></a>
-                        <a href="Hello$.html" title="">Hello</a>
+                        <a class="object" href="Main$.html" title=""></a>
+                        <a href="Main$.html" title="">Main</a>
+                      </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="trait" href="Monoid.html" title="A moinoid over members of type A"></a>
+                        <a href="Monoid.html" title="A moinoid over members of type A">Monoid</a>
+                      </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="class" href="SetFilter.html" title="A set-filtering monoid."></a>
+                        <a href="SetFilter.html" title="A set-filtering monoid.">SetFilter</a>
+                      </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="trait" href="Subgroup.html" title="A subgroup over members of type A"></a>
+                        <a href="Subgroup.html" title="A subgroup over members of type A">Subgroup</a>
                       </li>
               </ul>
             </div>
@@ -188,10 +200,10 @@
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="org.benknoble.loner.Greeting" visbl="pub" class="indented0 " data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="GreetingextendsAnyRef"></a><a id="Greeting:Greeting"></a>
+              <ol><li name="org.benknoble.loner.Monoid" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="Monoid[A]extendsSubgroup[A]"></a><a id="Monoid[A]:Monoid[A]"></a>
       <span class="permalink">
-      <a href="../../../org/benknoble/loner/index.html#GreetingextendsAnyRef" title="Permalink">
+      <a href="../../../org/benknoble/loner/index.html#Monoid[A]extendsSubgroup[A]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -200,10 +212,48 @@
         <span class="kind">trait</span>
       </span>
       <span class="symbol">
-        <a title="" href="Greeting.html"><span class="name">Greeting</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+        <a title="A moinoid over members of type A" href="Monoid.html"><span class="name">Monoid</span></a><span class="tparams">[<span name="A">A</span>]</span><span class="result"> extends <a href="Subgroup.html" class="extype" name="org.benknoble.loner.Subgroup">Subgroup</a>[<span class="extype" name="org.benknoble.loner.Monoid.A">A</span>]</span>
       </span>
       
+      <p class="shortcomment cmt">A moinoid over members of type A</p><div class="fullcomment"><div class="comment cmt"><p>A moinoid over members of type A</p><p>From category theory: A monoid is a subgroup equipped with a left-and-right
+identity value called zero
+</p></div></div>
+    </li><li name="org.benknoble.loner.SetFilter" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="SetFilter[A]extendsMonoid[Set[A]]withProductwithSerializable"></a><a id="SetFilter[A]:SetFilter[A]"></a>
+      <span class="permalink">
+      <a href="../../../org/benknoble/loner/index.html#SetFilter[A]extendsMonoid[Set[A]]withProductwithSerializable" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a title="A set-filtering monoid." href="SetFilter.html"><span class="name">SetFilter</span></a><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="a">a: <span class="extype" name="org.benknoble.loner.SetFilter.A">A</span></span>)</span><span class="result"> extends <a href="Monoid.html" class="extype" name="org.benknoble.loner.Monoid">Monoid</a>[<span class="extype" name="scala.Predef.Set">Set</span>[<span class="extype" name="org.benknoble.loner.SetFilter.A">A</span>]] with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
       
+      <p class="shortcomment cmt">A set-filtering monoid.</p><div class="fullcomment"><div class="comment cmt"><p>A set-filtering monoid.</p><p>Given an element <code>a</code> of the domain, the identity element is <code>{a}</code> and the
+subgroup operation is <code>S * T = { S if ¬(a ∈ S); (S - {a}) ∪ T if a ∈ S }</code>
+</p></div><dl class="paramcmts block"><dt class="param">a</dt><dd class="cmt"><p>the zero element</p></dd></dl></div>
+    </li><li name="org.benknoble.loner.Subgroup" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="Subgroup[A]extendsAnyRef"></a><a id="Subgroup[A]:Subgroup[A]"></a>
+      <span class="permalink">
+      <a href="../../../org/benknoble/loner/index.html#Subgroup[A]extendsAnyRef" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a title="A subgroup over members of type A" href="Subgroup.html"><span class="name">Subgroup</span></a><span class="tparams">[<span name="A">A</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">A subgroup over members of type A</p><div class="fullcomment"><div class="comment cmt"><p>A subgroup over members of type A</p><p>From category theory: A subgroup is a domain of elements (A) and an
+associative binary operation
+</p></div></div>
     </li></ol>
             </div>
 
@@ -212,10 +262,10 @@
         <div class="values members">
               <h3>Value Members</h3>
               <ol>
-                <li name="org.benknoble.loner.Hello" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="Hello"></a><a id="Hello:Hello"></a>
+                <li name="org.benknoble.loner.Loner" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Loner"></a><a id="Loner:Loner"></a>
       <span class="permalink">
-      <a href="../../../org/benknoble/loner/index.html#Hello" title="Permalink">
+      <a href="../../../org/benknoble/loner/index.html#Loner" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -224,7 +274,24 @@
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a title="" href="Hello$.html"><span class="name">Hello</span></a><span class="result"> extends <a href="Greeting.html" class="extype" name="org.benknoble.loner.Greeting">Greeting</a> with <span class="extype" name="scala.App">App</span></span>
+        <a title="LL(1) computer" href="Loner$.html"><span class="name">Loner</span></a>
+      </span>
+      
+      <p class="shortcomment cmt">LL(1) computer</p><div class="fullcomment"><div class="comment cmt"><p>LL(1) computer</p><p>Applicable to org.benknoble.ebnf.Grammar instances
+</p></div></div>
+    </li><li name="org.benknoble.loner.Main" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Main"></a><a id="Main:Main"></a>
+      <span class="permalink">
+      <a href="../../../org/benknoble/loner/index.html#Main" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a title="" href="Main$.html"><span class="name">Main</span></a>
       </span>
       
       
