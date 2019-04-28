@@ -5,7 +5,7 @@ An EBNF parser and LL(1) checker, written in Scala.
 This project consists of
 
   - [`ebnf`](./ebnf/): an EBNF parser and formatting filter
-  - **COMING SOON** [`loner`](./src/): an LL(1) checker that depends on the
+  - [`loner`](./src/): an LL(1) checker that depends on the
     `ebnf` library
 
 Each project is split into an API component and a `Main.scala` CLI component.
@@ -16,9 +16,10 @@ compiler design).
 The CLI drivers have the same interface: they read from standard in, or from a
 file if passed one as a parameter. They output to standard out a formatted
 grammar, suitable for machine consumption, or an error message if the input is
-not EBNF-formatted (see below). The exit status reflects the success state (0:
-success, 1: not ebnf, 2: invalid arguments). Given the `-h` flags gives a help
-message. Given the `-q` suppresses output.
+not EBNF-formatted (see below). Loner additionally errors if the grammar is not
+LL(1). The exit status reflects the success state (0: success, 1: not ebnf, 2:
+invalid arguments). Given the `-h` flags gives a help message. Given the `-q`
+suppresses output.
 
 ## Getting Started
 
