@@ -13,9 +13,9 @@ object Loner {
   type Starters = NtMap[Set[Word]]
   type Followers = NtMap[Set[Word]]
 
-  def fix[A,B,C](fi: (A, Map[B, C]) => Map[B, C])(f0: Map[B, C]): (A => Map[B, C]) = a => {
+  def fix[A,B](fi: (A, B) => B)(f0: B): (A => B) = a => {
     @annotation.tailrec
-    def go(prev: Map[B, C], cur: Map[B, C]): Map[B, C] =
+    def go(prev: B, cur: B): B =
       if (prev == cur)
         cur
       else
