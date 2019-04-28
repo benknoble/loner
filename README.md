@@ -4,7 +4,7 @@ An EBNF parser and LL(1) checker, written in Scala.
 
 This project consists of
 
-  - [`ebnf`](./ebnf/): an EBNF parser and formatting filter
+  - [`ebnf`](./ebnf/src/): an EBNF parser and formatting filter
   - [`loner`](./src/): an LL(1) checker that depends on the
     `ebnf` library
 
