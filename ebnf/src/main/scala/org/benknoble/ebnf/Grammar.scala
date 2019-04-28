@@ -215,7 +215,7 @@ case class Option(val expr: Expr) extends Expr {
 }
 
 /** The empty expression (pronounced "epsilon") */
-case object ε extends Expr {
+case object ε extends Word {
   def format = "ε"
 }
 
@@ -361,6 +361,11 @@ class Grammar(_rules: Seq[Production]) {
       .map(_.rule)
       .foldLeft(Set[Nonterminal]())((acc, rule) => acc union nonterminals(rule))
   }
+
+  /** true iff all non-terminals on the right side of a production are also on
+    * the left side of a production
+    */
+  def isWellFormed: Boolean = rhsNonterminals subsetOf lhsNonterminals
 }
 
 /** Factory for [[org.benknoble.ebnf.Grammar]] instances. */
