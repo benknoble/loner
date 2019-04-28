@@ -362,6 +362,9 @@ class Grammar(_rules: Seq[Production]) {
       .foldLeft(Set[Nonterminal]())((acc, rule) => acc union nonterminals(rule))
   }
 
+  /** true iff all non-terminals on the right side of a production are also on
+    * the left side of a production
+    */
   def isWellFormed: Boolean = rhsNonterminals subsetOf lhsNonterminals
 }
 

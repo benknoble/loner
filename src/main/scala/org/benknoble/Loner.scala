@@ -2,17 +2,45 @@ package org.benknoble.loner
 
 import org.benknoble.ebnf._
 
+/** LL(1) computer
+  *
+  * Applicable to org.benknoble.ebnf.Grammar instances
+  */
 object Loner {
 
   import ExprImplicits._
 
+  /** The monoid operation on Set[Word] defined by
+    * [[org.benknoble.loner.SetFilter]]
+    *
+    * ⊙(S)(T) = if (S contains ε) (S - ε) union T else S
+    */
   def ⊙ = SetFilter[Word](ε)
 
+  /** Map from org.benknoble.ebnf.Nonterminal to 'A' */
   type NtMap[A] = Map[Nonterminal, A]
+  /** Type of the nullable computation
+    *
+    * Map from org.benknoble.ebnf.Nonterminal to Boolean
+    */
   type Nullables = NtMap[Boolean]
+  /** Type of the starter computation
+    *
+    * Map from org.benknoble.ebnf.Nonterminal to Set[Word]
+    */
   type Starters = NtMap[Set[Word]]
+  /** Type of the follower computation
+    *
+    * Map from org.benknoble.ebnf.Nonterminal to Set[Word]
+    */
   type Followers = NtMap[Set[Word]]
 
+  /** Returns a function which computes the least fixed point, given a starting
+    * value and a step function
+    *
+    * @param fi step function
+    * @param f0 start value
+    */
   def fix[A,B](fi: (A, B) => B)(f0: B): (A => B) = a => {
     @annotation.tailrec
     def go(prev: B, cur: B): B =
@@ -41,6 +69,7 @@ object Loner {
     mapGrammar(N(prev))(g)
   }
 
+  /** Computes nullable map of an org.benknoble.ebnf.Grammar */
   def nullable(g: Grammar): Nullables = {
     val n0 = g.nonterminals.map(_ -> false).toMap
     fix(nullable_i)(n0)(g)
@@ -60,6 +89,7 @@ object Loner {
     mapGrammar(S(prev))(g)
 
 
+  /** Computes starter map of an org.benknoble.ebnf.Grammar */
   def starters(g: Grammar): Starters = {
     val nullmap = nullable(g)
     val s0 = g.nonterminals.map(n => {
@@ -78,8 +108,6 @@ object Loner {
     case Option(exp) => contains(n)(exp)
   }
 
-  // should this go in Expr?
-  // should any of these utility methods?
   private def sequify(e: Expr): Seq[Expr] = e match {
     case w: Word => Seq(w)
     case Alternation(left, right) => sequify(left) ++ sequify(right)
@@ -130,6 +158,7 @@ object Loner {
     }
   }
 
+  /** Computes follower map of an org.benknoble.ebnf.Grammar */
   def followers(g: Grammar): Followers = {
     val nullmap = nullable(g)
     val startmap = starters(g)
@@ -186,9 +215,16 @@ object Loner {
     fix(followers_i)(f0)(g)
   }
 
-  private def areDisjoint[A](sets: Set[A]*): Boolean =
+  /** true iff all sets are mutually disjoint
+    *
+    * Equivalent to ∩(sets) == ∅
+    *
+    * @param sets the sets to test
+    */
+  def areDisjoint[A](sets: Set[A]*): Boolean =
     sets.reduceOption(_ intersect _).getOrElse(Set.empty) == Set.empty
 
+  /** true iff the org.benknoble.ebnf.Gramamr is in LL(1) */
   def isLLone(g: Grammar): Boolean = {
     if (!g.isWellFormed)
       return false
@@ -237,6 +273,7 @@ object Loner {
     g.rules.map(p => predict(p)).forall(b => b)
   }
 
+  /** equivalent to Loner.isLLone(g) */
   def apply(g: Grammar): Boolean = isLLone(g)
 
 }
