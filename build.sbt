@@ -64,8 +64,13 @@ lazy val scaladocSite = (project in file("site"))
   .settings(
     scaladocSiteSettings,
     git.remoteRepo := "git@github.com:benknoble/loner.git",
-    ghpagesNoJekyll := true
+    ghpagesNoJekyll := true,
+    mappings in makeSite ++= Seq(
+      file("ebnf/.js/target/scala-2.12/ebnf-fastopt.js") -> "ebnf.js"
+    )
   )
+  .aggregate(ebnfJS)
+  .dependsOn(ebnfJS)
   .enablePlugins(GhpagesPlugin)
 
 // See https://www.scala-sbt.org/1.x/docs/Using-Sonatype.html for instructions on how to publish to Sonatype.
