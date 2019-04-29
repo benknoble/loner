@@ -1,5 +1,7 @@
 package org.benknoble.ebnf
 
+import scala.scalajs.js.annotation.{ JSExportTopLevel, JSExport }
+
 import scala.util.parsing.combinator._
 
 /** Parser for EBNF specifications
@@ -107,6 +109,7 @@ import scala.util.parsing.combinator._
   *         ;
   * }}}
   */
+@JSExportTopLevel("EbnfParser")
 object EbnfParser extends RegexParsers {
 
   protected val commentPrefix = "#"
@@ -191,6 +194,19 @@ object EbnfParser extends RegexParsers {
     case Success(g, _) => Right(g)
     case NoSuccess(msg, _) => Left(msg)
   }
+
+  @JSExport("parseJS_scala")
+  protected def parseJS_scala(input: String): String =
+    apply_fold(input)(_.toString())
+
+  @JSExport("parseJS_format")
+  protected def parseJS_format(input: String): String =
+    apply_fold(input)(_.format)
+
+  private def apply_fold(input: String)(f: Grammar => String) =
+    apply(input).fold(
+      str => str,
+      grammar => f(grammar))
 
 }
 
