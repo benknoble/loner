@@ -1,4 +1,3 @@
-import Dependencies._
 import sbtassembly.AssemblyPlugin.defaultShellScript
 
 ThisBuild / scalaVersion     := "2.12.8"
@@ -16,7 +15,7 @@ lazy val loner = (crossProject.crossType(CrossType.Pure) in file("."))
     name := "loner",
     assemblyOption in assembly := (assemblyOption in assembly).value.copy(prependShellScript = Some(defaultShellScript)),
     assemblyJarName in assembly := s"${name.value}-${version.value}",
-    libraryDependencies += scalaTest % Test
+    libraryDependencies += "org.scalatest" %%% "scalatest" % "3.0.5"
   )
   .jvmSettings(
     libraryDependencies += scalajsStubs
@@ -34,8 +33,8 @@ lazy val ebnf = (crossProject.crossType(CrossType.Pure) in file("ebnf"))
     name := "ebnf",
     assemblyOption in assembly := (assemblyOption in assembly).value.copy(prependShellScript = Some(defaultShellScript)),
     assemblyJarName in assembly := s"${name.value}-${version.value}",
-    libraryDependencies += scalaTest % Test,
-    libraryDependencies += parserCombinators
+    libraryDependencies += "org.scalatest" %%% "scalatest" % "3.0.5",
+    libraryDependencies += "org.scala-lang.modules" %%% "scala-parser-combinators" % "1.1.1"
   )
   .jvmSettings(
     libraryDependencies += scalajsStubs
