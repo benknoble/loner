@@ -1,11 +1,14 @@
 package org.benknoble.loner
 
+import scala.scalajs.js.annotation.{ JSExportTopLevel, JSExport }
+
 import org.benknoble.ebnf._
 
 /** LL(1) computer
   *
   * Applicable to org.benknoble.ebnf.Grammar instances
   */
+@JSExportTopLevel("Loner")
 object Loner {
 
   import ExprImplicits._
@@ -225,6 +228,7 @@ object Loner {
     sets.reduceOption(_ intersect _).getOrElse(Set.empty) == Set.empty
 
   /** true iff the org.benknoble.ebnf.Gramamr is in LL(1) */
+  @JSExport
   def isLLone(g: Grammar): Boolean = {
     if (!g.isWellFormed)
       return false
