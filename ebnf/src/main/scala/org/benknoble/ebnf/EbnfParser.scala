@@ -195,13 +195,19 @@ object EbnfParser extends RegexParsers {
     case NoSuccess(msg, _) => Left(msg)
   }
 
-  @JSExport("parseJS_scala")
+  @JSExport
   protected def parseJS_scala(input: String): String =
     apply_fold(input)(_.toString())
 
-  @JSExport("parseJS_format")
+  @JSExport
   protected def parseJS_format(input: String): String =
     apply_fold(input)(_.format)
+
+  @JSExport
+  protected def parseJS_grammar(input: String): Grammar =
+    apply(input).fold(
+      _ => Grammar(),
+      grammar => grammar)
 
   private def apply_fold(input: String)(f: Grammar => String) =
     apply(input).fold(
