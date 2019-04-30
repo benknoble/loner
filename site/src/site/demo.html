@@ -46,7 +46,51 @@
     </table>
 
     <h2 id='syntax'>Syntax</h2>
-    <!-- TODO syntax guide -->
+
+    <table>
+      <tr>
+        <th>Item</th>
+        <th>Syntax</th>
+      </tr>
+      <tr>
+        <td>Grammar</td>
+        <td><tt>Rule; Rule; ...</tt></td>
+      </tr>
+      <tr>
+        <td>Rule</td>
+        <td><tt>Nonterminal ::= Expression</tt></td>
+      </tr>
+      <tr>
+        <td>Nonterminal</td>
+        <td>Any characters in angle brackets: <tt>&lt;Characters&gt;</tt></td>
+      </tr>
+      <tr>
+        <td>Expression</td>
+        <td>
+          <ul>
+            <li><tt>(Expression)</tt></li>
+            <li><tt>Expression Expression</tt></li>
+            <li><tt>Expression | Expression</tt></li>
+            <li><tt>Option</tt></li>
+            <li><tt>Repetition</tt></li>
+            <li><tt>Terminal</tt></li>
+          </ul>
+        </td>
+      <tr>
+        <td>Option = <tt>(exp|&epsilon;)</tt></td>
+        <td><tt>[Expression]</tt></td>
+      </tr>
+      <tr>
+        <td>Repetition</td>
+        <td><tt>{Expression}</tt></td>
+      </tr>
+      <tr>
+        <td>Terminal</td>
+        <td>Any characters, or the special value &epsilon; (empty string)</td>
+      </tr>
+      </tr>
+    </table>
+
   </body>
 </html>
   </body>
