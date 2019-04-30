@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/kognise/water.css@latest/dist/light.css'>
+    <!-- Provided by genSite -->
+    <script src='./ebnf.js'></script>
+    <!-- Provided by genSite -->
+    <script src='./loner.js'></script>
+    <!-- Written by hand -->
+    <script src='./demo.js'></script>
+    <title>Loner Demo</title>
+  </head>
+
+  <body>
+    <h1>Loner Demo</h1>
+
+    <figure>
+      <figcaption><a href='#syntax'>Jump to syntax guide</a></figcaption>
+      <textarea
+        id='input'
+        rows='6'
+        style='font-family: monospace;'
+        oninput='output_handler()'></textarea>
+    </figure>
+
+    <p>Epsilon: &epsilon;</p>
+
+    <table>
+      <tr>
+        <th>Computation</th>
+        <th>Result</th>
+      </tr>
+      <tr>
+        <td>Formatted Output</td>
+        <td id='format_output'></td>
+      </tr>
+      <tr>
+        <td>LL(1)</td>
+        <td id='LLone_output'></td>
+      </tr>
+      <tr>
+        <td>Scala Representation</td>
+        <td id='scala_output'></td>
+      </tr>
+    </table>
+
+    <h2 id='syntax'>Syntax</h2>
+
+    <table>
+      <tr>
+        <th>Item</th>
+        <th>Syntax</th>
+      </tr>
+      <tr>
+        <td>Grammar</td>
+        <td><tt>Rule; Rule; ...</tt></td>
+      </tr>
+      <tr>
+        <td>Rule</td>
+        <td><tt>Nonterminal ::= Expression</tt></td>
+      </tr>
+      <tr>
+        <td>Nonterminal</td>
+        <td>Any characters in angle brackets: <tt>&lt;Characters&gt;</tt></td>
+      </tr>
+      <tr>
+        <td>Expression</td>
+        <td>
+          <ul>
+            <li><tt>(Expression)</tt></li>
+            <li><tt>Expression Expression</tt></li>
+            <li><tt>Expression | Expression</tt></li>
+            <li><tt>Option</tt></li>
+            <li><tt>Repetition</tt></li>
+            <li><tt>Terminal</tt></li>
+          </ul>
+        </td>
+      <tr>
+        <td>Option = <tt>(exp|&epsilon;)</tt></td>
+        <td><tt>[Expression]</tt></td>
+      </tr>
+      <tr>
+        <td>Repetition</td>
+        <td><tt>{Expression}</tt></td>
+      </tr>
+      <tr>
+        <td>Terminal</td>
+        <td>Any characters, or the special value &epsilon; (empty string)</td>
+      </tr>
+      </tr>
+    </table>
+
+  </body>
+</html>
+  </body>
+</html>
