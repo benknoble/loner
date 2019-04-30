@@ -31,7 +31,7 @@ Run the tools on some [examples](./examples)!
 
 Generated HTML documentation can be found on the [website][site].
 
-**COMING SOON** Check out the live demo!
+Check out the [live demo][demo]!
 
 ## EBNF File Format
 
@@ -142,3 +142,4 @@ Dr. Jan Prins, in Spring 2019. The topics of this compilers course inspired
 loner.
 
 [site]: https://benknoble.github.io/loner/
+[demo]: https://benknoble.github.io/loner/demo.html
