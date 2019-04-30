@@ -3,10 +3,12 @@ const indent_amt = 2
 function format_scala_rep(s) {
   let indent = 0
   const newline = match => (match === ")" ? "" : "\n")
-  const formatted = s.replace(/(\w+\()|\)/g, match => {
+  const formatted = s.replace(/\u03b5|(\w+\()|\)/g, match => {
     if (match === ")") {
       indent = (indent - indent_amt) < 0 ? 0 : indent - indent_amt
       return match
+    } else if (match === "\u03b5") {
+      return ' '.repeat(indent) + match
     } else {
       const old_indent = indent
       indent = indent + indent_amt
