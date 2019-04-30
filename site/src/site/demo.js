@@ -4,11 +4,13 @@ const eps = '\u03b5'
 function format_scala_rep(s) {
   let indent = 0
   const newline = match => (match === ")" ? "" : "\n")
+  // unicode is eps as defined above. Didn't want to mess around with string
+  // escapes to get a variable into a regex
   const formatted = s.replace(/\u03b5|(\w+\()|\)/g, match => {
     if (match === ")") {
       indent = (indent - indent_amt) < 0 ? 0 : indent - indent_amt
       return match
-    } else if (match === "\u03b5") {
+    } else if (match === eps) {
       return ' '.repeat(indent) + match
     } else {
       const old_indent = indent
