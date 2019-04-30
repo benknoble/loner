@@ -1,4 +1,5 @@
 const indent_amt = 2
+const eps = '\u03b5'
 
 function format_scala_rep(s) {
   let indent = 0
@@ -52,9 +53,12 @@ function remove_children(element) {
 }
 
 function setup_input_and_output() {
-  const initial_text = '<A> ::= a | b | {c};'
+  const initial_text = '&lt;A&gt; ::= a | b | {&lt;C&gt;};\n' +
+                       '&lt;B&gt; ::= [&lt;A&gt;]d&lt;C&gt;;\n' +
+                       '&lt;C&gt; ::= c;\n' +
+                       '&lt;A&gt; ::= edit me | ' + eps + ';\n'
   const input = document.getElementById('input')
-  input.innerText = initial_text
+  input.innerHTML = initial_text
   output_handler()
 }
 
