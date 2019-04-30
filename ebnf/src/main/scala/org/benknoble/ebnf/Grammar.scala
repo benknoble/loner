@@ -280,7 +280,7 @@ object ExprImplicits {
   * @param rule the Expr
   */
 class Production(val nt: Nonterminal, val rule: Expr) {
-  override def toString() = s"Production($nt, $rule)"
+  override def toString() = s"Production($nt,$rule)"
   override def equals(that: Any) = that match {
     case that: Production => nt == that.nt && rule == that.rule
     case _ => false
