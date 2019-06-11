@@ -1,5 +1,5 @@
 # expression
-<E> ::= <T>|<E><Op><T> ;
+<E> ::= <T>|<E><Op><T>|lparen<E>rparen ;
 # term
 <T> ::= <E>|num ;
 # operator

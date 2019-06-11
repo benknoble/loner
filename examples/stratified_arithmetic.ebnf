@@ -1,3 +1,3 @@
-<F> ::= <E>|num ;
+<F> ::= lparen<E>rparen|num ;
 <E> ::= <T>{+<T>} ;
 <T> ::= <F>{*<F>} ;
