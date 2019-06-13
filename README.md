@@ -1,5 +1,7 @@
 # Loner
 
+[![This project is considered stable](https://img.shields.io/badge/status-stable-success.svg)](https://benknoble.github.io/status/stable/)
+
 An EBNF parser and LL(1) checker, written in Scala.
 
 This project consists of
