@@ -47,7 +47,7 @@ From [Matt Might's specification](http://matt.might.net/articles/grammars-bnf-eb
    symbols, joined together by sequencing and choice.
 
  - A terminal symbol is a literal like ("+" or "function") or a class of
-   literals (like integer).
+   literals (like integer). It must be in single-quotes.
 
  - Simply juxtaposing expressions indicates sequencing.
 
@@ -55,10 +55,10 @@ From [Matt Might's specification](http://matt.might.net/articles/grammars-bnf-eb
 
 Example:
 ```
-<expr> ::= <term> "+" <expr> |  <term>
-<term> ::= <factor> "*" <term> |  <factor>
-<factor> ::= "(" <expr> ")" |  <const>
-<const> ::= integer
+<expr> ::= <term> '+' <expr> |  <term>
+<term> ::= <factor> '*' <term> |  <factor>
+<factor> ::= '(' <expr> ')' |  <const>
+<const> ::= 'integer'
 ```
 
  - Square brackets around an expansion, `[ expansion ]`, indicates that this
@@ -66,7 +66,7 @@ Example:
 
 For example, the rule:
 ```
-<term> ::= [ "-" ] <factor>
+<term> ::= [ '-' ] <factor>
 ```
 allows factors to be negated.
 
@@ -74,7 +74,7 @@ allows factors to be negated.
 
 For example, the rule:
 ```
-<args> ::= <arg> { "," <arg> }
+<args> ::= <arg> { ',' <arg> }
 ```
 defines a conventional comma-separated argument list.
 
@@ -83,7 +83,7 @@ defines a conventional comma-separated argument list.
 
 For example, the rule:
 ```
-<expr> ::= <term> ("+" | "-") <expr>
+<expr> ::= <term> ('+' | '-') <expr>
 ```
 defines an expression form that allows both addition and subtraction.
 
@@ -96,9 +96,9 @@ another tool).
 The following grammar from the tests is thus valid:
 ```
 # this is a comment
-<A> ::= a     # a values
-        | b   # b values
-        | c   # c values
+<A> ::= 'a'     # a values
+        | 'b'   # b values
+        | 'c'   # c values
         ;
 ```
 
@@ -118,7 +118,7 @@ commands. Because it provides main methods, the project code may be run via
 The two primary projects are `loner` and `ebnf`. Switch between them with
 `project`; loner depends on ebnf, for ease of development.
 
-Documentation is generated via `doc`. `sbt-site` and `sbt-ghpages` provide
+Documentation is generated via `scaladocSite`. `sbt-site` and `sbt-ghpages` provide
 site-generation tools for the [website][site].
 
 Tests are written using `scalatest` and are accessible via the standard `test`
