@@ -1,6 +1,6 @@
 # expression
-<E> ::= <T>|<E><Op><T>|lparen<E>rparen ;
+<E> ::= <T>|<E><Op><T>|'('<E>')' ;
 # term
-<T> ::= <E>|num ;
+<T> ::= <E>|'num' ;
 # operator
-<Op> ::= +|× ;
+<Op> ::= '+'|'×' ;
