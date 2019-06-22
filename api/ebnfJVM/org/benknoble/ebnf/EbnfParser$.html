@@ -126,16 +126,16 @@ DSL for creating complex grammars in code, and an
 grammar: org.benknoble.ebnf.Grammar = Grammar(<span class="std">List</span>(Production(Nonterminal('A), Alternation(Nonterminal('A),Sequence(Repetition(Terminal(abc)),<span class="std">Option</span>(Terminal(<span class="kw">def</span>)))))))
 
 scala&gt; <span class="kw">val</span> s = grammar.format
-s: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{abc}[<span class="kw">def</span>] ;</pre><p>If you include <a href="ExprImplicits$.html" class="extype" name="org.benknoble.ebnf.ExprImplicits">org.benknoble.ebnf.ExprImplicits</a> and take advantage
+s: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{<span class="lit">'abc'</span>}[<span class="lit">'def'</span>] ;</pre><p>If you include <a href="ExprImplicits$.html" class="extype" name="org.benknoble.ebnf.ExprImplicits">org.benknoble.ebnf.ExprImplicits</a> and take advantage
 of <a href="Expr.html" class="extype" name="org.benknoble.ebnf.Expr">org.benknoble.ebnf.Expr</a> syntax, it looks a lot cleaner:</p><pre>scala&gt; <span class="kw">val</span> grammar = Grammar(<span class="lit">'A ::= '</span>A || Terminal(<span class="lit">"abc"</span>).* ~ <span class="lit">"def"</span>.?)
 grammar: org.benknoble.ebnf.Grammar = Grammar(<span class="std">List</span>(Production(Nonterminal('A), Alternation(Nonterminal('A),Sequence(Repetition(Terminal(abc)),<span class="std">Option</span>(Terminal(<span class="kw">def</span>)))))))
 
 scala&gt; <span class="kw">val</span> s = grammar.format
-s: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{abc}[<span class="kw">def</span>] ;</pre><p>Finally, you can take advantage of <a href="" class="extype" name="org.benknoble.ebnf.EbnfParser">org.benknoble.ebnf.EbnfParser</a>:</p><pre>scala&gt; <span class="kw">val</span> grammar = EbnfParser(<span class="lit">"&lt;A&gt; ::= &lt;A&gt;|{abc}[def] ;"</span>)
+s: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{<span class="lit">'abc'</span>}[<span class="lit">'def'</span>] ;</pre><p>Finally, you can take advantage of <a href="" class="extype" name="org.benknoble.ebnf.EbnfParser">org.benknoble.ebnf.EbnfParser</a>:</p><pre>scala&gt; <span class="kw">val</span> grammar = EbnfParser(<span class="lit">"&lt;A&gt; ::= &lt;A&gt;|{'abc'}['def'] ;"</span>)
 grammar: Either[<span class="std">String</span>,org.benknoble.ebnf.Grammar] = Right(Grammar(<span class="std">List</span>(Production(Nonterminal('A), Alternation(Nonterminal('A),Sequence(Repetition(Terminal(abc)),<span class="std">Option</span>(Terminal(<span class="kw">def</span>))))))))
 
 scala&gt; <span class="kw">val</span> msg = grammar.fold(s <span class="kw">=&gt;</span> s, g <span class="kw">=&gt;</span> g.format)
-msg: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{abc}[<span class="kw">def</span>] ;</pre></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../index.html" class="extype" name="org.benknoble">benknoble</a></dd></dl></div>
+msg: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{<span class="lit">'abc'</span>}[<span class="lit">'def'</span>] ;</pre></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../index.html" class="extype" name="org.benknoble">benknoble</a></dd></dl></div>
     </li><li class="current-entities indented3">
                         <span class="separator"></span>
                         <a class="class" href="Alternation.html" title="A choice of expressions in the tree"></a>
@@ -227,7 +227,8 @@ encoding grammars intended for human consumption.</p><p>Many programming languag
 their specification.</p><p>Every rule in Backus-Naur form has the following structure:</p><pre>name ::= expansion</pre><p>The symbol <code>::=</code> means &quot;may expand into&quot; and &quot;may be replaced with.&quot;</p><p>In some texts, a name is also called a non-terminal symbol.</p><p>Every name in Backus-Naur form is surrounded by angle brackets, <code>&lt;</code> <code>&gt;</code>,
 whether it appears on the left- or right-hand side of the rule.</p><p>An expansion is an expression containing terminal symbols and non-terminal
 symbols, joined together by sequencing and choice.</p><p>A terminal symbol is a literal like (&quot;+&quot; or &quot;function&quot;) or a class of
-literals (like integer).</p><p>Simply juxtaposing expressions indicates sequencing.</p><p>A vertical bar <code>|</code> indicates choice.</p><p>For example, in BNF, the classic expression grammar is:</p><pre>&lt;expr&gt; ::= &lt;term&gt; <span class="lit">"+"</span> &lt;expr&gt; |  &lt;term&gt;
+literals (like integer). It must be quoted using single quotes. Any
+metacharacters may appear within the quotes.</p><p>Simply juxtaposing expressions indicates sequencing.</p><p>A vertical bar <code>|</code> indicates choice.</p><p>For example, in BNF, the classic expression grammar is:</p><pre>&lt;expr&gt; ::= &lt;term&gt; <span class="lit">"+"</span> &lt;expr&gt; |  &lt;term&gt;
 &lt;term&gt; ::= &lt;factor&gt; <span class="lit">"*"</span> &lt;term&gt; |  &lt;factor&gt;
 &lt;factor&gt; ::= <span class="lit">"("</span> &lt;expr&gt; <span class="lit">")"</span> |  &lt;const&gt;
 &lt;const&gt; ::= integer</pre><h3>EBNF</h3><p>Extended Backus-Naur form (EBNF) is a collection of extensions to
@@ -240,9 +241,9 @@ the rest of the line, such that it is not parsed at all. Indeed, it is not
 kept in the grammar object at all, so the result of formatting loses the
 comments (considered a feature: it cleans the output for consumption by
 another tool).</p><p>The following grammar from the tests is thus valid:</p><pre># <span class="kw">this</span> is a comment
-&lt;A&gt; ::= a     # a values
-        | b   # b values
-        | c   # c values
+&lt;A&gt; ::= <span class="lit">'a'</span>     # a values
+        | <span class="lit">'b'</span>   # b values
+        | <span class="lit">'c'</span>   # c values
         ;</pre></div><dl class="attributes block"> <dt>Annotations</dt><dd>
                 <span class="name">@JSExportTopLevel</span><span class="args">(<span>
       

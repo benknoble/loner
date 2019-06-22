@@ -126,16 +126,16 @@ DSL for creating complex grammars in code, and an
 grammar: org.benknoble.ebnf.Grammar = Grammar(<span class="std">List</span>(Production(Nonterminal('A), Alternation(Nonterminal('A),Sequence(Repetition(Terminal(abc)),<span class="std">Option</span>(Terminal(<span class="kw">def</span>)))))))
 
 scala&gt; <span class="kw">val</span> s = grammar.format
-s: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{abc}[<span class="kw">def</span>] ;</pre><p>If you include <a href="ExprImplicits$.html" class="extype" name="org.benknoble.ebnf.ExprImplicits">org.benknoble.ebnf.ExprImplicits</a> and take advantage
+s: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{<span class="lit">'abc'</span>}[<span class="lit">'def'</span>] ;</pre><p>If you include <a href="ExprImplicits$.html" class="extype" name="org.benknoble.ebnf.ExprImplicits">org.benknoble.ebnf.ExprImplicits</a> and take advantage
 of <a href="Expr.html" class="extype" name="org.benknoble.ebnf.Expr">org.benknoble.ebnf.Expr</a> syntax, it looks a lot cleaner:</p><pre>scala&gt; <span class="kw">val</span> grammar = Grammar(<span class="lit">'A ::= '</span>A || Terminal(<span class="lit">"abc"</span>).* ~ <span class="lit">"def"</span>.?)
 grammar: org.benknoble.ebnf.Grammar = Grammar(<span class="std">List</span>(Production(Nonterminal('A), Alternation(Nonterminal('A),Sequence(Repetition(Terminal(abc)),<span class="std">Option</span>(Terminal(<span class="kw">def</span>)))))))
 
 scala&gt; <span class="kw">val</span> s = grammar.format
-s: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{abc}[<span class="kw">def</span>] ;</pre><p>Finally, you can take advantage of <a href="EbnfParser$.html" class="extype" name="org.benknoble.ebnf.EbnfParser">org.benknoble.ebnf.EbnfParser</a>:</p><pre>scala&gt; <span class="kw">val</span> grammar = EbnfParser(<span class="lit">"&lt;A&gt; ::= &lt;A&gt;|{abc}[def] ;"</span>)
+s: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{<span class="lit">'abc'</span>}[<span class="lit">'def'</span>] ;</pre><p>Finally, you can take advantage of <a href="EbnfParser$.html" class="extype" name="org.benknoble.ebnf.EbnfParser">org.benknoble.ebnf.EbnfParser</a>:</p><pre>scala&gt; <span class="kw">val</span> grammar = EbnfParser(<span class="lit">"&lt;A&gt; ::= &lt;A&gt;|{'abc'}['def'] ;"</span>)
 grammar: Either[<span class="std">String</span>,org.benknoble.ebnf.Grammar] = Right(Grammar(<span class="std">List</span>(Production(Nonterminal('A), Alternation(Nonterminal('A),Sequence(Repetition(Terminal(abc)),<span class="std">Option</span>(Terminal(<span class="kw">def</span>))))))))
 
 scala&gt; <span class="kw">val</span> msg = grammar.fold(s <span class="kw">=&gt;</span> s, g <span class="kw">=&gt;</span> g.format)
-msg: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{abc}[<span class="kw">def</span>] ;</pre></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../index.html" class="extype" name="org.benknoble">benknoble</a></dd></dl></div>
+msg: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{<span class="lit">'abc'</span>}[<span class="lit">'def'</span>] ;</pre></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../index.html" class="extype" name="org.benknoble">benknoble</a></dd></dl></div>
     </li><li class="current-entities indented3">
                         <span class="separator"></span>
                         <a class="class" href="Alternation.html" title="A choice of expressions in the tree"></a>
@@ -224,7 +224,7 @@ msg: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{abc}[<span class
       
           <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>A (context-free) grammar of productions</p><p>The preferred construction method is via the companion object's apply
 method, which is variadic.</p><p>A Grammar is represented by ;-delimited, newline-separated Productions:</p><pre>scala&gt; <span class="kw">val</span> g = <span class="kw">new</span> Grammar(<span class="std">Seq</span>(<span class="kw">new</span> Production(Nonterminal('A), Alternation(Terminal(<span class="lit">"abc"</span>), <span class="std">Option</span>(Nonterminal('B)))))).format
-g: <span class="std">String</span> = &lt;A&gt; ::= abc|[&lt;B&gt;] ;</pre></div><dl class="attributes block"> <dt>See also</dt><dd><span class="cmt"><p><a href="Production.html" class="extype" name="org.benknoble.ebnf.Production">org.benknoble.ebnf.Production</a></p></span></dd></dl><div class="toggleContainer block">
+g: <span class="std">String</span> = &lt;A&gt; ::= <span class="lit">'abc'</span>|[&lt;B&gt;] ;</pre></div><dl class="attributes block"> <dt>See also</dt><dd><span class="cmt"><p><a href="Production.html" class="extype" name="org.benknoble.ebnf.Production">org.benknoble.ebnf.Production</a></p></span></dd></dl><div class="toggleContainer block">
           <span class="toggle">
             Linear Supertypes
           </span>
@@ -617,7 +617,7 @@ the left side of a production
       
       <p class="shortcomment cmt">The rules of the Grammar</p><div class="fullcomment"><div class="comment cmt"><p>The rules of the Grammar</p><p>Any original rules with the same Nonterminal left-hand side are collapsed
 into alternations:</p><pre>scala&gt; <span class="kw">val</span> g = Grammar('A ::= <span class="lit">"abc"</span>, 'A ::= <span class="lit">"def"</span>).format
-g: <span class="std">String</span> = &lt;A&gt; ::= abc|<span class="kw">def</span> ;</pre><p>Rather than expose the original constructor parameter, we apply a grouping
+g: <span class="std">String</span> = &lt;A&gt; ::= <span class="lit">'abc'</span>|<span class="lit">'def'</span> ;</pre><p>Rather than expose the original constructor parameter, we apply a grouping
 and then branchify the groups in order to create a &quot;simplified&quot; (but more
 manageable) grammar.
 </p></div></div>

@@ -126,16 +126,16 @@ DSL for creating complex grammars in code, and an
 grammar: org.benknoble.ebnf.Grammar = Grammar(<span class="std">List</span>(Production(Nonterminal('A), Alternation(Nonterminal('A),Sequence(Repetition(Terminal(abc)),<span class="std">Option</span>(Terminal(<span class="kw">def</span>)))))))
 
 scala&gt; <span class="kw">val</span> s = grammar.format
-s: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{abc}[<span class="kw">def</span>] ;</pre><p>If you include <a href="ExprImplicits$.html" class="extype" name="org.benknoble.ebnf.ExprImplicits">org.benknoble.ebnf.ExprImplicits</a> and take advantage
+s: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{<span class="lit">'abc'</span>}[<span class="lit">'def'</span>] ;</pre><p>If you include <a href="ExprImplicits$.html" class="extype" name="org.benknoble.ebnf.ExprImplicits">org.benknoble.ebnf.ExprImplicits</a> and take advantage
 of <a href="Expr.html" class="extype" name="org.benknoble.ebnf.Expr">org.benknoble.ebnf.Expr</a> syntax, it looks a lot cleaner:</p><pre>scala&gt; <span class="kw">val</span> grammar = Grammar(<span class="lit">'A ::= '</span>A || Terminal(<span class="lit">"abc"</span>).* ~ <span class="lit">"def"</span>.?)
 grammar: org.benknoble.ebnf.Grammar = Grammar(<span class="std">List</span>(Production(Nonterminal('A), Alternation(Nonterminal('A),Sequence(Repetition(Terminal(abc)),<span class="std">Option</span>(Terminal(<span class="kw">def</span>)))))))
 
 scala&gt; <span class="kw">val</span> s = grammar.format
-s: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{abc}[<span class="kw">def</span>] ;</pre><p>Finally, you can take advantage of <a href="EbnfParser$.html" class="extype" name="org.benknoble.ebnf.EbnfParser">org.benknoble.ebnf.EbnfParser</a>:</p><pre>scala&gt; <span class="kw">val</span> grammar = EbnfParser(<span class="lit">"&lt;A&gt; ::= &lt;A&gt;|{abc}[def] ;"</span>)
+s: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{<span class="lit">'abc'</span>}[<span class="lit">'def'</span>] ;</pre><p>Finally, you can take advantage of <a href="EbnfParser$.html" class="extype" name="org.benknoble.ebnf.EbnfParser">org.benknoble.ebnf.EbnfParser</a>:</p><pre>scala&gt; <span class="kw">val</span> grammar = EbnfParser(<span class="lit">"&lt;A&gt; ::= &lt;A&gt;|{'abc'}['def'] ;"</span>)
 grammar: Either[<span class="std">String</span>,org.benknoble.ebnf.Grammar] = Right(Grammar(<span class="std">List</span>(Production(Nonterminal('A), Alternation(Nonterminal('A),Sequence(Repetition(Terminal(abc)),<span class="std">Option</span>(Terminal(<span class="kw">def</span>))))))))
 
 scala&gt; <span class="kw">val</span> msg = grammar.fold(s <span class="kw">=&gt;</span> s, g <span class="kw">=&gt;</span> g.format)
-msg: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{abc}[<span class="kw">def</span>] ;</pre></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../index.html" class="extype" name="org.benknoble">benknoble</a></dd></dl></div>
+msg: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{<span class="lit">'abc'</span>}[<span class="lit">'def'</span>] ;</pre></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../index.html" class="extype" name="org.benknoble">benknoble</a></dd></dl></div>
     </li><li class="current-entities indented3">
                         <span class="separator"></span>
                         <a class="class" href="Alternation.html" title="A choice of expressions in the tree"></a>
@@ -230,16 +230,16 @@ DSL for creating complex grammars in code, and an
 grammar: org.benknoble.ebnf.Grammar = Grammar(<span class="std">List</span>(Production(Nonterminal('A), Alternation(Nonterminal('A),Sequence(Repetition(Terminal(abc)),<span class="std">Option</span>(Terminal(<span class="kw">def</span>)))))))
 
 scala&gt; <span class="kw">val</span> s = grammar.format
-s: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{abc}[<span class="kw">def</span>] ;</pre><p>If you include <a href="ExprImplicits$.html" class="extype" name="org.benknoble.ebnf.ExprImplicits">org.benknoble.ebnf.ExprImplicits</a> and take advantage
+s: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{<span class="lit">'abc'</span>}[<span class="lit">'def'</span>] ;</pre><p>If you include <a href="ExprImplicits$.html" class="extype" name="org.benknoble.ebnf.ExprImplicits">org.benknoble.ebnf.ExprImplicits</a> and take advantage
 of <a href="Expr.html" class="extype" name="org.benknoble.ebnf.Expr">org.benknoble.ebnf.Expr</a> syntax, it looks a lot cleaner:</p><pre>scala&gt; <span class="kw">val</span> grammar = Grammar(<span class="lit">'A ::= '</span>A || Terminal(<span class="lit">"abc"</span>).* ~ <span class="lit">"def"</span>.?)
 grammar: org.benknoble.ebnf.Grammar = Grammar(<span class="std">List</span>(Production(Nonterminal('A), Alternation(Nonterminal('A),Sequence(Repetition(Terminal(abc)),<span class="std">Option</span>(Terminal(<span class="kw">def</span>)))))))
 
 scala&gt; <span class="kw">val</span> s = grammar.format
-s: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{abc}[<span class="kw">def</span>] ;</pre><p>Finally, you can take advantage of <a href="EbnfParser$.html" class="extype" name="org.benknoble.ebnf.EbnfParser">org.benknoble.ebnf.EbnfParser</a>:</p><pre>scala&gt; <span class="kw">val</span> grammar = EbnfParser(<span class="lit">"&lt;A&gt; ::= &lt;A&gt;|{abc}[def] ;"</span>)
+s: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{<span class="lit">'abc'</span>}[<span class="lit">'def'</span>] ;</pre><p>Finally, you can take advantage of <a href="EbnfParser$.html" class="extype" name="org.benknoble.ebnf.EbnfParser">org.benknoble.ebnf.EbnfParser</a>:</p><pre>scala&gt; <span class="kw">val</span> grammar = EbnfParser(<span class="lit">"&lt;A&gt; ::= &lt;A&gt;|{'abc'}['def'] ;"</span>)
 grammar: Either[<span class="std">String</span>,org.benknoble.ebnf.Grammar] = Right(Grammar(<span class="std">List</span>(Production(Nonterminal('A), Alternation(Nonterminal('A),Sequence(Repetition(Terminal(abc)),<span class="std">Option</span>(Terminal(<span class="kw">def</span>))))))))
 
 scala&gt; <span class="kw">val</span> msg = grammar.fold(s <span class="kw">=&gt;</span> s, g <span class="kw">=&gt;</span> g.format)
-msg: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{abc}[<span class="kw">def</span>] ;</pre></div><div class="toggleContainer block">
+msg: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{<span class="lit">'abc'</span>}[<span class="lit">'def'</span>] ;</pre></div><div class="toggleContainer block">
           <span class="toggle">
             Linear Supertypes
           </span>
@@ -310,7 +310,7 @@ msg: <span class="std">String</span> = &lt;A&gt; ::= &lt;A&gt;|{abc}[<span class
 <span class="kw">import</span> org.benknoble.ebnf._
 
 scala&gt; <span class="kw">val</span> a = Alternation(Nonterminal('A), Terminal(<span class="lit">"a"</span>)).format
-a: <span class="std">String</span> = &lt;A&gt;|a</pre></div><dl class="paramcmts block"><dt class="param">left</dt><dd class="cmt"><p>the left side of the Alternation</p></dd><dt class="param">right</dt><dd class="cmt"><p>the right side in the Alternation</p></dd></dl></div>
+a: <span class="std">String</span> = &lt;A&gt;|<span class="lit">'a'</span></pre></div><dl class="paramcmts block"><dt class="param">left</dt><dd class="cmt"><p>the left side of the Alternation</p></dd><dt class="param">right</dt><dd class="cmt"><p>the right side in the Alternation</p></dd></dl></div>
     </li><li name="org.benknoble.ebnf.Expr" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
       <a id="ExprextendsAnyRef"></a><a id="Expr:Expr"></a>
       <span class="permalink">
@@ -347,7 +347,7 @@ Each of these is represented by a concrete case class.</p><p>Provides methods co
       
       <p class="shortcomment cmt">A (context-free) grammar of productions</p><div class="fullcomment"><div class="comment cmt"><p>A (context-free) grammar of productions</p><p>The preferred construction method is via the companion object's apply
 method, which is variadic.</p><p>A Grammar is represented by ;-delimited, newline-separated Productions:</p><pre>scala&gt; <span class="kw">val</span> g = <span class="kw">new</span> Grammar(<span class="std">Seq</span>(<span class="kw">new</span> Production(Nonterminal('A), Alternation(Terminal(<span class="lit">"abc"</span>), <span class="std">Option</span>(Nonterminal('B)))))).format
-g: <span class="std">String</span> = &lt;A&gt; ::= abc|[&lt;B&gt;] ;</pre></div><dl class="attributes block"> <dt>See also</dt><dd><span class="cmt"><p><a href="Production.html" class="extype" name="org.benknoble.ebnf.Production">org.benknoble.ebnf.Production</a></p></span></dd></dl></div>
+g: <span class="std">String</span> = &lt;A&gt; ::= <span class="lit">'abc'</span>|[&lt;B&gt;] ;</pre></div><dl class="attributes block"> <dt>See also</dt><dd><span class="cmt"><p><a href="Production.html" class="extype" name="org.benknoble.ebnf.Production">org.benknoble.ebnf.Production</a></p></span></dd></dl></div>
     </li><li name="org.benknoble.ebnf.Nonterminal" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="NonterminalextendsWordwithProductwithSerializable"></a><a id="Nonterminal:Nonterminal"></a>
       <span class="permalink">
@@ -384,10 +384,10 @@ n: <span class="std">String</span> = &lt;A&gt;</pre></div><dl class="paramcmts b
       </span>
       
       <p class="shortcomment cmt">An optional expression.</p><div class="fullcomment"><div class="comment cmt"><p>An optional expression.</p><p>Equivalent to <code>Alternation(expr, ε)</code>. Surrounded by square brackets:</p><pre>scala&gt; <span class="kw">var</span> o = <span class="std">Option</span>(Sequence(Nonterminal('A), Terminal(<span class="lit">"abc"</span>))).format
-o: <span class="std">String</span> = [&lt;A&gt;abc]
+o: <span class="std">String</span> = [&lt;A&gt;<span class="lit">'abc'</span>]
 
 scala&gt; o = Sequence(Nonterminal('A), Terminal(<span class="lit">"abc"</span>)).?.format
-o: <span class="std">String</span> = [&lt;A&gt;abc]</pre></div><dl class="paramcmts block"><dt class="param">expr</dt><dd class="cmt"><p>the optional expression</p></dd></dl><dl class="attributes block"> <dt>See also</dt><dd><span class="cmt"><p><a href="Alternation.html" class="extype" name="org.benknoble.ebnf.Alternation">org.benknoble.ebnf.Alternation</a></p></span><span class="cmt"><p><a href="ε$.html" class="extype" name="org.benknoble.ebnf.ε">org.benknoble.ebnf.ε</a></p></span></dd></dl></div>
+o: <span class="std">String</span> = [&lt;A&gt;<span class="lit">'abc'</span>]</pre></div><dl class="paramcmts block"><dt class="param">expr</dt><dd class="cmt"><p>the optional expression</p></dd></dl><dl class="attributes block"> <dt>See also</dt><dd><span class="cmt"><p><a href="Alternation.html" class="extype" name="org.benknoble.ebnf.Alternation">org.benknoble.ebnf.Alternation</a></p></span><span class="cmt"><p><a href="ε$.html" class="extype" name="org.benknoble.ebnf.ε">org.benknoble.ebnf.ε</a></p></span></dd></dl></div>
     </li><li name="org.benknoble.ebnf.Production" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ProductionextendsAnyRef"></a><a id="Production:Production"></a>
       <span class="permalink">
@@ -404,7 +404,7 @@ o: <span class="std">String</span> = [&lt;A&gt;abc]</pre></div><dl class="paramc
       </span>
       
       <p class="shortcomment cmt">A production from a nonterminal to a rule</p><div class="fullcomment"><div class="comment cmt"><p>A production from a nonterminal to a rule</p><p>A production is represented as <code>&lt;Nonterminal&gt; ::= expr</code>:</p><pre>scala&gt; <span class="kw">val</span> e = <span class="kw">new</span> Production(Nonterminal('A),Terminal(<span class="lit">"abc"</span>)).format
-e: <span class="std">String</span> = &lt;A&gt; ::= abc</pre><p>Contains a naïve comparison for equality based on the nonterminal and
+e: <span class="std">String</span> = &lt;A&gt; ::= <span class="lit">'abc'</span></pre><p>Contains a naïve comparison for equality based on the nonterminal and
 expression (structural equality: <code>'A ::= &quot;a&quot;||&quot;b&quot;</code> does NOT equal
 <code>'A ::= &quot;b&quot;||&quot;a&quot;</code>)
 </p></div><dl class="attributes block"> <dt>See also</dt><dd><span class="cmt"><p><a href="Nonterminal.html" class="extype" name="org.benknoble.ebnf.Nonterminal">org.benknoble.ebnf.Nonterminal</a>'s ::= syntax</p></span><span class="cmt"><p><a href="Expr.html" class="extype" name="org.benknoble.ebnf.Expr">org.benknoble.ebnf.Expr</a></p></span></dd></dl></div>
@@ -424,10 +424,10 @@ expression (structural equality: <code>'A ::= &quot;a&quot;||&quot;b&quot;</code
       </span>
       
       <p class="shortcomment cmt">The Kleene-star closure of an expression</p><div class="fullcomment"><div class="comment cmt"><p>The Kleene-star closure of an expression</p><p>Repetitions are an expression surrounded by curly braces:</p><pre>scala&gt; <span class="kw">val</span> r = Repetition(Sequence(Nonterminal('A), Terminal(<span class="lit">"abc"</span>))).format
-r: <span class="std">String</span> = {&lt;A&gt;abc}
+r: <span class="std">String</span> = {&lt;A&gt;<span class="lit">'abc'</span>}
 
 scala&gt; <span class="kw">val</span> r2 = Sequence(Nonterminal('A), Terminal(<span class="lit">"abc"</span>)).*.format
-r2: <span class="std">String</span> = {&lt;A&gt;abc}</pre></div><dl class="paramcmts block"><dt class="param">expr</dt><dd class="cmt"><p>the expression to repeat</p></dd></dl></div>
+r2: <span class="std">String</span> = {&lt;A&gt;<span class="lit">'abc'</span>}</pre></div><dl class="paramcmts block"><dt class="param">expr</dt><dd class="cmt"><p>the expression to repeat</p></dd></dl></div>
     </li><li name="org.benknoble.ebnf.Sequence" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="SequenceextendsExprwithProductwithSerializable"></a><a id="Sequence:Sequence"></a>
       <span class="permalink">
@@ -448,10 +448,10 @@ group <a href="Alternation.html" class="extype" name="org.benknoble.ebnf.Alterna
 <span class="kw">import</span> org.benknoble.ebnf._
 
 scala&gt; <span class="kw">val</span> s = Sequence(Nonterminal('A), Terminal(<span class="lit">"a"</span>)).format
-s: <span class="std">String</span> = &lt;A&gt;a
+s: <span class="std">String</span> = &lt;A&gt;<span class="lit">'a'</span>
 
 scala&gt; <span class="kw">val</span> sa = Sequence(Nonterminal('A), Alternation(Terminal(<span class="lit">"a"</span>), Terminal(<span class="lit">"b"</span>))).format
-sa: <span class="std">String</span> = &lt;A&gt;(a|b)</pre></div><dl class="paramcmts block"><dt class="param">left</dt><dd class="cmt"><p>the left side of the sequence</p></dd><dt class="param">right</dt><dd class="cmt"><p>the right side in the sequence</p></dd></dl></div>
+sa: <span class="std">String</span> = &lt;A&gt;(<span class="lit">'a'</span>|<span class="lit">'b'</span>)</pre></div><dl class="paramcmts block"><dt class="param">left</dt><dd class="cmt"><p>the left side of the sequence</p></dd><dt class="param">right</dt><dd class="cmt"><p>the right side in the sequence</p></dd></dl></div>
     </li><li name="org.benknoble.ebnf.Terminal" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="TerminalextendsWordwithProductwithSerializable"></a><a id="Terminal:Terminal"></a>
       <span class="permalink">
@@ -467,11 +467,11 @@ sa: <span class="std">String</span> = &lt;A&gt;(a|b)</pre></div><dl class="param
         <a title="A terminal symbol of the grammar" href="Terminal.html"><span class="name">Terminal</span></a><span class="params">(<span name="s">s: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <a href="Word.html" class="extype" name="org.benknoble.ebnf.Word">Word</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       
-      <p class="shortcomment cmt">A terminal symbol of the grammar</p><div class="fullcomment"><div class="comment cmt"><p>A terminal symbol of the grammar</p><p>Terminals look like themselves:</p><pre>scala&gt; <span class="kw">import</span> org.benknoble.ebnf._
+      <p class="shortcomment cmt">A terminal symbol of the grammar</p><div class="fullcomment"><div class="comment cmt"><p>A terminal symbol of the grammar</p><p>Terminals look like single-quoted versions of themselves:</p><pre>scala&gt; <span class="kw">import</span> org.benknoble.ebnf._
 <span class="kw">import</span> org.benknoble.ebnf._
 
 scala&gt; <span class="kw">val</span> t = Terminal(<span class="lit">"abc"</span>).format
-t: <span class="std">String</span> = abc</pre></div><dl class="paramcmts block"><dt class="param">s</dt><dd class="cmt"><p>the String representing the terminal symbol</p></dd></dl></div>
+t: <span class="std">String</span> = <span class="lit">'abc'</span></pre></div><dl class="paramcmts block"><dt class="param">s</dt><dd class="cmt"><p>the String representing the terminal symbol</p></dd></dl></div>
     </li><li name="org.benknoble.ebnf.Word" visbl="pub" class="indented0 " data-isabs="true" fullComment="no" group="Ungrouped">
       <a id="WordextendsExpr"></a><a id="Word:Word"></a>
       <span class="permalink">
@@ -518,7 +518,8 @@ encoding grammars intended for human consumption.</p><p>Many programming languag
 their specification.</p><p>Every rule in Backus-Naur form has the following structure:</p><pre>name ::= expansion</pre><p>The symbol <code>::=</code> means &quot;may expand into&quot; and &quot;may be replaced with.&quot;</p><p>In some texts, a name is also called a non-terminal symbol.</p><p>Every name in Backus-Naur form is surrounded by angle brackets, <code>&lt;</code> <code>&gt;</code>,
 whether it appears on the left- or right-hand side of the rule.</p><p>An expansion is an expression containing terminal symbols and non-terminal
 symbols, joined together by sequencing and choice.</p><p>A terminal symbol is a literal like (&quot;+&quot; or &quot;function&quot;) or a class of
-literals (like integer).</p><p>Simply juxtaposing expressions indicates sequencing.</p><p>A vertical bar <code>|</code> indicates choice.</p><p>For example, in BNF, the classic expression grammar is:</p><pre>&lt;expr&gt; ::= &lt;term&gt; <span class="lit">"+"</span> &lt;expr&gt; |  &lt;term&gt;
+literals (like integer). It must be quoted using single quotes. Any
+metacharacters may appear within the quotes.</p><p>Simply juxtaposing expressions indicates sequencing.</p><p>A vertical bar <code>|</code> indicates choice.</p><p>For example, in BNF, the classic expression grammar is:</p><pre>&lt;expr&gt; ::= &lt;term&gt; <span class="lit">"+"</span> &lt;expr&gt; |  &lt;term&gt;
 &lt;term&gt; ::= &lt;factor&gt; <span class="lit">"*"</span> &lt;term&gt; |  &lt;factor&gt;
 &lt;factor&gt; ::= <span class="lit">"("</span> &lt;expr&gt; <span class="lit">")"</span> |  &lt;const&gt;
 &lt;const&gt; ::= integer</pre><h3>EBNF</h3><p>Extended Backus-Naur form (EBNF) is a collection of extensions to
@@ -531,9 +532,9 @@ the rest of the line, such that it is not parsed at all. Indeed, it is not
 kept in the grammar object at all, so the result of formatting loses the
 comments (considered a feature: it cleans the output for consumption by
 another tool).</p><p>The following grammar from the tests is thus valid:</p><pre># <span class="kw">this</span> is a comment
-&lt;A&gt; ::= a     # a values
-        | b   # b values
-        | c   # c values
+&lt;A&gt; ::= <span class="lit">'a'</span>     # a values
+        | <span class="lit">'b'</span>   # b values
+        | <span class="lit">'c'</span>   # c values
         ;</pre></div><dl class="attributes block"> <dt>Annotations</dt><dd>
                 <span class="name">@JSExportTopLevel</span><span class="args">(<span>
       
@@ -588,7 +589,7 @@ scala&gt; <span class="kw">val</span> p = 'A ::= (<span class="lit">"abc"</span>
 p: org.benknoble.ebnf.Production = Production(Nonterminal('A), Sequence(Alternation(Terminal(abc),<span class="std">Option</span>(Nonterminal('B))),Repetition(Nonterminal('C))))
 
 scala&gt; <span class="kw">val</span> f = p.format
-f: <span class="std">String</span> = &lt;A&gt; ::= (abc|[&lt;B&gt;]){&lt;C&gt;}</pre><p>Do note that <code>val r: Expr = &quot;abc&quot;.*</code> will not work, due to ambiguity:</p><pre>scala&gt; <span class="kw">val</span> r: Expr = <span class="lit">"abc"</span>.*
+f: <span class="std">String</span> = &lt;A&gt; ::= (<span class="lit">'abc'</span>|[&lt;B&gt;]){&lt;C&gt;}</pre><p>Do note that <code>val r: Expr = &quot;abc&quot;.*</code> will not work, due to ambiguity:</p><pre>scala&gt; <span class="kw">val</span> r: Expr = <span class="lit">"abc"</span>.*
 &lt;console<span class="kw">&gt;:</span><span class="num">17</span>: error: <span class="kw">type</span> mismatch;
  found   : <span class="std">String</span>(<span class="lit">"abc"</span>)
  required: ?{<span class="kw">def</span> *: ?}

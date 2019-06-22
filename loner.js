@@ -24653,21 +24653,23 @@ $c_Lorg_benknoble_ebnf_EbnfParser$.prototype.opt__s_util_parsing_combinator_Pars
       return new $c_s_util_parsing_combinator_RegexParsers$$anon$1().init___s_util_parsing_combinator_RegexParsers__T(this$1, "]")
     })
   })(this))).$$up$up__F1__s_util_parsing_combinator_Parsers$Parser(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function(this$3) {
-    return (function(x$3$2) {
-      var x$3 = $as_Lorg_benknoble_ebnf_Expr(x$3$2);
-      return new $c_Lorg_benknoble_ebnf_Option().init___Lorg_benknoble_ebnf_Expr(x$3)
+    return (function(x$2$2) {
+      var x$2 = $as_Lorg_benknoble_ebnf_Expr(x$2$2);
+      return new $c_Lorg_benknoble_ebnf_Option().init___Lorg_benknoble_ebnf_Expr(x$2)
     })
   })(this)))
 });
 $c_Lorg_benknoble_ebnf_EbnfParser$.prototype.terminal__s_util_parsing_combinator_Parsers$Parser = (function() {
-  var this$2 = new $c_sci_StringOps().init___T("[^<>\\[\\]{}()\u03b5|;\\s]+");
+  var this$2 = new $c_sci_StringOps().init___T("'[^']+'");
   var groupNames = $m_sci_Nil$();
   var $$this = this$2.repr$1;
   var r = new $c_s_util_matching_Regex().init___T__sc_Seq($$this, groupNames);
   return new $c_s_util_parsing_combinator_RegexParsers$$anon$2().init___s_util_parsing_combinator_RegexParsers__s_util_matching_Regex(this, r).$$up$up__F1__s_util_parsing_combinator_Parsers$Parser(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function($this) {
-    return (function(x$2$2) {
-      var x$2 = $as_T(x$2$2);
-      return new $c_Lorg_benknoble_ebnf_Terminal().init___T(x$2)
+    return (function(quoted$2) {
+      var quoted = $as_T(quoted$2);
+      var endIndex = (((-1) + $uI(quoted.length)) | 0);
+      var term = $as_T(quoted.substring(1, endIndex));
+      return new $c_Lorg_benknoble_ebnf_Terminal().init___T(term)
     })
   })(this)))
 });
@@ -24834,9 +24836,9 @@ $c_Lorg_benknoble_ebnf_EbnfParser$.prototype.repetition__s_util_parsing_combinat
       return new $c_s_util_parsing_combinator_RegexParsers$$anon$1().init___s_util_parsing_combinator_RegexParsers__T(this$1, "}")
     })
   })(this))).$$up$up__F1__s_util_parsing_combinator_Parsers$Parser(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function(this$3) {
-    return (function(x$4$2) {
-      var x$4 = $as_Lorg_benknoble_ebnf_Expr(x$4$2);
-      return new $c_Lorg_benknoble_ebnf_Repetition().init___Lorg_benknoble_ebnf_Expr(x$4)
+    return (function(x$3$2) {
+      var x$3 = $as_Lorg_benknoble_ebnf_Expr(x$3$2);
+      return new $c_Lorg_benknoble_ebnf_Repetition().init___Lorg_benknoble_ebnf_Expr(x$3)
     })
   })(this)))
 });
@@ -24866,9 +24868,9 @@ $c_Lorg_benknoble_ebnf_EbnfParser$.prototype.grammar__s_util_parsing_combinator_
     })
   })(this));
   return $f_s_util_parsing_combinator_Parsers__rep__F0__s_util_parsing_combinator_Parsers$Parser(this, p).$$up$up__F1__s_util_parsing_combinator_Parsers$Parser(new $c_sjsr_AnonFunction1().init___sjs_js_Function1((function(this$2) {
-    return (function(x$5$2) {
-      var x$5 = $as_sci_List(x$5$2);
-      return new $c_Lorg_benknoble_ebnf_Grammar().init___sc_Seq(x$5)
+    return (function(x$4$2) {
+      var x$4 = $as_sci_List(x$4$2);
+      return new $c_Lorg_benknoble_ebnf_Grammar().init___sc_Seq(x$4)
     })
   })(this)))
 });
@@ -45687,7 +45689,51 @@ $c_Lorg_benknoble_ebnf_Terminal.prototype.toString__T = (function() {
   return $m_sr_ScalaRunTime$().$$undtoString__s_Product__T(this)
 });
 $c_Lorg_benknoble_ebnf_Terminal.prototype.format__T = (function() {
-  return this.s$3
+  var x = this.s$3;
+  var this$2 = new $c_sci_StringOps().init___T(x);
+  var x$1 = $f_sci_StringLike__stripPrefix__T__T(this$2, "'");
+  var this$4 = new $c_sci_StringOps().init___T(x$1);
+  var arg$macro$1 = $f_sci_StringLike__stripSuffix__T__T(this$4, "'");
+  var this$7 = new $c_sci_StringOps().init___T("'%s'");
+  var array = [arg$macro$1];
+  var jsx$2 = $m_sjsr_RuntimeString$();
+  var $$this = this$7.repr$1;
+  $m_sc_Seq$();
+  $m_sjs_js_WrappedArray$();
+  var array$1 = [];
+  var x1 = $uI(array.length);
+  switch (x1) {
+    case (-1): {
+      break
+    }
+  };
+  var i = 0;
+  var len = $uI(array.length);
+  while ((i < len)) {
+    var index = i;
+    var arg1 = array[index];
+    var elem = $f_sci_StringLike__unwrapArg__psci_StringLike__O__O(this$7, arg1);
+    array$1.push(elem);
+    i = ((1 + i) | 0)
+  };
+  $m_s_reflect_ManifestFactory$ObjectManifest$();
+  var len$1 = $uI(array$1.length);
+  var result = $newArrayObject($d_O.getArrayOf(), [len$1]);
+  var len$2 = result.u.length;
+  var i$1 = 0;
+  var j = 0;
+  var x$2 = $uI(array$1.length);
+  var x$3 = ((x$2 < len$2) ? x$2 : len$2);
+  var that = result.u.length;
+  var end = ((x$3 < that) ? x$3 : that);
+  while ((i$1 < end)) {
+    var jsx$1 = j;
+    var index$1 = i$1;
+    result.set(jsx$1, array$1[index$1]);
+    i$1 = ((1 + i$1) | 0);
+    j = ((1 + j) | 0)
+  };
+  return jsx$2.format__T__AO__T($$this, result)
 });
 $c_Lorg_benknoble_ebnf_Terminal.prototype.init___T = (function(s) {
   this.s$3 = s;
