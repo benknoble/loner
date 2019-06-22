@@ -56,7 +56,7 @@
       </li>
       <li>
         <p>A terminal symbol is a literal like ("+" or "function") or a class of
-        literals (like integer).</p>
+        literals (like integer). It must be surrounded by single quotes.</p>
       </li>
       <li>
         <p>Simply juxtaposing expressions indicates sequencing.</p>
@@ -66,29 +66,29 @@
       </li>
     </ul>
     <p>Example:</p>
-    <pre><code>&lt;expr&gt; ::= &lt;term&gt; "+" &lt;expr&gt; |  &lt;term&gt;
-&lt;term&gt; ::= &lt;factor&gt; "*" &lt;term&gt; |  &lt;factor&gt;
-&lt;factor&gt; ::= "(" &lt;expr&gt; ")" |  &lt;const&gt;
-&lt;const&gt; ::= integer</code></pre>
+    <pre><code>&lt;expr&gt; ::= &lt;term&gt; '+' &lt;expr&gt; |  &lt;term&gt;
+&lt;term&gt; ::= &lt;factor&gt; '*' &lt;term&gt; |  &lt;factor&gt;
+&lt;factor&gt; ::= '(' &lt;expr&gt; ')' |  &lt;const&gt;
+&lt;const&gt; ::= 'integer'</code></pre>
     <ul>
       <li>Square brackets around an expansion, <code>[ expansion ]</code>, indicates that this
         expansion is optional.</li>
     </ul>
     <p>For example, the rule:</p>
-    <pre><code>&lt;term&gt; ::= [ "-" ] &lt;factor&gt; </code></pre>
+    <pre><code>&lt;term&gt; ::= [ '-' ] &lt;factor&gt; </code></pre>
     <p>allows factors to be negated.</p>
     <ul>
       <li>Curly braces indicate that the expression may be repeated zero or more times.</li>
     </ul>
     <p>For example, the rule:</p>
-    <pre><code>&lt;args&gt; ::= &lt;arg&gt; { "," &lt;arg&gt; } </code></pre>
+    <pre><code>&lt;args&gt; ::= &lt;arg&gt; { ',' &lt;arg&gt; } </code></pre>
     <p>defines a conventional comma-separated argument list.</p>
     <ul>
       <li>To indicate precedence, use parentheses, <code>()</code>, to explictly define the order
         of expansion.</li>
     </ul>
     <p>For example, the rule:</p>
-    <pre><code>&lt;expr&gt; ::= &lt;term&gt; ("+" | "-") &lt;expr&gt; </code></pre>
+    <pre><code>&lt;expr&gt; ::= &lt;term&gt; ('+' | '-') &lt;expr&gt; </code></pre>
     <p>defines an expression form that allows both addition and subtraction.</p>
     <p>This version of EBNF admits a "comment-like" extension syntax: a <code>#</code> escapes
     the rest of the line, such that it is not parsed at all. Indeed, it is not
@@ -97,9 +97,9 @@
     another tool).</p>
     <p>The following grammar from the tests is thus valid:</p>
     <pre><code># this is a comment
-&lt;A&gt; ::= a     # a values
-        | b   # b values
-        | c   # c values
+&lt;A&gt; ::= 'a'     # a values
+        | 'b'   # b values
+        | 'c'   # c values
         ; </code></pre>
     <p>All whitespace is ignored.</p>
 
@@ -110,8 +110,9 @@
     <p>The two primary projects are <code>loner</code> and
     <code>ebnf</code>. Switch between them with <code>project</code>; loner
     depends on ebnf, for ease of development.</p>
-    <p>Documentation is generated via <code>doc</code>. <code>sbt-site</code>
-    and <code>sbt-ghpages</code> provide site-generation tools for the <a href="https://benknoble.github.io/loner/">website</a>.</p>
+    <p>Documentation is generated via <code>scaladocSite</code>.
+    <code>sbt-site</code> and <code>sbt-ghpages</code> provide site-generation
+    tools for the <a href="https://benknoble.github.io/loner/">website</a>.</p>
     <p>Tests are written using <code>scalatest</code> and are accessible via the
     standard <code>test</code> commands. All API features require tests&mdash;new
     features or bug-fixes should ensure test coverage, in the style of the

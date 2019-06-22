@@ -17,7 +17,7 @@ package org.benknoble
   * grammar: org.benknoble.ebnf.Grammar = Grammar(List(Production(Nonterminal('A), Alternation(Nonterminal('A),Sequence(Repetition(Terminal(abc)),Option(Terminal(def)))))))
   *
   * scala> val s = grammar.format
-  * s: String = <A> ::= <A>|{abc}[def] ;
+  * s: String = <A> ::= <A>|{'abc'}['def'] ;
   * }}}
   *
   * If you include [[org.benknoble.ebnf.ExprImplicits]] and take advantage
@@ -27,16 +27,16 @@ package org.benknoble
   * grammar: org.benknoble.ebnf.Grammar = Grammar(List(Production(Nonterminal('A), Alternation(Nonterminal('A),Sequence(Repetition(Terminal(abc)),Option(Terminal(def)))))))
   *
   * scala> val s = grammar.format
-  * s: String = <A> ::= <A>|{abc}[def] ;
+  * s: String = <A> ::= <A>|{'abc'}['def'] ;
   * }}}
   *
   * Finally, you can take advantage of [[org.benknoble.ebnf.EbnfParser]]:
   * {{{
-  * scala> val grammar = EbnfParser("&lt;A&gt; ::= &lt;A&gt;|{abc}[def] ;")
+  * scala> val grammar = EbnfParser("&lt;A&gt; ::= &lt;A&gt;|{'abc'}['def'] ;")
   * grammar: Either[String,org.benknoble.ebnf.Grammar] = Right(Grammar(List(Production(Nonterminal('A), Alternation(Nonterminal('A),Sequence(Repetition(Terminal(abc)),Option(Terminal(def))))))))
   *
   * scala> val msg = grammar.fold(s => s, g => g.format)
-  * msg: String = <A> ::= <A>|{abc}[def] ;
+  * msg: String = <A> ::= <A>|{'abc'}['def'] ;
   * }}}
   *
   */

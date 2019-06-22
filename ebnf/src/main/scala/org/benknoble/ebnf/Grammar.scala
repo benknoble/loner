@@ -81,20 +81,20 @@ abstract class Word extends Expr
 
 /** A terminal symbol of the grammar
   *
-  * Terminals look like themselves:
+  * Terminals look like single-quoted versions of themselves:
   * {{{
   * scala> import org.benknoble.ebnf._
   * import org.benknoble.ebnf._
   *
   * scala> val t = Terminal("abc").format
-  * t: String = abc
+  * t: String = 'abc'
   * }}}
   *
   * @constructor create a new Terminal
   * @param s the String representing the terminal symbol
   */
 case class Terminal(val s: String) extends Word {
-  def format = s
+  def format = f"'${s.stripPrefix("'").stripSuffix("'")}'"
 }
 
 /** A nonterminal symbol of the grammar
@@ -138,10 +138,10 @@ case class Nonterminal(val name: Symbol) extends Word {
   * import org.benknoble.ebnf._
   *
   * scala> val s = Sequence(Nonterminal('A), Terminal("a")).format
-  * s: String = <A>a
+  * s: String = <A>'a'
   *
   * scala> val sa = Sequence(Nonterminal('A), Alternation(Terminal("a"), Terminal("b"))).format
-  * sa: String = <A>(a|b)
+  * sa: String = <A>('a'|'b')
   * }}}
   *
   * @constructor create a new Sequence from left to right
@@ -164,7 +164,7 @@ case class Sequence(val left: Expr, val right: Expr) extends Expr {
   * import org.benknoble.ebnf._
   *
   * scala> val a = Alternation(Nonterminal('A), Terminal("a")).format
-  * a: String = <A>|a
+  * a: String = <A>|'a'
   * }}}
   *
   * @constructor create a new Alternation from left to right
@@ -180,10 +180,10 @@ case class Alternation(val left: Expr, val right: Expr) extends Expr {
   * Repetitions are an expression surrounded by curly braces:
   * {{{
   * scala> val r = Repetition(Sequence(Nonterminal('A), Terminal("abc"))).format
-  * r: String = {<A>abc}
+  * r: String = {<A>'abc'}
   *
   * scala> val r2 = Sequence(Nonterminal('A), Terminal("abc")).*.format
-  * r2: String = {<A>abc}
+  * r2: String = {<A>'abc'}
   * }}}
   *
   * @constructor create a new Repetition of expr
@@ -198,10 +198,10 @@ case class Repetition(val expr: Expr) extends Expr {
   * Equivalent to `Alternation(expr, ε)`. Surrounded by square brackets:
   * {{{
   * scala> var o = Option(Sequence(Nonterminal('A), Terminal("abc"))).format
-  * o: String = [<A>abc]
+  * o: String = [<A>'abc']
   *
   * scala> o = Sequence(Nonterminal('A), Terminal("abc")).?.format
-  * o: String = [<A>abc]
+  * o: String = [<A>'abc']
   * }}}
   *
   * @see [[org.benknoble.ebnf.Alternation]]
@@ -235,7 +235,7 @@ case object ε extends Word {
   * p: org.benknoble.ebnf.Production = Production(Nonterminal('A), Sequence(Alternation(Terminal(abc),Option(Nonterminal('B))),Repetition(Nonterminal('C))))
 
   * scala> val f = p.format
-  * f: String = <A> ::= (abc|[<B>]){<C>}
+  * f: String = <A> ::= ('abc'|[<B>]){<C>}
   * }}}
   *
   * Do note that `val r: Expr = "abc".*` will not work, due to ambiguity:
@@ -265,7 +265,7 @@ object ExprImplicits {
   * A production is represented as `<Nonterminal> ::= expr`:
   * {{{
   * scala> val e = new Production(Nonterminal('A),Terminal("abc")).format
-  * e: String = <A> ::= abc
+  * e: String = <A> ::= 'abc'
   * }}}
   *
   * Contains a naïve comparison for equality based on the nonterminal and
@@ -298,7 +298,7 @@ class Production(val nt: Nonterminal, val rule: Expr) {
   * A Grammar is represented by ;-delimited, newline-separated Productions:
   * {{{
   * scala> val g = new Grammar(Seq(new Production(Nonterminal('A), Alternation(Terminal("abc"), Option(Nonterminal('B)))))).format
-  * g: String = <A> ::= abc|[<B>] ;
+  * g: String = <A> ::= 'abc'|[<B>] ;
   * }}}
   *
   * @see [[org.benknoble.ebnf.Production]]
@@ -326,7 +326,7 @@ class Grammar(_rules: Seq[Production]) {
     * into alternations:
     * {{{
     * scala> val g = Grammar('A ::= "abc", 'A ::= "def").format
-    * g: String = <A> ::= abc|def ;
+    * g: String = <A> ::= 'abc'|'def' ;
     * }}}
     *
     * Rather than expose the original constructor parameter, we apply a grouping
