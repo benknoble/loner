@@ -36,8 +36,8 @@ class GrammarSpec extends FlatSpec with Matchers {
   }
 
   "A Terminal of a string" should "be represented by that string" in {
-    Terminal("a").format shouldEqual "a"
-    Terminal("ab").format shouldEqual "ab"
+    Terminal("a").format shouldEqual "'a'"
+    Terminal("ab").format shouldEqual "'ab'"
   }
 
   "A Nonterminal of a string" should "be represented by the string" in {
@@ -45,25 +45,25 @@ class GrammarSpec extends FlatSpec with Matchers {
   }
 
   "A Sequence" should "be the concatentation of its elements" in {
-    (`a*` ~ ε).format shouldEqual "{a}ε"
-    `1(a)*b`.format shouldEqual "1{a}b"
-    `1(a)?b`.format shouldEqual "1[a]b"
-    `1(a|c)b`.format shouldEqual "1(a|c)b"
+    (`a*` ~ ε).format shouldEqual "{'a'}ε"
+    `1(a)*b`.format shouldEqual "'1'{'a'}'b'"
+    `1(a)?b`.format shouldEqual "'1'['a']'b'"
+    `1(a|c)b`.format shouldEqual "'1'('a'|'c')'b'"
   }
 
   "An Alternation" should "consist of |-separated elements" in {
-    (`a*` || ε).format shouldEqual "{a}|ε"
-    `(1|(a)*|b)`.format shouldEqual "1|{a}|b"
-    `(1|(a)?|b)`.format shouldEqual "1|[a]|b"
-    `(1|(a|c)|b)`.format shouldEqual "1|a|c|b"
+    (`a*` || ε).format shouldEqual "{'a'}|ε"
+    `(1|(a)*|b)`.format shouldEqual "'1'|{'a'}|'b'"
+    `(1|(a)?|b)`.format shouldEqual "'1'|['a']|'b'"
+    `(1|(a|c)|b)`.format shouldEqual "'1'|'a'|'c'|'b'"
   }
 
   "A Repetition" should "be surrounded by {}" in {
-    `a*`.format shouldEqual "{a}"
+    `a*`.format shouldEqual "{'a'}"
   }
 
   "An Option" should "be surrounded by []" in {
-    `a?`.format shouldEqual "[a]"
+    `a?`.format shouldEqual "['a']"
   }
 
   "Epsilon" should "be ε" in {
@@ -71,17 +71,17 @@ class GrammarSpec extends FlatSpec with Matchers {
   }
 
   "A Production" should "be <Nonterminal> ::= rule(s)" in {
-    Pa.format shouldEqual "<A> ::= a"
+    Pa.format shouldEqual "<A> ::= 'a'"
     Pempty.format shouldEqual "<A> ::= ε"
-    `Pa*`.format shouldEqual "<A> ::= {a}"
-    `P1(a)*b`.format shouldEqual "<A> ::= 1{a}b"
-    `P1(a)?b`.format shouldEqual "<A> ::= 1[a]b"
-    `P1(a|c)b`.format shouldEqual "<A> ::= 1(a|c)b"
+    `Pa*`.format shouldEqual "<A> ::= {'a'}"
+    `P1(a)*b`.format shouldEqual "<A> ::= '1'{'a'}'b'"
+    `P1(a)?b`.format shouldEqual "<A> ::= '1'['a']'b'"
+    `P1(a|c)b`.format shouldEqual "<A> ::= '1'('a'|'c')'b'"
   }
 
   "A Grammar" should "be ;-delimited, newline-separated Productions" in {
-    G.format shouldEqual """<A> ::= a|ε|{a}|1{a}b|1[a]b|1(a|c)b ;
-<C> ::= c ;"""
+    G.format shouldEqual """<A> ::= 'a'|ε|{'a'}|'1'{'a'}'b'|'1'['a']'b'|'1'('a'|'c')'b' ;
+<C> ::= 'c' ;"""
   }
 
   "A Grammar's nonterminals" should "be the set of nonterminals" in {
