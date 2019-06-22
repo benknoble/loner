@@ -37,7 +37,8 @@ import scala.util.parsing.combinator._
   * symbols, joined together by sequencing and choice.
   *
   * A terminal symbol is a literal like ("+" or "function") or a class of
-  * literals (like integer).
+  * literals (like integer). It must be quoted using single quotes. Any
+  * metacharacters may appear within the quotes.
   *
   * Simply juxtaposing expressions indicates sequencing.
   *
@@ -103,9 +104,9 @@ import scala.util.parsing.combinator._
   * The following grammar from the tests is thus valid:
   * {{{
   * # this is a comment
-  * <A> ::= a     # a values
-  *         | b   # b values
-  *         | c   # c values
+  * <A> ::= 'a'     # a values
+  *         | 'b'   # b values
+  *         | 'c'   # c values
   *         ;
   * }}}
   */
@@ -120,7 +121,10 @@ object EbnfParser extends RegexParsers {
   def epsilon: Parser[Expr] = "ε" ^^ { _ => ε }
 
   /** Parser for terminals */
-  def terminal: Parser[Expr] = """[^<>\[\]{}()ε|;\s]+""".r ^^ { Terminal(_) }
+  def terminal: Parser[Expr] = """'[^']+'""".r ^^ { quoted =>
+    val term = quoted.substring(1,quoted.length-1)
+    Terminal(term)
+  }
 
   /** Parser for nonterminals */
   def nonterminal: Parser[Nonterminal] = """<[^>]+>""".r ^^ { bracketed =>
@@ -217,14 +221,14 @@ object EbnfParser extends RegexParsers {
 }
 
 // object Main extends App {
-//   val grammar = """<A> ::= [a|ε]c ;
-// <B> ::= <A>b ;
-// <C> ::= {<B>}$ ;
-// <D> ::= abd ;
-// <E> ::= (a|b)c ;
-// <F> ::= a
-// | b | c
-// | d ;
+//   val grammar = """<A> ::= ['a'|ε]'c' ;
+// <B> ::= <A>'b' ;
+// <C> ::= {<B>}'$' ;
+// <D> ::= 'abd' ;
+// <E> ::= ('a'|'b')'c' ;
+// <F> ::= 'a'
+// | 'b' | 'c'
+// | 'd' ;
 // """
 //   println(EbnfParser(grammar).map(_.format))
 // }

@@ -10,38 +10,38 @@ class EbnfParserSpec extends FlatSpec with Matchers with EitherValues {
   }
 
   it should "parse a simple single-rule grammar" in {
-    EbnfParser("<A> ::= a ;").right.value shouldEqual
+    EbnfParser("<A> ::= 'a' ;").right.value shouldEqual
       Grammar('A ::= "a")
     EbnfParser("<A> ::= ε ;").right.value shouldEqual
       Grammar('A ::= ε)
   }
 
   it should "parse a multi-rule grammar with the same non-terminals" in {
-    EbnfParser("<A> ::= a; <A> ::= b; ").right.value shouldEqual
+    EbnfParser("<A> ::= 'a'; <A> ::= 'b'; ").right.value shouldEqual
       Grammar('A ::= "a" || "b")
   }
 
   it should "parse a single-rule grammar with sequences" in {
-    EbnfParser("<A> ::= abc;").right.value shouldEqual
+    EbnfParser("<A> ::= 'abc';").right.value shouldEqual
       Grammar('A ::= "abc")
-    EbnfParser("<A> ::= a(bc);").right.value shouldEqual
+    EbnfParser("<A> ::= 'a'('bc');").right.value shouldEqual
       Grammar('A ::= "a" ~ "bc")
   }
 
   it should "parse a single-rule grammar with alternations" in {
-    EbnfParser("<A> ::= a|b|c;").right.value shouldEqual
+    EbnfParser("<A> ::= 'a'|'b'|'c';").right.value shouldEqual
       Grammar('A ::= "a" || "b" || "c")
-    EbnfParser("<A> ::= a|b[d]|c;").right.value shouldEqual
+    EbnfParser("<A> ::= 'a'|'b'['d']|'c';").right.value shouldEqual
       Grammar('A ::= "a" || ("b" ~ "d".?) || "c")
   }
 
   it should "parse a single-rule grammar with repetitions" in {
-    EbnfParser("<A> ::= {a};").right.value shouldEqual
+    EbnfParser("<A> ::= {'a'};").right.value shouldEqual
       Grammar('A ::= Terminal("a").*)
   }
 
   it should "parse a single-rule grammar with options" in {
-    EbnfParser("<A> ::= [a];").right.value shouldEqual
+    EbnfParser("<A> ::= ['a'];").right.value shouldEqual
       Grammar('A ::= "a".?)
   }
 
@@ -51,13 +51,13 @@ class EbnfParserSpec extends FlatSpec with Matchers with EitherValues {
   }
 
   it should "parse a single-rule grammar with all constructs" in {
-    EbnfParser("<A> ::= a<A>([b]|c){d};").right.value shouldEqual
+    EbnfParser("<A> ::= 'a'<A>(['b']|'c'){'d'};").right.value shouldEqual
       Grammar('A ::= "a" ~ 'A ~ ("b".? || "c") ~ Terminal("d").*)
   }
 
   it should "parse a multi-rule grammar with all constructs" in {
     EbnfParser(
-      "<A> ::= a<A>([b]|c){d};<B> ::= a<B>([b]|c){d};"
+      "<A> ::= 'a'<A>(['b']|'c'){'d'};<B> ::= 'a'<B>(['b']|'c'){'d'};"
     ).right.value shouldEqual Grammar(
       'A ::= "a" ~ 'A ~ ("b".? || "c") ~ Terminal("d").*,
       'B ::= "a" ~ 'B ~ ("b".? || "c") ~ Terminal("d").*
@@ -65,18 +65,18 @@ class EbnfParserSpec extends FlatSpec with Matchers with EitherValues {
   }
 
   it should "fail on grammars missing semi-colons" in {
-    EbnfParser("<A> ::= a") shouldBe a [Left[_,_]]
+    EbnfParser("<A> ::= 'a'") shouldBe a [Left[_,_]]
   }
 
   it should "fail on grammars not starting with non-terminals" in {
-    EbnfParser("A ::= a;") shouldBe a [Left[_,_]]
-    EbnfParser("A> ::= a;") shouldBe a [Left[_,_]]
-    EbnfParser("<A ::= a;") shouldBe a [Left[_,_]]
+    EbnfParser("A ::= 'a';") shouldBe a [Left[_,_]]
+    EbnfParser("A> ::= 'a';") shouldBe a [Left[_,_]]
+    EbnfParser("<A ::= 'a';") shouldBe a [Left[_,_]]
   }
 
   it should "fail on grammars missing the 'goes-to' symbol '::='" in {
-    EbnfParser("<A> := a;") shouldBe a [Left[_,_]]
-    EbnfParser("<A> :: a;") shouldBe a [Left[_,_]]
+    EbnfParser("<A> := 'a';") shouldBe a [Left[_,_]]
+    EbnfParser("<A> :: 'a';") shouldBe a [Left[_,_]]
   }
 
   it should "fail on grammars with no right-hand side" in {
@@ -86,8 +86,8 @@ class EbnfParserSpec extends FlatSpec with Matchers with EitherValues {
   it should "ignore whitespace" in {
     EbnfParser("""
       <A>
-        ::= a
-        | b	[c    ]
+        ::= 'a'
+        | 'b'	['c'    ]
         ;"""
         ).right.value shouldEqual
       Grammar('A ::= "a" || "b" ~ "c".?)
@@ -96,13 +96,18 @@ class EbnfParserSpec extends FlatSpec with Matchers with EitherValues {
   it should "ignore comments" in {
     EbnfParser("""
       # this is a comment
-      <A> ::= a     # a values
-              | b   # b values
-              | c   # c values
+      <A> ::= 'a'     # a values
+              | 'b'   # b values
+              | 'c'   # c values
               ;
       """
       ).right.value shouldEqual
     Grammar('A ::= "a" || "b" || "c")
+  }
+
+  it should "allow metacharacters in quoted non-terminals" in {
+    EbnfParser("<A> ::= '(' <A> ')' | ε;").right.value shouldEqual
+    Grammar('A ::= "(" ~ 'A ~ ")" || ε)
   }
 
 }
