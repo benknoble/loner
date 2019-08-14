@@ -1,0 +1,24 @@
+name: CI
+on: [push]
+
+jobs:
+  install:
+    name: Test on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-16.04, ubuntu-18.04, macos-latest]
+
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          submodules: true
+      - if: matrix.os == macos-latest
+        run: brew install scala sbt
+      - if: startsWith(matrix.os, 'ubuntu')
+        run: |
+          echo "deb https://dl.bintray.com/sbt/debian /" | sudo tee -a /etc/apt/sources.list.d/sbt.list
+          sudo apt-key adv --keyserver hkps://keyserver.ubuntu.com:443 --recv 2EE0EA64E40A89B84B2DF73499E82A75642AC823
+          sudo apt-get update
+          sudo apt-get install sbt
+      - run: make test
