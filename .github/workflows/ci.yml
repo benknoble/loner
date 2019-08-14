@@ -21,4 +21,5 @@ jobs:
           sudo apt-key adv --keyserver hkps://keyserver.ubuntu.com:443 --recv 2EE0EA64E40A89B84B2DF73499E82A75642AC823
           sudo apt-get update
           sudo apt-get install sbt
-      - run: make test
+      - run: |
+          sbt lonerJVM/test lonerJS/test
